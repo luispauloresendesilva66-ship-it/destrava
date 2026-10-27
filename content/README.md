@@ -44,8 +44,8 @@ A importação é repetível: rodar duas vezes com o mesmo arquivo dá o mesmo r
       "title": "…",
       "description": "…",
       "durationSeconds": 1500,
-      "videoKey": "n1/a01.mp4",
-      "captionsKey": "n1/a01.vtt",
+      "videoKey": "N1/a01.mp4",
+      "captionsKey": "N1/a01.vtt",
       "isFree": true,
       "isSample": false,
       "exercises": [
@@ -98,7 +98,7 @@ Todos são inteiros maiores que 0. O banco (`examQuestions`) precisa ter **pelo 
 | `title` | texto |
 | `description` | texto (opcional) |
 | `durationSeconds` | **obrigatório**, inteiro maior que 0 |
-| `videoKey`, `captionsKey` | caminho do arquivo no armazenamento (ex.: `n1/a01.mp4`, `n1/a01.vtt`); opcionais |
+| `videoKey`, `captionsKey` | caminho do arquivo no armazenamento (ex.: `N1/a01.mp4`, `N1/a01.vtt`); opcionais |
 | `isFree` | `true` se a aula é gratuita (padrão `false`) |
 | `isSample` | `true` se é aula de amostra (padrão `false`) |
 | `exercises` | lista de exercícios (pode ser vazia) |

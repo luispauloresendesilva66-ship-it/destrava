@@ -12,8 +12,8 @@
       "title": "O que é HTML?",
       "description": "Conheça a linguagem que dá estrutura a toda página da web.",
       "durationSeconds": 600,
-      "videoKey": "n1/a01.mp4",
-      "captionsKey": "n1/a01.vtt",
+      "videoKey": "N1/a01.mp4",
+      "captionsKey": "N1/a01.vtt",
       "isFree": true,
       "isSample": false,
       "exercises": [
@@ -43,8 +43,8 @@
       "title": "Sua primeira página",
       "description": "Monte uma página simples com título, parágrafo e lista.",
       "durationSeconds": 900,
-      "videoKey": "n1/a02.mp4",
-      "captionsKey": "n1/a02.vtt",
+      "videoKey": "N1/a02.mp4",
+      "captionsKey": "N1/a02.vtt",
       "isFree": false,
       "isSample": false,
       "exercises": [
