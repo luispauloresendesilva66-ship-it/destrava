@@ -8,6 +8,7 @@ import RequireAuth from './features/auth/RequireAuth.jsx'
 import { SessionProvider } from './features/auth/SessionProvider.jsx'
 import DashboardPage from './features/levels/DashboardPage.jsx'
 import LevelMapPage from './features/levels/LevelMapPage.jsx'
+import LessonPage from './features/lessons/LessonPage.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
 function Home() {
@@ -40,6 +41,14 @@ export default function App() {
               element={
                 <RequireAuth>
                   <LevelMapPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/aula/:lessonId"
+              element={
+                <RequireAuth>
+                  <LessonPage />
                 </RequireAuth>
               }
             />

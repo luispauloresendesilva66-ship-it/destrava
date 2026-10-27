@@ -1,5 +1,7 @@
 {
   "imports": {
+    "@supabase/supabase-js": "npm:@supabase/supabase-js@2",
+    "aws4fetch": "npm:aws4fetch@1",
     "linkedom": "npm:linkedom@0.18",
     "postcss": "npm:postcss@8",
     "quickjs-emscripten": "npm:quickjs-emscripten@0.31"
