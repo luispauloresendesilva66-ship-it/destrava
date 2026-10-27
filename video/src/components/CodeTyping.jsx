@@ -61,8 +61,11 @@ export function colorize(text) {
  *   (frames = 0 aparece de uma vez). O trecho só ocupa espaço depois de digitado, como inserção num editor.
  * highlights: [{ text, at, until?, occurrence? }] — marca-texto num trecho do código final.
  * lineHighlights: [{ line, at, until? }] — destaca a linha inteira (0-based, linhas exibidas).
+ * highlights[].color — cor própria do marca-texto (padrão: highlightColor).
+ * wrap — quebra linhas longas dentro da largura (a linha lógica continua uma só: numeração e destaque).
+ * markSpaces — espaços seguidos (2+) aparecem como pontinhos cinza.
  */
-export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fontSize = 40, width, lineNumbers = true, cursor = true, highlightColor = 'rgba(127,119,221,0.55)', lineColor = 'rgba(127,119,221,0.22)', style }) => {
+export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fontSize = 40, width, lineNumbers = true, cursor = true, highlightColor = 'rgba(127,119,221,0.55)', lineColor = 'rgba(127,119,221,0.22)', wrap = false, markSpaces = false, style }) => {
   const frame = useCurrentFrame()
   const full = segments.map((s) => s.text).join('')
   const colors = colorize(full)
@@ -85,13 +88,13 @@ export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fon
     offset += n
   }
 
-  const marks = new Array(full.length).fill(false)
+  const marks = new Array(full.length).fill(null)
   for (const h of highlights) {
     if (frame < h.at || (h.until != null && frame >= h.until)) continue
     let idx = -1
     for (let o = 0; o <= (h.occurrence || 0); o++) idx = full.indexOf(h.text, idx + 1)
     if (idx < 0) continue
-    for (let k = idx; k < idx + h.text.length; k++) marks[k] = true
+    for (let k = idx; k < idx + h.text.length; k++) marks[k] = h.color || highlightColor
   }
 
   // monta as linhas só com os caracteres já exibidos
@@ -105,7 +108,9 @@ export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fon
       if (k === cursorAfter) cursorLine = lines.length - 1
       continue
     }
-    lines[lines.length - 1].push({ ch: full[k], c: colors[k], m: marks[k] })
+    // espaço "extra": faz parte de uma sequência de 2+ espaços que não é a indentação do início da linha
+    const extra = markSpaces && full[k] === ' ' && (full[k - 1] === ' ' || full[k + 1] === ' ') && /\S/.test(full.slice(full.lastIndexOf('\n', k) + 1, k))
+    lines[lines.length - 1].push({ ch: extra ? '·' : full[k], c: extra ? '#8E8AB8' : colors[k], m: marks[k] })
     if (k === cursorAfter) cursorLine = lines.length - 1
   }
   const blink = Math.floor(frame / 15) % 2 === 0
@@ -116,17 +121,17 @@ export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fon
         const hl = lineHighlights.some((h) => li === h.line && frame >= h.at && (h.until == null || frame < h.until))
         const runs = []
         for (const x of chars) {
-          const key = x.c + (x.m ? '|m' : '')
+          const key = x.c + '|' + (x.m || '')
           const last = runs[runs.length - 1]
           if (last && last.key === key) last.t += x.ch
           else runs.push({ key, t: x.ch, c: x.c, m: x.m })
         }
         return (
-          <div key={li} style={{ display: 'flex', height: lineH, background: hl ? lineColor : 'transparent', boxShadow: hl ? `inset 6px 0 0 ${C.purpleSoft}` : 'none' }}>
+          <div key={li} style={{ display: 'flex', [wrap ? 'minHeight' : 'height']: lineH, background: hl ? lineColor : 'transparent', boxShadow: hl ? `inset 6px 0 0 ${C.purpleSoft}` : 'none' }}>
             {lineNumbers && <span style={{ width: fontSize * 1.8, textAlign: 'right', paddingRight: fontSize * 0.7, color: '#6E69A8', flexShrink: 0 }}>{li + 1}</span>}
-            <span style={{ whiteSpace: 'pre' }}>
+            <span style={wrap ? { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', minWidth: 0 } : { whiteSpace: 'pre' }}>
               {runs.map((r, ri) => (
-                <span key={ri} style={{ color: r.c, background: r.m ? highlightColor : 'transparent' }}>{r.t}</span>
+                <span key={ri} style={{ color: r.c, background: r.m || 'transparent' }}>{r.t}</span>
               ))}
               {cursor && cursorActive && cursorLine === li && blink && <span style={{ display: 'inline-block', width: fontSize * 0.12, height: fontSize * 1.1, background: C.lavender, verticalAlign: 'text-bottom', marginLeft: 2 }} />}
             </span>

@@ -5,9 +5,12 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && remotion studio src/index.js",
-    "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs",
-    "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite"
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && remotion studio src/index.js",
+    "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
+    "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
+    "still:n1a02": "npm run prep:n1a02 && node scripts/stills.mjs AulaN1A02 n1-a02-sua-primeira-pagina",
+    "render:n1a02": "npm run prep:n1a02 && remotion render src/index.js AulaN1A02 ../aulas/n1-a02-sua-primeira-pagina/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.539",

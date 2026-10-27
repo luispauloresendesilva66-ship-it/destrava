@@ -2,17 +2,33 @@ import React from 'react'
 import { Composition } from 'remotion'
 import { AulaN1A01, calculateAulaMetadata } from './aulas/n1-a01/Aula.jsx'
 import { BLOCKS } from './aulas/n1-a01/blocks.js'
+import { AulaN1A02, calculateAulaN1A02Metadata } from './aulas/n1-a02/Aula.jsx'
+import { BLOCKS as BLOCKS_A02 } from './aulas/n1-a02/blocks.js'
 import { FPS, H, W } from './theme.js'
 
+const placeholder = (blocks) => ({ timings: blocks.map((b) => ({ n: b.n, file: null, audioFrames: FPS * 5, totalFrames: FPS * 6 })) })
+
 export const Root = () => (
-  <Composition
-    id="AulaN1A01"
-    component={AulaN1A01}
-    width={W}
-    height={H}
-    fps={FPS}
-    durationInFrames={FPS * 60}
-    defaultProps={{ timings: BLOCKS.map((b) => ({ n: b.n, file: null, audioFrames: FPS * 5, totalFrames: FPS * 6 })) }}
-    calculateMetadata={calculateAulaMetadata}
-  />
+  <>
+    <Composition
+      id="AulaN1A01"
+      component={AulaN1A01}
+      width={W}
+      height={H}
+      fps={FPS}
+      durationInFrames={FPS * 60}
+      defaultProps={placeholder(BLOCKS)}
+      calculateMetadata={calculateAulaMetadata}
+    />
+    <Composition
+      id="AulaN1A02"
+      component={AulaN1A02}
+      width={W}
+      height={H}
+      fps={FPS}
+      durationInFrames={FPS * 60}
+      defaultProps={placeholder(BLOCKS_A02)}
+      calculateMetadata={calculateAulaN1A02Metadata}
+    />
+  </>
 )

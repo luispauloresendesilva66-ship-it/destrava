@@ -1,5 +1,5 @@
 import React from 'react'
-import { AbsoluteFill, interpolate, random, useCurrentFrame } from 'remotion'
+import { AbsoluteFill, interpolate, useCurrentFrame } from 'remotion'
 import { C, FONT, MONO } from '../../theme.js'
 import { makeSync, fadeIn, clamp01 } from '../../lib/sync.js'
 import { LogoReveal } from '../../components/LogoReveal.jsx'
@@ -8,23 +8,11 @@ import { Background } from '../../components/Background.jsx'
 import { CodeTyping, EditorWindow } from '../../components/CodeTyping.jsx'
 import { BrowserMock } from '../../components/BrowserMock.jsx'
 import { BrowserIcon } from '../../components/Diagram.jsx'
-import { Chip } from './scenes-a.jsx'
+import { Check, Chip, Confetti, Cross } from '../../components/Marks.jsx'
 
 const abs = (x, y, extra) => ({ position: 'absolute', left: x, top: y, ...extra })
 const rampF = (f, a, b) => interpolate(f, [a, b], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })
 
-const Check = ({ size = 64 }) => (
-  <svg width={size} height={size} viewBox="0 0 64 64">
-    <circle cx="32" cy="32" r="30" fill={C.green} />
-    <path d="M18 33 L28 43 L47 22" fill="none" stroke={C.night} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-const Cross = ({ size = 64 }) => (
-  <svg width={size} height={size} viewBox="0 0 64 64">
-    <circle cx="32" cy="32" r="30" fill={C.red} />
-    <path d="M21 21 L43 43 M43 21 L21 43" fill="none" stroke={C.white} strokeWidth="7" strokeLinecap="round" />
-  </svg>
-)
 
 // ---------------------------------------------------------------- Bloco 7
 const Card = ({ title, sub, children, op, shift }) => (
@@ -193,26 +181,6 @@ export const HeadBody = ({ block, frames }) => {
 }
 
 // ---------------------------------------------------------------- Bloco 10
-const Confetti = ({ start }) => {
-  const frame = useCurrentFrame()
-  const f = frame - start
-  if (f < 0 || f > 100) return null
-  return (
-    <>
-      {Array.from({ length: 46 }).map((_, i) => {
-        const x = 500 + random(`x${i}`) * 900
-        const delay = random(`d${i}`) * 22
-        const g = f - delay
-        if (g < 0) return null
-        const y = 80 + g * (6 + random(`v${i}`) * 5)
-        const rot = g * (4 + random(`r${i}`) * 8)
-        const col = i % 3 === 0 ? C.green : i % 3 === 1 ? '#C4E29A' : '#7FAE3E'
-        return <div key={i} style={{ position: 'absolute', left: x + Math.sin(g / 6 + i) * 24, top: y, width: 16, height: 26, background: col, borderRadius: 4, transform: `rotate(${rot}deg)`, opacity: clamp01(1 - (f - 70) / 30) }} />
-      })}
-    </>
-  )
-}
-
 export const Conteudo = ({ block, frames }) => {
   const frame = useCurrentFrame()
   const s = makeSync(block.fala, frames)

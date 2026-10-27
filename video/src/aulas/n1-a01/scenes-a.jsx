@@ -8,14 +8,13 @@ import { Title } from '../../components/Title.jsx'
 import { CodeTyping, EditorWindow } from '../../components/CodeTyping.jsx'
 import { BrowserMock, SamplePage } from '../../components/BrowserMock.jsx'
 import { Arrow, BrowserIcon, DocIcon, House, ServerIcon } from '../../components/Diagram.jsx'
+import { Chip } from '../../components/Marks.jsx'
 
 const abs = (x, y, extra) => ({ position: 'absolute', left: x, top: y, ...extra })
 const rampF = (f, a, b) => interpolate(f, [a, b], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })
 
-// Chip de rótulo
-export const Chip = ({ children, color = C.purple, bg = C.white, border, size = 36, style }) => (
-  <div style={{ fontFamily: FONT, fontSize: size, fontWeight: 600, color, background: bg, border: `3px solid ${border || color}`, borderRadius: 16, padding: '8px 22px', display: 'inline-block', ...style }}>{children}</div>
-)
+// Chip de rótulo (componente compartilhado)
+export { Chip }
 
 // ---------------------------------------------------------------- Bloco 1
 export const Abertura = ({ block, frames }) => {
