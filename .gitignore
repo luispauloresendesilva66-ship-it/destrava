@@ -4,3 +4,11 @@ dist/
 !.env.example
 supabase/.temp/
 .superpowers/
+
+# video pipeline
+aulas/**/audio/
+aulas/**/out/
+video/public/aulas/
+video/.remotion/
+video/out/
+.remotion/
