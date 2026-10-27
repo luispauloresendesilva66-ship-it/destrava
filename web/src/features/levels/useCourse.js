@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { supabase } from '../../lib/supabase'
+import { fetchAllRows } from '../../lib/fetchAllRows.js'
 import { useSession } from '../auth/useSession.js'
 import { canAccessLevel, canWatchLesson, canTakeExam, isLessonDone } from '@domain/access.js'
 import { livesRemaining, currentStreakDays, xpFor, startOfDaySaoPaulo } from '@domain/lives.js'
@@ -71,48 +72,91 @@ export function buildCourseState({
     })
 }
 
-async function fetchAll() {
-  const results = await Promise.all([
+// Puro: números do painel. errorsToday vem de uma contagem exata feita no banco.
+export function computeStats({ plan, errorsToday, attempts, passedExams, now }) {
+  const correct = new Set(attempts.filter((a) => a.correct).map((a) => a.exercise_id))
+  return {
+    livesRemaining: plan === 'free' ? livesRemaining({ plan, errorsToday }) : null,
+    streakDays: currentStreakDays({
+      activityDates: attempts.map((a) => new Date(a.created_at)),
+      now,
+    }),
+    xp: xpFor({ correctExercises: correct.size, passedExams }),
+  }
+}
+
+async function fetchAll(now) {
+  const startOfToday = startOfDaySaoPaulo(now).toISOString()
+  const [levels, lessons, exercises, attempts, exams, errors] = await Promise.all([
     supabase.from('levels').select('id, position, slug, name, description').order('position'),
     supabase
       .from('lessons')
       .select('id, level_id, position, title, duration_seconds, is_free, is_sample')
       .order('position'),
     supabase.from('exercises').select('id, lesson_id, position, type, topic'),
-    supabase.from('exercise_attempts').select('exercise_id, correct, created_at'),
-    supabase.from('exam_attempts').select('level_id, passed, submitted_at'),
+    fetchAllRows((from, to) =>
+      supabase
+        .from('exercise_attempts')
+        .select('id, exercise_id, correct, created_at')
+        .order('id')
+        .range(from, to),
+    ),
+    fetchAllRows((from, to) =>
+      supabase
+        .from('exam_attempts')
+        .select('id, level_id, passed, submitted_at')
+        .order('id')
+        .range(from, to),
+    ),
+    supabase
+      .from('exercise_attempts')
+      .select('id', { count: 'exact', head: true })
+      .eq('correct', false)
+      .gte('created_at', startOfToday),
   ])
-  const failed = results.find((r) => r.error)
-  if (failed) throw failed.error
-  const [levels, lessons, exercises, attempts, exams] = results.map((r) => r.data ?? [])
-  return { levels, lessons, exercises, attempts, exams }
+  for (const r of [levels, lessons, exercises, errors]) if (r.error) throw r.error
+  return {
+    levels: levels.data ?? [],
+    lessons: lessons.data ?? [],
+    exercises: exercises.data ?? [],
+    attempts,
+    exams,
+    errorsToday: errors.count ?? 0,
+    now,
+  }
 }
 
 export function useCourse() {
   const { profile } = useSession()
-  const plan = profile?.plan ?? 'free'
+  const plan = profile?.plan
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+  const requestId = useRef(0)
 
   const refresh = useCallback(async () => {
+    const id = ++requestId.current
     setLoading(true)
     setError(null)
     try {
-      setData(await fetchAll())
+      const result = await fetchAll(new Date())
+      if (id === requestId.current) setData(result)
     } catch {
-      setError(LOAD_ERROR)
+      if (id === requestId.current) setError(LOAD_ERROR)
     } finally {
-      setLoading(false)
+      if (id === requestId.current) setLoading(false)
     }
   }, [])
 
   useEffect(() => {
     refresh()
+    return () => {
+      requestId.current += 1
+    }
   }, [refresh])
 
   const computed = useMemo(() => {
-    if (!data) return { state: null, stats: null }
+    if (!data || !plan) return { state: null, stats: null }
     const correctExerciseIds = new Set(
       data.attempts.filter((a) => a.correct).map((a) => a.exercise_id),
     )
@@ -130,34 +174,31 @@ export function useCourse() {
       passedLevelPositions,
     })
 
-    const now = new Date()
-    const startOfToday = startOfDaySaoPaulo(now)
-    const errorsToday = data.attempts.filter(
-      (a) => !a.correct && new Date(a.created_at) >= startOfToday,
-    ).length
-
     let nextLesson = null
     for (const step of state) {
       nextLesson = step.lessons.find((l) => l.watchable && !l.done)?.lesson ?? null
       if (nextLesson) break
     }
 
+    const base = computeStats({
+      plan,
+      errorsToday: data.errorsToday,
+      attempts: data.attempts,
+      passedExams: passedLevelPositions.length,
+      now: data.now,
+    })
     return {
       state,
-      stats: {
-        lives: plan === 'free' ? livesRemaining({ plan, errorsToday }) : null,
-        streakDays: currentStreakDays({
-          activityDates: data.attempts.map((a) => new Date(a.created_at)),
-          now,
-        }),
-        xp: xpFor({
-          correctExercises: correctExerciseIds.size,
-          passedExams: passedLevelPositions.length,
-        }),
-        nextLesson,
-      },
+      stats: { lives: base.livesRemaining, streakDays: base.streakDays, xp: base.xp, nextLesson },
     }
   }, [data, plan])
 
-  return { state: computed.state, stats: computed.stats, plan, loading, error, refresh }
+  return {
+    state: computed.state,
+    stats: computed.stats,
+    plan,
+    loading: loading || (!plan && !error),
+    error,
+    refresh,
+  }
 }

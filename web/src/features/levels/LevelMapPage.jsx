@@ -43,7 +43,7 @@ export default function LevelMapPage() {
             .filter(Boolean)
             .join(' ')
           const onHeadClick = () => {
-            if (!unlocked && plan === 'free') setNoticeFor(level.id)
+            setNoticeFor(!unlocked && plan === 'free' ? level.id : null)
           }
           return (
             <li key={level.id} className={cls}>

@@ -51,4 +51,33 @@ describe('LevelMapPage', () => {
     expect(screen.getByRole('link', { name: 'Aula 1' })).toHaveAttribute('href', '/aula/x1')
     expect(screen.getByRole('button', { name: /Degrau 1.*aprovado/ })).toBeInTheDocument()
   })
+
+  it('limpa o aviso ao clicar em outro nível', () => {
+    setup('free')
+    fireEvent.click(screen.getByRole('button', { name: /Degrau 2.*bloqueado/ }))
+    expect(screen.getByText('Disponível no plano Gold')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: /Degrau 1/ }))
+    expect(screen.queryByText('Disponível no plano Gold')).not.toBeInTheDocument()
+  })
+
+  it('erro de carregamento mostra a mensagem e o botão chama refresh', () => {
+    const refresh = vi.fn()
+    useCourse.mockReturnValue({
+      plan: 'gold',
+      loading: false,
+      state: null,
+      refresh,
+      error: 'Não foi possível carregar o curso. Tente de novo.',
+    })
+    render(
+      <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <LevelMapPage />
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('alert')).toHaveTextContent(
+      'Não foi possível carregar o curso. Tente de novo.',
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Tentar de novo' }))
+    expect(refresh).toHaveBeenCalledTimes(1)
+  })
 })
