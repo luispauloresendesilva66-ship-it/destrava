@@ -1,7 +1,8 @@
 // Pure CSS check, shared with the browser. Only depends on postcss.
 import postcss from 'postcss'
 
-const norm = (s) => String(s).trim().replace(/\s+/g, ' ').toLowerCase()
+const collapse = (s) => String(s).trim().replace(/\s+/g, ' ')
+const norm = (s) => collapse(s).toLowerCase()
 
 export function findCssDeclaration(cssText, { selector, property, value }) {
   let root
@@ -10,14 +11,14 @@ export function findCssDeclaration(cssText, { selector, property, value }) {
   } catch {
     return false
   }
-  const wantSelector = norm(selector)
+  // Selectors are case-sensitive; property and value are not.
+  const wantSelector = collapse(selector)
   const wantProperty = norm(property)
   const wantValue = norm(value)
   let found = false
   root.walkRules((rule) => {
     if (found) return false
-    const matches = rule.selectors.some((s) => norm(s) === wantSelector)
-    if (!matches) return
+    if (!rule.selectors.some((s) => collapse(s) === wantSelector)) return
     rule.walkDecls((decl) => {
       if (norm(decl.prop) === wantProperty && norm(decl.value) === wantValue) found = true
     })

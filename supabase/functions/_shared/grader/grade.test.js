@@ -93,3 +93,46 @@ describe('gradeCode', () => {
     expect(res.results.map((x) => x.passed)).toEqual([true, false])
   })
 })
+
+describe('fix round 1', () => {
+  it('css selector is case-sensitive', async () => {
+    const r = await one({ css: '.Box { display: flex; }' }, { type: 'css-decl', selector: '.box', property: 'display', value: 'flex' })
+    expect(r.passed).toBe(false)
+  })
+  it('expression with trailing line comment works', async () => {
+    const r = await one({ js: 'var x = 4' }, { type: 'js-equals', expression: 'x // comentario', equals: 4 })
+    expect(r.passed).toBe(true)
+  })
+  it('student cannot break JSON.stringify', async () => {
+    const r = await one({ js: 'JSON.stringify = () => "9"' }, { type: 'js-equals', expression: '1', equals: 1 })
+    expect(r.passed).toBe(true)
+  })
+  it('shares one deadline across js-equals tests', async () => {
+    const t = { type: 'js-equals', expression: '1', equals: 1 }
+    const start = Date.now()
+    const res = await gradeCode({ js: 'while(true){}' }, [t, t, t])
+    expect(Date.now() - start).toBeLessThan(2500)
+    for (const r of res.results) {
+      expect(r.passed).toBe(false)
+      expect(r.message).toBe('Seu código demorou demais (possível loop infinito).')
+    }
+  })
+  it('tests after the deadline fail with timeout without running', async () => {
+    const start = Date.now()
+    const res = await gradeCode({ js: '' }, [
+      { type: 'js-equals', expression: '(function(){while(true){}})()', equals: 1 },
+      { type: 'js-equals', expression: '1', equals: 1 },
+    ])
+    expect(Date.now() - start).toBeLessThan(2500)
+    expect(res.results.map((r) => r.message)).toEqual([
+      'Seu código demorou demais (possível loop infinito).',
+      'Seu código demorou demais (possível loop infinito).',
+    ])
+  })
+  it('backtracking regex terminates (known limit: engine ignores interrupt)', async () => {
+    const start = Date.now()
+    const r = await one({ js: '' }, { type: 'js-equals', expression: "/(a+)+$/.test('a'.repeat(22)+'b')", equals: false })
+    console.log(`regex repeat(22) took ${Date.now() - start} ms`)
+    expect(r.passed).toBe(true)
+  })
+})
