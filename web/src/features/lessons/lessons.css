@@ -12,3 +12,8 @@
 .player__speed:focus-visible { outline: 3px solid var(--c-purple); outline-offset: 2px; }
 .lesson-page .lesson-list { padding: 0; }
 .lesson-page .lesson-list a[aria-current='page'] { font-weight: 700; }
+.lesson-layout { display: block; }
+@media (min-width: 900px) {
+  .lesson-page { max-width: 1120px; }
+  .lesson-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--space); align-items: start; }
+}

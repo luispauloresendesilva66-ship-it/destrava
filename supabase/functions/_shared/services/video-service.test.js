@@ -69,6 +69,24 @@ describe('getLessonVideoUrl', () => {
     expect(presign).toHaveBeenCalledTimes(1)
   })
 
+  it.each(['../secret.mp4', '/abs.mp4', 'n1/../x.mp4'])('rejects unsafe videoKey %s', async (k) => {
+    const { run, presign } = setup({ lesson: { videoKey: k } })
+    await expect(run()).rejects.toMatchObject({ status: 404, message: 'Vídeo não encontrado.' })
+    expect(presign).not.toHaveBeenCalled()
+  })
+
+  it('rejects unsafe captionsKey', async () => {
+    const { run, presign } = setup({ lesson: { captionsKey: '../x.vtt' } })
+    await expect(run()).rejects.toMatchObject({ status: 404, message: 'Vídeo não encontrado.' })
+    expect(presign).not.toHaveBeenCalled()
+  })
+
+  it('does not look up the previous lesson for samples', async () => {
+    const { run, repo } = setup({ lesson: { isSample: true, levelPosition: 4 } })
+    await run()
+    expect(repo.isPreviousLessonDone).not.toHaveBeenCalled()
+  })
+
   it('with captionsKey, presigns the captions too', async () => {
     const { run } = setup()
     const out = await run()
