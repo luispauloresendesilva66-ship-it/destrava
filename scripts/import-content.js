@@ -3,6 +3,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { createClient } from '@supabase/supabase-js'
 import { validateContent } from './validate-content.js'
+import { replaceExamQuestions } from './replace-exam-questions.js'
 
 function fail(message) {
   console.error(message)
@@ -98,32 +99,8 @@ async function importContent(supabase, content) {
     }
   }
 
-  // Perguntas de prova são substituídas a cada importação.
-  const { data: oldQuestions, error: oldErr } = await supabase
-    .from('exam_questions')
-    .select('id')
-    .eq('level_id', levelRow.id)
-  check(oldErr, 'Falha ao buscar perguntas antigas da prova')
-  const oldIds = oldQuestions.map((q) => q.id)
-  if (oldIds.length > 0) {
-    const { error: delAnsErr } = await supabase.from('exam_answers').delete().in('question_id', oldIds)
-    check(delAnsErr, 'Falha ao apagar respostas antigas da prova')
-    const { error: delQErr } = await supabase.from('exam_questions').delete().eq('level_id', levelRow.id)
-    check(delQErr, 'Falha ao apagar perguntas antigas da prova')
-  }
-
-  if (examQuestions.length > 0) {
-    const { data: inserted, error: insErr } = await supabase
-      .from('exam_questions')
-      .insert(examQuestions.map((q) => ({ level_id: levelRow.id, type: q.type, topic: q.topic, prompt: q.prompt })))
-      .select('id')
-    check(insErr, 'Falha ao criar perguntas da prova')
-    // O Postgres devolve as linhas inseridas na mesma ordem do insert.
-    const { error: ansErr } = await supabase
-      .from('exam_answers')
-      .insert(inserted.map((row, i) => ({ question_id: row.id, answer: examQuestions[i].answer })))
-    check(ansErr, 'Falha ao criar respostas da prova')
-  }
+  // Perguntas de prova são substituídas a cada importação (sem perder as antigas se algo falhar).
+  await replaceExamQuestions(supabase, levelRow.id, examQuestions)
 
   return { lessons: lessons.length, exercises: exerciseCount, questions: examQuestions.length }
 }
