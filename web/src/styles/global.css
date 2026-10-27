@@ -1,0 +1,38 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--c-night);
+  background: var(--c-lavender);
+}
+
+.layout-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space);
+  background: #fff;
+  border-bottom: 1px solid var(--c-purple-soft);
+}
+
+.layout-menu {
+  display: flex;
+  gap: var(--space);
+}
+
+.layout-menu a {
+  color: var(--c-purple);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.layout-main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: var(--space);
+}

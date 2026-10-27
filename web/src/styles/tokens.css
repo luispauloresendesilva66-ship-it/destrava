@@ -1,0 +1,11 @@
+:root {
+  --c-night: #26215C;
+  --c-purple: #534AB7;
+  --c-purple-soft: #7F77DD;
+  --c-lavender: #EEEDFE;
+  --c-green: #97C459;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius: 12px;
+  --space: 16px;
+}
