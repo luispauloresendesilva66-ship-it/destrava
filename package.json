@@ -16,5 +16,8 @@
     "linkedom": "^0.18.14",
     "postcss": "^8.5.32",
     "quickjs-emscripten": "^0.31.0"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
   }
 }

@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Layout from './components/Layout.jsx'
 import SignupPage from './features/auth/SignupPage.jsx'
@@ -8,11 +9,11 @@ import RequireAuth from './features/auth/RequireAuth.jsx'
 import { SessionProvider } from './features/auth/SessionProvider.jsx'
 import DashboardPage from './features/levels/DashboardPage.jsx'
 import LevelMapPage from './features/levels/LevelMapPage.jsx'
-import LessonPage from './features/lessons/LessonPage.jsx'
-import ExamPage from './features/exams/ExamPage.jsx'
-import ExamResultPage from './features/exams/ExamResultPage.jsx'
-import CertificatesPage from './features/certificates/CertificatesPage.jsx'
-import VerifyCertificatePage from './features/certificates/VerifyCertificatePage.jsx'
+const LessonPage = lazy(() => import('./features/lessons/LessonPage.jsx'))
+const ExamPage = lazy(() => import('./features/exams/ExamPage.jsx'))
+const ExamResultPage = lazy(() => import('./features/exams/ExamResultPage.jsx'))
+const CertificatesPage = lazy(() => import('./features/certificates/CertificatesPage.jsx'))
+const VerifyCertificatePage = lazy(() => import('./features/certificates/VerifyCertificatePage.jsx'))
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
 function Home() {
@@ -24,6 +25,7 @@ export default function App() {
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <SessionProvider>
         <Layout>
+          <Suspense fallback={<p role="status">Carregando...</p>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cadastro" element={<SignupPage />} />
@@ -82,6 +84,7 @@ export default function App() {
             />
             <Route path="/certificado/:code" element={<VerifyCertificatePage />} />
           </Routes>
+          </Suspense>
         </Layout>
       </SessionProvider>
     </BrowserRouter>
