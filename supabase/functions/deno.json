@@ -1,0 +1,7 @@
+{
+  "imports": {
+    "linkedom": "npm:linkedom@0.18",
+    "postcss": "npm:postcss@8",
+    "quickjs-emscripten": "npm:quickjs-emscripten@0.31"
+  }
+}
