@@ -15,6 +15,7 @@ vi.mock('../../lib/api.js', () => ({
   VIDEO_ERROR: 'Não foi possível carregar o vídeo. Tente de novo.',
 }))
 vi.mock('../levels/useCourse.js', () => ({ useCourse: () => ({ state: null }) }))
+vi.mock('../exercises/ExerciseRunner.jsx', () => ({ default: () => null }))
 
 import LessonPage from './LessonPage.jsx'
 import { getVideoUrl } from '../../lib/api.js'

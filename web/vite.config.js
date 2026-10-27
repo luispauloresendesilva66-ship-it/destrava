@@ -10,6 +10,9 @@ export default defineConfig({
       '@domain': fileURLToPath(
         new URL('../supabase/functions/_shared/domain', import.meta.url),
       ),
+      '@grader': fileURLToPath(
+        new URL('../supabase/functions/_shared/grader', import.meta.url),
+      ),
     },
   },
   server: {

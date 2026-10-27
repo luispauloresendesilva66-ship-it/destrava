@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase'
 import { getVideoUrl, VIDEO_ERROR } from '../../lib/api.js'
 import { useCourse } from '../levels/useCourse.js'
 import VideoPlayer from './VideoPlayer.jsx'
+import ExerciseRunner from '../exercises/ExerciseRunner.jsx'
 import './lessons.css'
 
 async function loadStartAt(lessonId) {
@@ -21,7 +22,7 @@ async function loadStartAt(lessonId) {
 
 export default function LessonPage() {
   const { lessonId } = useParams()
-  const { state } = useCourse()
+  const { state, refresh } = useCourse()
   const [video, setVideo] = useState(null)
   const [problem, setProblem] = useState(null) // { message, forbidden }
   const [attempt, setAttempt] = useState(0)
@@ -95,6 +96,7 @@ export default function LessonPage() {
               onExpired={getVideoUrl}
             />
           )}
+          <ExerciseRunner lessonId={lessonId} onProgress={refresh} />
         </div>
         {step && (
           <nav aria-label="Aulas do nível">
