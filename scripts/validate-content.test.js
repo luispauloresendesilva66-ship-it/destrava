@@ -18,10 +18,11 @@ describe('validateContent', () => {
 
   it('rejeita tipo de teste de código desconhecido', () => {
     const c = sample()
-    c.lessons[1].exercises[1].solution.tests[0].type = 'foo'
+    const code = c.lessons[1].exercises.find((e) => e.type === 'code')
+    code.solution.tests[0].type = 'foo'
     const errors = validateContent(c)
     expect(errors.length).toBeGreaterThan(0)
-    expect(errors.join('\n')).toContain('Aula 2, exercício 2')
+    expect(errors.join('\n')).toContain(`Aula 2, exercício ${code.position}, teste 1`)
     expect(errors.join('\n')).toContain('"foo"')
   })
 
@@ -62,10 +63,11 @@ describe('validateContent', () => {
   it('rejeita solução fora do formato do tipo', () => {
     const c = sample()
     c.lessons[0].exercises[0].solution = { correctIndex: 9 }
-    c.lessons[1].exercises[0].solution = { order: [0, 0, 2] }
+    const ob = c.lessons[1].exercises.find((e) => e.type === 'order_blocks')
+    ob.solution = { order: [0, 0, 2] }
     const text = validateContent(c).join('\n')
     expect(text).toContain('Aula 1, exercício 1')
-    expect(text).toContain('Aula 2, exercício 1')
+    expect(text).toContain(`Aula 2, exercício ${ob.position}: solution.order`)
   })
 
   it('rejeita posições duplicadas e entrada que não é objeto', () => {

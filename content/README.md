@@ -19,7 +19,7 @@ Para usar outro arquivo de variáveis: `node scripts/import-content.js content/n
 
 Se o JSON tiver erros, o script lista todos em português e **não importa nada**. Se faltar `SUPABASE_URL` ou `SUPABASE_SERVICE_ROLE_KEY`, ele avisa e para.
 
-Resultado esperado: `Importado: 1 nível, 2 aulas, 4 exercícios, 6 perguntas.`
+Resultado esperado: `Importado: 1 nível, 2 aulas, 7 exercícios, 6 perguntas.`
 
 ### O que a importação faz
 

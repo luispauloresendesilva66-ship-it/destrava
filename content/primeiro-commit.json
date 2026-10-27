@@ -11,7 +11,7 @@
       "position": 1,
       "title": "O que é HTML?",
       "description": "Conheça a linguagem que dá estrutura a toda página da web.",
-      "durationSeconds": 600,
+      "durationSeconds": 433,
       "videoKey": "N1/a01.mp4",
       "captionsKey": "N1/a01.vtt",
       "isFree": true,
@@ -41,8 +41,8 @@
     {
       "position": 2,
       "title": "Sua primeira página",
-      "description": "Monte uma página simples com título, parágrafo e lista.",
-      "durationSeconds": 900,
+      "description": "Monte uma página \"sobre mim\" com títulos, parágrafos, quebra de linha, ênfase e comentários.",
+      "durationSeconds": 606,
       "videoKey": "N1/a02.mp4",
       "captionsKey": "N1/a02.vtt",
       "isFree": false,
@@ -50,27 +50,81 @@
       "exercises": [
         {
           "position": 1,
-          "type": "order_blocks",
+          "type": "multiple_choice",
           "topic": "html",
-          "prompt": { "blocks": ["<ul>", "<li>Item</li>", "</ul>"] },
-          "solution": { "order": [0, 1, 2] },
-          "explanation": "A lista abre com <ul>, tem os itens <li> dentro e fecha com </ul>."
+          "prompt": {
+            "question": "A Ana quer um subtítulo com a letra menor e pensou em usar <h4> só por causa do tamanho. Qual é a melhor escolha?",
+            "options": [
+              "Usar <h4>, porque o tamanho é o que importa",
+              "Escolher o nível pela hierarquia do conteúdo e deixar o tamanho para o CSS",
+              "Usar vários <h1>, um para cada assunto",
+              "Usar <p> com vários <br> para separar"
+            ]
+          },
+          "solution": { "correctIndex": 1 },
+          "explanation": "O número do título indica a importância do conteúdo, não o tamanho da letra. A aparência é trabalho do CSS, e a página deve ter um único <h1>."
         },
         {
           "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Dentro de um <p>, a Ana apertou a barra de espaço dez vezes entre duas palavras e deu três enters no meio da frase. O que o navegador mostra?",
+            "options": [
+              "Os dez espaços e as três linhas em branco, exatamente como no editor",
+              "A frase numa linha só, com um único espaço entre as palavras",
+              "Cada palavra numa linha diferente",
+              "Uma mensagem de erro"
+            ]
+          },
+          "solution": { "correctIndex": 1 },
+          "explanation": "O navegador junta espaços e quebras de linha seguidos em um único espaço. Para quebrar a linha de verdade, use <br>."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<p>Estou aprendendo <___>HTML</strong> e estou gostando <em>muito</___>.</p>",
+            "blanks": 2
+          },
+          "solution": { "answers": ["strong", "em"] },
+          "explanation": "<strong> marca algo importante e fecha com </strong>. <em> marca uma ênfase e fecha com </em>."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<h1>Olá, eu sou a Ana</h1>",
+              "<!-- Seção: apresentação -->",
+              "<h2>Quem sou eu</h2>",
+              "<p>Estou mudando de carreira para a tecnologia.</p>",
+              "<h2>O que estou aprendendo</h2>",
+              "<p>Estou aprendendo <strong>HTML</strong>.</p>"
+            ]
+          },
+          "solution": { "order": [0, 1, 2, 3, 4, 5] },
+          "explanation": "O <h1> vem primeiro, como título principal. Cada seção começa com seu <h2>, seguido do parágrafo que fala daquele assunto. O comentário fica antes da seção que ele descreve."
+        },
+        {
+          "position": 5,
           "type": "code",
           "topic": "html",
           "prompt": {
-            "statement": "Crie um título <h1> com o texto \"Meu site\".",
-            "starter": { "html": "" }
+            "statement": "Complete a página da Ana: abaixo do <h1>, crie um <h2> com o texto \"O que estou aprendendo\" e, depois dele, um parágrafo <p> em que a palavra HTML esteja dentro de <strong>. Exemplo: Estou aprendendo <strong>HTML</strong>.",
+            "starter": { "html": "<h1>Olá, eu sou a Ana</h1>\n<!-- Escreva seu código abaixo -->\n" }
           },
           "solution": {
             "tests": [
-              { "type": "dom-exists", "selector": "h1" },
-              { "type": "dom-text", "selector": "h1", "equals": "Meu site" }
+              { "type": "dom-text", "selector": "h1", "equals": "Olá, eu sou a Ana" },
+              { "type": "dom-text", "selector": "h2", "equals": "O que estou aprendendo" },
+              { "type": "dom-exists", "selector": "p strong" },
+              { "type": "dom-text", "selector": "p strong", "equals": "HTML" }
             ]
           },
-          "explanation": "Basta escrever <h1>Meu site</h1>."
+          "explanation": "Uma solução: <h2>O que estou aprendendo</h2> e, embaixo, <p>Estou aprendendo <strong>HTML</strong>.</p>. O <strong> fica dentro do <p> e fecha antes dele."
         }
       ]
     }
