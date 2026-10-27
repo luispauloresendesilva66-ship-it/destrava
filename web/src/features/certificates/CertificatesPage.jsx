@@ -53,36 +53,53 @@ export default function CertificatesPage() {
   }
 
   return (
-    <section className="course-page">
+    <section className="page">
       <h1>Meus certificados</h1>
-      {!certs && !error && <p role="status">Carregando...</p>}
+      {!certs && !error && <p className="loading" role="status">Carregando...</p>}
       {error && (
-        <div className="course-error" role="alert">
+        <div className="alert alert--danger" role="alert">
           <p>{error}</p>
         </div>
       )}
       {certs && certs.length === 0 && (
-        <p>Você ainda não tem certificados. Passe na prova de um nível para conquistar o primeiro.</p>
+        <p className="empty-state">Você ainda não tem certificados. Passe na prova de um nível para conquistar o primeiro.</p>
       )}
       {certs && certs.length > 0 && (
         <ul className="cert-list">
           {certs.map((c) => (
             <li key={c.code} className="cert-item">
-              <h2>{c.levels?.name}</h2>
-              <p>
-                Emitido em {formatIssuedDate(c.issued_at)} · Código {c.code}
-              </p>
+              <span
+                className={`cert-item__icon${c.status === 'active' ? ' cert-item__icon--active' : ''}`}
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24" width="22" height="22" focusable="false">
+                  <circle cx="12" cy="9" r="5.5" fill="none" stroke="currentColor" strokeWidth="2" />
+                  <path
+                    d="m8.5 13.5-1.5 7 5-2.5 5 2.5-1.5-7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+              <div className="cert-item__body">
+                <h2>{c.levels?.name}</h2>
+                <p className="cert-item__meta">
+                  Emitido em {formatIssuedDate(c.issued_at)} · Código {c.code}
+                </p>
+              </div>
               {c.status === 'active' ? (
                 <button
                   type="button"
-                  className="course-button"
+                  className="btn btn--primary cert-item__action"
                   disabled={busy === c.code}
                   onClick={() => download(c)}
                 >
                   Baixar PDF
                 </button>
               ) : (
-                <p>{LOCKED_CERTIFICATE_MESSAGE}</p>
+                <p className="cert-item__locked">{LOCKED_CERTIFICATE_MESSAGE}</p>
               )}
             </li>
           ))}

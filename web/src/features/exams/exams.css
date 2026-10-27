@@ -1,20 +1,137 @@
-@import '../levels/levels.css';
 @import '../exercises/exercises.css';
 
-.exam-page { max-width: 640px; margin: var(--space) auto; padding: 0 var(--space); display: flex; flex-direction: column; gap: 12px; }
-.exam-page h1 { color: var(--c-night); font-size: 1.5rem; margin: 0; }
-.exam-page h2 { color: var(--c-night); font-size: 1.125rem; margin: 0; }
-.exam__name { display: flex; flex-direction: column; gap: 12px; }
-.exam__name label, .exam__file { display: flex; flex-direction: column; gap: 4px; color: var(--c-night); font-weight: 600; }
-.exam__name input, .exam__file textarea {
-  min-height: 44px; padding: 8px 12px; font: inherit; color: var(--c-night); background: #fff;
-  border: 2px solid var(--c-purple-soft); border-radius: 8px;
+/* Prova do nível: uma pergunta por tela, barra de progresso, rodapé fixo no celular. */
+.exam-page h1 { font-size: var(--text-2xl); }
+
+/* Confirmação do nome */
+.exam__name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
-.exam__file textarea { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 400; }
-.exam__files { display: flex; flex-direction: column; gap: 12px; }
-.exam__warning { margin: 0; padding: 8px 12px; color: var(--c-night); background: var(--c-lavender); border-radius: 8px; }
-.exam__bar { height: 8px; background: var(--c-lavender); border-radius: 4px; overflow: hidden; }
-.exam__bar-fill { height: 100%; background: var(--c-purple); }
-.exam__score { margin: 0; font-size: 3rem; font-weight: 700; color: var(--c-night); }
-.exam__score--passed { color: var(--c-green); }
-.exam__topics { margin: 0; padding-left: 20px; }
+
+.exam__name label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.exam__name .btn { align-self: stretch; min-height: 48px; }
+
+.exam__warning {
+  font-size: var(--text-sm);
+}
+
+/* Pergunta */
+.exam-page > .ex__progress { margin: 0; }
+
+.exam__bar { margin-top: calc(var(--space-3) * -1); }
+
+.exam__question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.exam__files {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.exam__file {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+}
+
+.exam__file .textarea { font-weight: var(--weight-regular); }
+
+.exam-page > .ex__footer {
+  margin-inline: calc(var(--space-4) * -1);
+  padding-inline: var(--space-4);
+  border-radius: 0;
+}
+
+/* Resultado */
+.exam-result {
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.exam-result--passed {
+  align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(100% 70% at 50% 0%, var(--color-success-bg), transparent 70%),
+    var(--color-surface);
+  border-top: 6px solid var(--color-success);
+}
+
+.exam-result--failed {
+  border-top: 6px solid var(--c-purple-soft);
+}
+
+.exam__score {
+  margin: 0;
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-black);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text);
+}
+
+/* Verde de marca como fundo; texto em verde escuro para manter contraste AA. */
+.exam__score--passed {
+  display: inline-grid;
+  place-items: center;
+  width: 128px;
+  height: 128px;
+  font-size: var(--text-3xl);
+  color: var(--color-success-text);
+  background: var(--color-surface);
+  border: 6px solid var(--color-success);
+  border-radius: 50%;
+}
+
+.exam__topics {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.exam__topics li {
+  padding: var(--space-3) var(--space-4);
+  font-weight: var(--weight-semibold);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+}
+
+.exam__topics a { font-weight: var(--weight-medium); }
+
+.exam-result h2 { font-size: var(--text-lg); }
+
+.exam-result [role='status'] {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.exam-result .btn { align-self: flex-start; }
+.exam-result--passed .btn { align-self: center; }
+
+@media (min-width: 768px) {
+  .exam-page h1 { font-size: var(--text-3xl); }
+  .exam-result { padding: var(--space-10) var(--space-8); }
+  .exam-page > .ex__footer { margin-inline: 0; padding-inline: 0; }
+}

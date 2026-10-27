@@ -45,9 +45,9 @@ export default function SignupPage() {
 
   if (done) {
     return (
-      <section className="auth-card">
+      <section className="card auth-card">
         <h1>Quase lá!</h1>
-        <p role="status">Enviamos um link de confirmação para o seu e-mail.</p>
+        <p className="alert" role="status">Enviamos um link de confirmação para o seu e-mail.</p>
         <p>
           Depois de confirmar, <Link to="/entrar">entre na sua conta</Link>.
         </p>
@@ -56,11 +56,12 @@ export default function SignupPage() {
   }
 
   return (
-    <section className="auth-card">
+    <section className="card auth-card">
       <h1>Criar conta</h1>
       <form className="auth-form" onSubmit={handleSubmit} noValidate>
-        <label htmlFor="signup-name">Nome completo</label>
+        <label className="label" htmlFor="signup-name">Nome completo</label>
         <input
+          className="input"
           id="signup-name"
           type="text"
           autoComplete="name"
@@ -68,8 +69,9 @@ export default function SignupPage() {
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
         />
-        <label htmlFor="signup-email">E-mail</label>
+        <label className="label" htmlFor="signup-email">E-mail</label>
         <input
+          className="input"
           id="signup-email"
           type="email"
           autoComplete="email"
@@ -77,8 +79,9 @@ export default function SignupPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="signup-password">Senha</label>
+        <label className="label" htmlFor="signup-password">Senha</label>
         <input
+          className="input"
           id="signup-password"
           type="password"
           autoComplete="new-password"
@@ -86,10 +89,11 @@ export default function SignupPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <p className="auth-hint">Use pelo menos 8 caracteres.</p>
+        <p className="help-text">Use pelo menos 8 caracteres.</p>
         <div className="auth-check">
           <input
             id="signup-terms"
+            className="checkbox"
             type="checkbox"
             checked={accepted}
             onChange={(e) => setAccepted(e.target.checked)}
@@ -100,11 +104,11 @@ export default function SignupPage() {
           </label>
         </div>
         {error && (
-          <p className="auth-error" role="alert">
+          <p className="form-error" role="alert">
             {error}
           </p>
         )}
-        <button type="submit" className="auth-button" disabled={busy}>
+        <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
           {busy ? 'Criando...' : 'Criar conta'}
         </button>
       </form>

@@ -32,7 +32,7 @@ export default defineConfig({
       workbox: {
         // Só o shell estático (assets do build). Sem runtimeCaching: vídeo (Backblaze),
         // Supabase e qualquer requisição cross-origin passam direto pela rede.
-        globPatterns: ['**/*.{js,css,html,png,svg,ico,webmanifest}'],
+        globPatterns: ['**/*.{js,css,html,png,svg,ico,webmanifest,woff2}'],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         navigateFallback: '/index.html',
         // Não engole arquivos/rotas que não são da SPA.

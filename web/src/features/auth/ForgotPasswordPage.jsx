@@ -31,14 +31,15 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <section className="auth-card">
+    <section className="card auth-card">
       <h1>Recuperar senha</h1>
       {sent ? (
-        <p role="status">Se esse e-mail tiver cadastro, enviamos um link para criar uma nova senha.</p>
+        <p className="alert" role="status">Se esse e-mail tiver cadastro, enviamos um link para criar uma nova senha.</p>
       ) : (
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label htmlFor="forgot-email">E-mail</label>
+          <label className="label" htmlFor="forgot-email">E-mail</label>
           <input
+            className="input"
             id="forgot-email"
             type="email"
             autoComplete="email"
@@ -47,11 +48,11 @@ export default function ForgotPasswordPage() {
             onChange={(e) => setEmail(e.target.value)}
           />
           {error && (
-            <p className="auth-error" role="alert">
+            <p className="form-error" role="alert">
               {error}
             </p>
           )}
-          <button type="submit" className="auth-button" disabled={busy}>
+          <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
             {busy ? 'Enviando...' : 'Enviar link'}
           </button>
         </form>

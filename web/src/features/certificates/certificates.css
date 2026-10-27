@@ -1,12 +1,153 @@
-@import '../levels/levels.css';
+/* Lista de certificados e página pública de verificação. */
+.cert-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
 
-.cert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-.cert-item { padding: var(--space); background: var(--c-lavender); border-radius: var(--radius); color: var(--c-night); }
-.cert-item h2 { margin: 0 0 4px; font-size: 1.125rem; color: var(--c-night); }
-.cert-item p { margin: 0 0 8px; }
-.cert-verify { padding: var(--space); border-radius: var(--radius); background: var(--c-lavender); color: var(--c-night); }
-.cert-verify h1 { margin: 0 0 8px; }
-.cert-verify--valid h1 { color: var(--c-green); }
-.cert-verify dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
-.cert-verify dt { font-weight: 600; }
-.cert-verify dd { margin: 0; }
+.cert-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.cert-item__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface-sunken);
+}
+
+/* Certificado liberado é conquista: verde de marca com ícone em roxo-noite. */
+.cert-item__icon--active {
+  color: var(--color-on-success);
+  background: var(--color-success);
+}
+
+.cert-item h2 {
+  margin: 0 0 var(--space-1);
+  font-size: var(--text-lg);
+}
+
+.cert-item__meta {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.cert-item__action,
+.cert-item__locked {
+  grid-column: 1 / -1;
+}
+
+.cert-item__locked {
+  margin: 0;
+  padding: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  background: var(--color-surface-sunken);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 640px) {
+  .cert-item {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    padding: var(--space-5);
+  }
+
+  .cert-item__action { grid-column: auto; }
+  .cert-item__locked { grid-column: 2 / -1; }
+}
+
+/* Verificação pública */
+.verify-page { padding-top: var(--space-4); }
+
+.cert-verify {
+  padding: var(--space-6) var(--space-5);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.cert-verify--valid { border-top: 6px solid var(--color-success); }
+
+.cert-verify__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.cert-verify__seal {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--color-on-success);
+  background: var(--color-success);
+}
+
+/* Título em roxo-noite (o verde puro na lavanda não passa em contraste). */
+.cert-verify h1 {
+  margin: 0;
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+}
+
+.cert-verify dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.cert-verify dt {
+  padding-top: var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.cert-verify dd {
+  margin: 0;
+  padding: var(--space-1) 0 var(--space-3);
+  font-weight: var(--weight-semibold);
+  border-bottom: 1px solid var(--color-border);
+  overflow-wrap: anywhere;
+}
+
+.cert-verify--invalid {
+  text-align: center;
+  font-weight: var(--weight-semibold);
+  border-top: 4px solid var(--color-danger);
+}
+
+.cert-verify--invalid p { margin: 0; }
+
+@media (min-width: 560px) {
+  .cert-verify { padding: var(--space-8); }
+
+  .cert-verify dl { grid-template-columns: max-content 1fr; column-gap: var(--space-6); }
+  .cert-verify dt { padding: var(--space-3) 0; border-bottom: 1px solid var(--color-border); }
+  .cert-verify dd { padding: var(--space-3) 0; }
+}

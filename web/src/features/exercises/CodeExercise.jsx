@@ -46,37 +46,43 @@ export default function CodeExercise({ exercise, onSubmit, ...shell }) {
       confirmLabel="Testar"
       {...shell}
     >
-      <div className="ex__tabs" role="tablist" aria-label="Arquivos">
-        {tabs.map((key) => (
-          <button
-            key={key}
-            type="button"
-            role="tab"
-            aria-selected={tab === key}
-            className="ex__tab"
-            onClick={() => setTab(key)}
-          >
-            {FILES[key].label}
-          </button>
-        ))}
+      <div className="ex__workspace">
+        <div className="ex__code-pane">
+          <div className="ex__tabs" role="tablist" aria-label="Arquivos">
+            {tabs.map((key) => (
+              <button
+                key={key}
+                type="button"
+                role="tab"
+                aria-selected={tab === key}
+                className="ex__tab"
+                onClick={() => setTab(key)}
+              >
+                {FILES[key].label}
+              </button>
+            ))}
+          </div>
+          <CodeMirror
+            key={tab}
+            className="ex__editor"
+            value={files[tab]}
+            height="200px"
+            extensions={[FILES[tab].extension()]}
+            basicSetup={{ lineNumbers: true, foldGutter: false }}
+            aria-label={`Editor de ${FILES[tab].label}`}
+            onChange={(value) => setFiles((f) => ({ ...f, [tab]: value }))}
+          />
+        </div>
+        <div className="ex__preview-pane">
+          <p className="ex__hint ex__preview-label">Pré-visualização</p>
+          <iframe
+            className="ex__preview"
+            title="Pré-visualização"
+            sandbox="allow-scripts"
+            srcDoc={previewDoc}
+          />
+        </div>
       </div>
-      <CodeMirror
-        key={tab}
-        className="ex__editor"
-        value={files[tab]}
-        height="200px"
-        extensions={[FILES[tab].extension()]}
-        basicSetup={{ lineNumbers: true, foldGutter: false }}
-        aria-label={`Editor de ${FILES[tab].label}`}
-        onChange={(value) => setFiles((f) => ({ ...f, [tab]: value }))}
-      />
-      <p className="ex__hint">Pré-visualização</p>
-      <iframe
-        className="ex__preview"
-        title="Pré-visualização"
-        sandbox="allow-scripts"
-        srcDoc={previewDoc}
-      />
     </ExerciseShell>
   )
 }

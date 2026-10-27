@@ -65,21 +65,21 @@ export default function LessonPage() {
   const watchOnly = plan === 'free' && current?.is_sample === true
 
   return (
-    <section className="lesson-page">
+    <section className="page page--wide lesson-page">
       <h1>{current?.title ?? 'Aula'}</h1>
       <div className="lesson-layout">
         <div className="lesson-main">
           {problem ? (
-            <div className="course-error" role="alert">
+            <div className="alert alert--danger" role="alert">
               <p>{problem.message}</p>
               {problem.forbidden ? (
-                <Link to="/niveis" className="course-link">
+                <Link to="/niveis" className="btn btn--primary">
                   Voltar aos níveis
                 </Link>
               ) : (
                 <button
                   type="button"
-                  className="course-button"
+                  className="btn btn--primary"
                   onClick={() => setAttempt((n) => n + 1)}
                 >
                   Tentar de novo
@@ -87,7 +87,7 @@ export default function LessonPage() {
               )}
             </div>
           ) : !video ? (
-            <p role="status">Carregando...</p>
+            <p className="loading player__loading" role="status">Carregando...</p>
           ) : (
             <VideoPlayer
               key={`${lessonId}-${attempt}`}
@@ -104,7 +104,7 @@ export default function LessonPage() {
           )}
         </div>
         {step && (
-          <nav aria-label="Aulas do nível">
+          <nav className="card lesson-aside" aria-label="Aulas do nível">
             <h2>{step.level.name}</h2>
             <ul className="lesson-list">
               {step.lessons.map(({ lesson, watchable }) => (

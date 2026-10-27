@@ -22,7 +22,7 @@ export default function App() {
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <SessionProvider>
         <Layout>
-          <Suspense fallback={<p role="status">Carregando...</p>}>
+          <Suspense fallback={<p className="loading" role="status">Carregando...</p>}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/cadastro" element={<SignupPage />} />

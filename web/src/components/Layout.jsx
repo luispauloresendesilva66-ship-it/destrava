@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useSession } from '../features/auth/useSession.js'
 import Logo from './Logo.jsx'
 
@@ -7,18 +7,20 @@ export default function Layout({ children }) {
   return (
     <>
       <header className="layout-header">
-        <Link to="/" aria-label="Destrava, página inicial">
+        <Link to="/" className="layout-brand" aria-label="Destrava, página inicial">
           <Logo variant="horizontal" size={32} />
         </Link>
         <nav className="layout-menu" aria-label="Menu principal">
           {session ? (
             <>
-              <Link to="/painel">Painel</Link>
-              <Link to="/niveis">Níveis</Link>
-              <Link to="/certificados">Certificados</Link>
+              <NavLink to="/painel">Painel</NavLink>
+              <NavLink to="/niveis">Níveis</NavLink>
+              <NavLink to="/certificados">Certificados</NavLink>
             </>
           ) : (
-            <Link to="/">Início</Link>
+            <NavLink to="/" end>
+              Início
+            </NavLink>
           )}
         </nav>
       </header>

@@ -47,9 +47,9 @@ export default function ExamResultPage() {
 
   if (!result) {
     return (
-      <section className="exam-page">
+      <section className="page page--narrow exam-page exam-result">
         <p>Não encontramos o resultado desta prova.</p>
-        <Link className="course-link" to="/niveis">
+        <Link className="btn btn--primary" to="/niveis">
           Voltar ao mapa de níveis
         </Link>
       </section>
@@ -58,7 +58,7 @@ export default function ExamResultPage() {
 
   if (result.passed) {
     return (
-      <section className="exam-page">
+      <section className="page page--narrow exam-page exam-result exam-result--passed">
         <h1>Parabéns, você foi aprovado!</h1>
         <p className="exam__score exam__score--passed">{result.percent}%</p>
         {result.certificate && (
@@ -66,7 +66,7 @@ export default function ExamResultPage() {
             {result.certificate.status === 'locked' && (
               <p>{LOCKED_CERTIFICATE_MESSAGE}</p>
             )}
-            <Link className="course-link" to="/certificados">
+            <Link className="btn btn--primary" to="/certificados">
               Ver meu certificado
             </Link>
           </>
@@ -76,7 +76,7 @@ export default function ExamResultPage() {
   }
 
   return (
-    <section className="exam-page">
+    <section className="page page--narrow exam-page exam-result exam-result--failed">
       <h1>Você ainda não passou desta vez</h1>
       <p className="exam__score">{result.percent}%</p>
       <p>É preciso acertar pelo menos 90% para passar.</p>
@@ -101,7 +101,7 @@ export default function ExamResultPage() {
       <p role="status">
         {result.nextAttemptAt ? formatRetry(result.nextAttemptAt) : 'Você já pode tentar de novo.'}
       </p>
-      <Link className="course-link" to="/niveis">
+      <Link className="btn btn--secondary" to="/niveis">
         Voltar ao mapa de níveis
       </Link>
     </section>

@@ -1,11 +1,139 @@
+/*
+ * Destrava — design tokens.
+ * Camada 1: paleta da marca (não usar direto nos componentes, prefira os papéis).
+ * Camada 2: papéis (bg, surface, text, primary, success, danger...).
+ * Regra da marca: verde só sinaliza conquista (acerto, aprovado, válido, desbloqueado).
+ */
 :root {
+  /* ---- Paleta da marca ---- */
   --c-night: #26215C;
   --c-purple: #534AB7;
   --c-purple-soft: #7F77DD;
   --c-lavender: #EEEDFE;
   --c-green: #97C459;
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --radius: 12px;
-  --space: 16px;
+  /* Tons de apoio derivados da marca */
+  --c-purple-strong: #433A9E;  /* hover/pressed do roxo */
+  --c-purple-tint: #DCD9FB;    /* bordas/realces leves */
+  --c-green-strong: #3B6413;   /* verde para TEXTO (7:1 no branco) */
+  --c-green-tint: #EFF6E5;     /* fundo de sucesso */
+  --c-red: #9F2D16;            /* erro/"Quase!" — tom quente contido (7.3:1 no branco) */
+  --c-red-soft: #E3A08F;       /* borda de erro */
+  --c-red-tint: #FDF1EE;       /* fundo de erro */
+
+  /* Neutros puxados para o roxo-noite */
+  --c-gray-0: #FFFFFF;
+  --c-gray-25: #F6F5FD;
+  --c-gray-50: #F1F0FA;
+  --c-gray-100: #E6E4F3;
+  --c-gray-200: #D6D3EA;
+  --c-gray-300: #B9B5D6;
+  --c-gray-500: #5F5A86;       /* texto secundário (6.4:1 no branco, 5.5:1 na lavanda) */
+  --c-gray-700: #3B3670;
+
+  /* ---- Papéis de cor ---- */
+  --color-bg: var(--c-gray-25);
+  --color-surface: var(--c-gray-0);
+  --color-surface-raised: var(--c-gray-0);
+  --color-surface-sunken: var(--c-gray-50);
+  --color-surface-accent: var(--c-lavender);
+  --color-border: var(--c-gray-100);
+  --color-border-strong: var(--c-gray-200);
+  --color-border-interactive: var(--c-gray-300);
+  --color-text: var(--c-night);
+  --color-text-muted: var(--c-gray-500);
+  --color-text-inverse: var(--c-gray-0);
+  --color-primary: var(--c-purple);
+  --color-primary-hover: var(--c-purple-strong);
+  --color-primary-soft: var(--c-lavender);
+  --color-on-primary: var(--c-gray-0);
+  --color-link: var(--c-purple);
+  --color-success: var(--c-green);          /* fundos/realces; texto em cima: night */
+  --color-success-text: var(--c-green-strong);
+  --color-success-bg: var(--c-green-tint);
+  --color-on-success: var(--c-night);
+  --color-danger: var(--c-red);
+  --color-danger-border: var(--c-red-soft);
+  --color-danger-bg: var(--c-red-tint);
+  --color-info-bg: var(--c-lavender);
+  --color-focus: var(--c-purple);
+  --color-locked: var(--c-gray-300);
+
+  /* ---- Tipografia ---- */
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;   /* 12 */
+  --text-sm: 0.875rem;  /* 14 */
+  --text-md: 1rem;      /* 16 */
+  --text-lg: 1.125rem;  /* 18 */
+  --text-xl: 1.375rem;  /* 22 */
+  --text-2xl: 1.75rem;  /* 28 */
+  --text-3xl: 2.25rem;  /* 36 */
+  --text-4xl: 3rem;     /* 48 */
+
+  --leading-tight: 1.2;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* ---- Espaçamento (base 4) ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* ---- Raios ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  /* ---- Elevação (sombras tingidas de roxo-noite) ---- */
+  --shadow-xs: 0 1px 2px rgb(38 33 92 / 0.06);
+  --shadow-sm: 0 1px 3px rgb(38 33 92 / 0.08), 0 1px 2px rgb(38 33 92 / 0.04);
+  --shadow-md: 0 6px 16px -4px rgb(38 33 92 / 0.12), 0 2px 4px rgb(38 33 92 / 0.05);
+  --shadow-lg: 0 18px 40px -12px rgb(38 33 92 / 0.22);
+  --shadow-focus: 0 0 0 3px rgb(83 74 183 / 0.28);
+
+  /* ---- Camadas ---- */
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-header: 20;
+  --z-overlay: 40;
+
+  /* ---- Movimento ---- */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --transition-base: var(--duration-base) var(--ease-out);
+
+  /* ---- Layout ---- */
+  --container-sm: 440px;
+  --container-md: 720px;
+  --container-lg: 1120px;
+  --header-height: 64px;
+  --tap-min: 44px;
+
+  /* Aliases legados (mantidos para compatibilidade) */
+  --radius: var(--radius-md);
+  --space: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+  }
 }

@@ -39,7 +39,7 @@ export default function ExerciseShell({
 
   const frozen = busy || locked || result !== null
   return (
-    <div className="ex">
+    <div className={`ex${result ? (result.correct ? ' ex--correct' : ' ex--wrong') : ''}`}>
       <h3 className="ex__title">{title}</h3>
       <fieldset className="ex__body" disabled={frozen}>
         {children}
@@ -70,7 +70,7 @@ export default function ExerciseShell({
         {!result && (
           <button
             type="button"
-            className="course-button ex__confirm"
+            className="btn btn--primary ex__confirm"
             disabled={!canConfirm || frozen}
             onClick={confirm}
           >
@@ -78,12 +78,12 @@ export default function ExerciseShell({
           </button>
         )}
         {result && !result.correct && !locked && (
-          <button type="button" className="course-button ex__confirm" onClick={retry}>
+          <button type="button" className="btn btn--primary ex__confirm" onClick={retry}>
             Tentar de novo
           </button>
         )}
         {result?.correct && onContinue && (
-          <button type="button" className="course-button ex__confirm" onClick={onContinue}>
+          <button type="button" className="btn btn--primary ex__confirm" onClick={onContinue}>
             Continuar
           </button>
         )}

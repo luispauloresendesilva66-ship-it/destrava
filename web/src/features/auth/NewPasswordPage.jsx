@@ -41,18 +41,18 @@ export default function NewPasswordPage() {
 
   if (loading) {
     return (
-      <section className="auth-card">
+      <section className="card auth-card">
         <h1>Nova senha</h1>
-        <p className="auth-status">Carregando...</p>
+        <p className="loading" role="status">Carregando...</p>
       </section>
     )
   }
 
   if (!session) {
     return (
-      <section className="auth-card">
+      <section className="card auth-card">
         <h1>Nova senha</h1>
-        <p className="auth-error" role="alert">
+        <p className="form-error" role="alert">
           {INVALID_LINK}
         </p>
         <p className="auth-alt">
@@ -63,11 +63,12 @@ export default function NewPasswordPage() {
   }
 
   return (
-    <section className="auth-card">
+    <section className="card auth-card">
       <h1>Nova senha</h1>
       <form className="auth-form" onSubmit={handleSubmit} noValidate>
-        <label htmlFor="new-password">Nova senha</label>
+        <label className="label" htmlFor="new-password">Nova senha</label>
         <input
+          className="input"
           id="new-password"
           type="password"
           autoComplete="new-password"
@@ -75,13 +76,13 @@ export default function NewPasswordPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <p className="auth-hint">Use pelo menos 8 caracteres.</p>
+        <p className="help-text">Use pelo menos 8 caracteres.</p>
         {error && (
-          <p className="auth-error" role="alert">
+          <p className="form-error" role="alert">
             {error}
           </p>
         )}
-        <button type="submit" className="auth-button" disabled={busy}>
+        <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
           {busy ? 'Salvando...' : 'Salvar nova senha'}
         </button>
       </form>

@@ -60,35 +60,37 @@ export default function VideoPlayer({ lessonId, url, captionsUrl, startAt = 0, o
 
   return (
     <div className="player">
-      <video
-        ref={videoRef}
-        className="player__video"
-        src={src}
-        controls
-        crossOrigin="anonymous"
-        playsInline
-        onLoadedMetadata={onLoadedMetadata}
-        onPlaying={() => {
-          refreshing.current = false
-        }}
-        onPause={save}
-        onError={onError}
-      >
-        {captionsUrl && (
-          <track kind="captions" src={captionsUrl} srcLang="pt-BR" label="Português" default />
-        )}
-      </video>
+      <div className="player__frame">
+        <video
+          ref={videoRef}
+          className="player__video"
+          src={src}
+          controls
+          crossOrigin="anonymous"
+          playsInline
+          onLoadedMetadata={onLoadedMetadata}
+          onPlaying={() => {
+            refreshing.current = false
+          }}
+          onPause={save}
+          onError={onError}
+        >
+          {captionsUrl && (
+            <track kind="captions" src={captionsUrl} srcLang="pt-BR" label="Português" default />
+          )}
+        </video>
+      </div>
       {failed && (
-        <p className="course-error" role="alert">
+        <p className="alert alert--danger" role="alert">
           Não foi possível carregar o vídeo. Tente de novo.
         </p>
       )}
-      <div className="player__speeds" role="group" aria-label="Velocidade">
+      <div className="player__speeds segmented" role="group" aria-label="Velocidade">
         {SPEEDS.map((s) => (
           <button
             key={s}
             type="button"
-            className="player__speed"
+            className="player__speed segmented__item"
             aria-pressed={rate === s}
             onClick={() => changeRate(s)}
           >

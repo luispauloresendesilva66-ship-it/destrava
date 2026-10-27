@@ -23,15 +23,15 @@ export default function VerifyCertificatePage() {
   const { loading, cert, failed } = state
   if (loading) {
     return (
-      <section className="course-page">
-        <p role="status">Verificando...</p>
+      <section className="page page--narrow verify-page">
+        <p className="loading" role="status">Verificando...</p>
       </section>
     )
   }
   if (failed) {
     return (
-      <section className="course-page">
-        <p role="alert">Não foi possível verificar agora. Tente de novo em instantes.</p>
+      <section className="page page--narrow verify-page">
+        <p className="alert alert--danger" role="alert">Não foi possível verificar agora. Tente de novo em instantes.</p>
       </section>
     )
   }
@@ -39,9 +39,23 @@ export default function VerifyCertificatePage() {
   if (cert?.status === 'active') {
     const hours = `${cert.workload_hours} ${cert.workload_hours === 1 ? 'hora' : 'horas'}`
     return (
-      <section className="course-page">
+      <section className="page page--narrow verify-page">
         <div className="cert-verify cert-verify--valid">
-          <h1>Certificado válido</h1>
+          <div className="cert-verify__head">
+            <span className="cert-verify__seal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="28" height="28" focusable="false">
+                <path
+                  d="m6 12.5 4 4 8-9"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.75"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <h1>Certificado válido</h1>
+          </div>
           <dl>
             <dt>Nome</dt>
             <dd>{cert.full_name}</dd>
@@ -60,8 +74,8 @@ export default function VerifyCertificatePage() {
   }
 
   return (
-    <section className="course-page">
-      <div className="cert-verify">
+    <section className="page page--narrow verify-page">
+      <div className="cert-verify cert-verify--invalid">
         <p>{cert?.status === 'revoked' ? 'Este certificado foi revogado.' : 'Certificado não encontrado.'}</p>
       </div>
     </section>

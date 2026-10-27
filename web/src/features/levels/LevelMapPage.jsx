@@ -10,7 +10,7 @@ export default function LevelMapPage() {
 
   if (loading) {
     return (
-      <p className="course-page" role="status">
+      <p className="loading" role="status">
         Carregando...
       </p>
     )
@@ -18,10 +18,10 @@ export default function LevelMapPage() {
 
   if (error) {
     return (
-      <div className="course-page">
-        <div className="course-error" role="alert">
+      <div className="page">
+        <div className="alert alert--danger" role="alert">
           <p>{error}</p>
-          <button type="button" className="course-button" onClick={refresh}>
+          <button type="button" className="btn btn--primary" onClick={refresh}>
             Tentar de novo
           </button>
         </div>
@@ -30,7 +30,7 @@ export default function LevelMapPage() {
   }
 
   return (
-    <section className="course-page">
+    <section className="page">
       <h1>Mapa de níveis</h1>
       <ol className="level-list">
         {state.map((step, index) => {
@@ -58,7 +58,7 @@ export default function LevelMapPage() {
                 </span>
                 <span className="level-step__name">{level.name}</span>
                 {!unlocked && <LockBadge />}
-                {passed && <span className="passed-tag">Aprovado</span>}
+                {passed && <span className="badge badge--success passed-tag">Aprovado</span>}
               </button>
               {noticeFor === level.id && !unlocked && (
                 <p className="level-notice" role="status">
@@ -69,7 +69,7 @@ export default function LevelMapPage() {
                 {lessons.map(({ lesson, done, watchable }) => (
                   <li key={lesson.id}>
                     {watchable ? (
-                      <Link to={`/aula/${lesson.id}`}>
+                      <Link to={`/aula/${lesson.id}`} className={done ? 'is-done' : undefined}>
                         {lesson.title}
                         {done ? ' (concluída)' : ''}
                       </Link>
@@ -83,7 +83,7 @@ export default function LevelMapPage() {
                 ))}
               </ul>
               {examAvailable && !passed && (
-                <Link className="course-link level-step__exam" to={`/prova/${level.id}`}>
+                <Link className="btn btn--primary level-step__exam" to={`/prova/${level.id}`}>
                   Fazer a prova
                 </Link>
               )}

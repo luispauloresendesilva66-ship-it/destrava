@@ -43,6 +43,7 @@ function QuestionBody({ question, value, onChange }) {
         <label key={key} className="exam__file">
           <span>{FILE_LABELS[key]}</span>
           <textarea
+            className="textarea"
             rows={8}
             spellCheck={false}
             value={current[key]}
@@ -107,11 +108,11 @@ export default function ExamPage() {
 
   if (blocked) {
     return (
-      <section className="exam-page">
-        <p className="course-error" role="alert">
+      <section className="page page--narrow exam-page">
+        <p className="alert alert--danger" role="alert">
           {blocked}
         </p>
-        <Link className="course-link" to="/niveis">
+        <Link className="btn btn--secondary" to="/niveis">
           Voltar ao mapa de níveis
         </Link>
       </section>
@@ -120,12 +121,13 @@ export default function ExamPage() {
 
   if (!exam) {
     return (
-      <section className="exam-page">
+      <section className="page page--narrow exam-page">
         <h1>Prova do nível</h1>
-        <form onSubmit={begin} className="exam__name">
+        <form onSubmit={begin} className="card exam__name">
           <label>
             Nome completo
             <input
+              className="input"
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -134,13 +136,13 @@ export default function ExamPage() {
               minLength={3}
             />
           </label>
-          <p className="exam__warning">{NAME_WARNING}</p>
+          <p className="alert exam__warning">{NAME_WARNING}</p>
           {problem && (
-            <p className="course-error" role="alert">
+            <p className="alert alert--danger" role="alert">
               {problem}
             </p>
           )}
-          <button type="submit" className="course-button" disabled={busy || fullName.trim().length < 3}>
+          <button type="submit" className="btn btn--primary" disabled={busy || fullName.trim().length < 3}>
             {busy ? 'Carregando...' : 'Começar prova'}
           </button>
         </form>
@@ -155,41 +157,43 @@ export default function ExamPage() {
   const title = question.type === 'multiple_choice' ? question.prompt.question : question.prompt.statement
 
   return (
-    <section className="exam-page">
+    <section className="page page--narrow exam-page">
       <p className="ex__progress">
         Pergunta {index + 1} de {total}
       </p>
       <div
-        className="exam__bar"
+        className="progress exam__bar"
         role="progressbar"
         aria-label="Progresso da prova"
         aria-valuemin={0}
         aria-valuemax={total}
         aria-valuenow={index + 1}
       >
-        <div className="exam__bar-fill" style={{ width: `${((index + 1) / total) * 100}%` }} />
+        <div className="progress__fill exam__bar-fill" style={{ width: `${((index + 1) / total) * 100}%` }} />
       </div>
-      <h2 className="ex__title">{title}</h2>
-      <QuestionBody
-        key={question.id}
-        question={question}
-        value={answers[question.id]}
-        onChange={(value) => setAnswers((a) => ({ ...a, [question.id]: value }))}
-      />
+      <div className="card exam__question">
+        <h2 className="ex__title">{title}</h2>
+        <QuestionBody
+          key={question.id}
+          question={question}
+          value={answers[question.id]}
+          onChange={(value) => setAnswers((a) => ({ ...a, [question.id]: value }))}
+        />
+      </div>
       {problem && (
-        <p className="course-error" role="alert">
+        <p className="alert alert--danger" role="alert">
           {problem}
         </p>
       )}
       <div className="ex__footer">
         {last ? (
-          <button type="button" className="course-button" disabled={busy || !answered} onClick={send}>
+          <button type="button" className="btn btn--primary" disabled={busy || !answered} onClick={send}>
             {busy ? 'Enviando...' : 'Enviar prova'}
           </button>
         ) : (
           <button
             type="button"
-            className="course-button"
+            className="btn btn--primary"
             disabled={!answered}
             onClick={() => setIndex(index + 1)}
           >

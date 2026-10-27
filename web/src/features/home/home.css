@@ -1,0 +1,85 @@
+.home {
+  position: relative;
+  display: grid;
+  gap: var(--space-10);
+  align-items: center;
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-5);
+  overflow: hidden;
+  background:
+    radial-gradient(90% 80% at 100% 0%, rgb(127 119 221 / 0.22), transparent 60%),
+    radial-gradient(70% 60% at 0% 100%, rgb(238 237 254 / 0.9), transparent 70%),
+    var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.home__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.home h1 {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-black);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.home__lead {
+  margin: 0;
+  max-width: 34ch;
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+}
+
+.home__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Escada: quatro degraus subindo, o último (conquista) em verde. */
+.home__steps {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 120px;
+}
+
+.home__step {
+  flex: 1;
+  max-width: 72px;
+  border-radius: var(--radius-sm) var(--radius-sm) 4px 4px;
+  background: var(--c-purple-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+.home__step--1 { height: 25%; background: var(--c-purple-tint); }
+.home__step--2 { height: 50%; background: var(--c-purple-soft); }
+.home__step--3 { height: 75%; background: var(--c-purple); }
+.home__step--4 {
+  height: 100%;
+  background: linear-gradient(180deg, var(--c-green) 0 18%, var(--c-night) 18% 100%);
+}
+
+@media (min-width: 560px) {
+  .home__actions { flex-direction: row; flex-wrap: wrap; }
+}
+
+@media (min-width: 900px) {
+  .home {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: var(--space-12);
+    padding: var(--space-16) var(--space-12);
+  }
+
+  .home h1 { font-size: var(--text-4xl); }
+  .home__steps { height: 260px; gap: var(--space-3); }
+  .home__step { max-width: 88px; }
+}

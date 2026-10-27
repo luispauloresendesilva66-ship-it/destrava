@@ -34,11 +34,12 @@ export default function LoginPage() {
   if (!loading && session) return <Navigate to="/painel" replace />
 
   return (
-    <section className="auth-card">
+    <section className="card auth-card">
       <h1>Entrar</h1>
       <form className="auth-form" onSubmit={handleSubmit}>
-        <label htmlFor="login-email">E-mail</label>
+        <label className="label" htmlFor="login-email">E-mail</label>
         <input
+          className="input"
           id="login-email"
           type="email"
           autoComplete="email"
@@ -46,8 +47,9 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="login-password">Senha</label>
+        <label className="label" htmlFor="login-password">Senha</label>
         <input
+          className="input"
           id="login-password"
           type="password"
           autoComplete="current-password"
@@ -56,11 +58,11 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
         {error && (
-          <p className="auth-error" role="alert">
+          <p className="form-error" role="alert">
             {error}
           </p>
         )}
-        <button type="submit" className="auth-button" disabled={busy}>
+        <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
           {busy ? 'Entrando...' : 'Entrar'}
         </button>
       </form>

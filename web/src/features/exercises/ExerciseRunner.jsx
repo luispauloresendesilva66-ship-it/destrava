@@ -83,9 +83,9 @@ export default function ExerciseRunner({ lessonId, onProgress }) {
 
   if (error) {
     return (
-      <div className="course-error" role="alert">
+      <div className="alert alert--danger" role="alert">
         <p>{error}</p>
-        <button type="button" className="course-button" onClick={() => setAttempt((n) => n + 1)}>
+        <button type="button" className="btn btn--primary" onClick={() => setAttempt((n) => n + 1)}>
           Tentar de novo
         </button>
       </div>
@@ -93,9 +93,9 @@ export default function ExerciseRunner({ lessonId, onProgress }) {
   }
   if (livesError) {
     return (
-      <div className="course-error" role="alert">
+      <div className="alert alert--danger" role="alert">
         <p>{livesError}</p>
-        <button type="button" className="course-button" onClick={reload}>
+        <button type="button" className="btn btn--primary" onClick={reload}>
           Tentar de novo
         </button>
       </div>
@@ -114,7 +114,15 @@ export default function ExerciseRunner({ lessonId, onProgress }) {
       <h2>Exercícios</h2>
       <p className="ex__progress">
         Exercício {Math.min(index + 1, exercises.length)} de {exercises.length}
-        {Number.isFinite(remaining) && <span> · Vidas: {remaining}</span>}
+        {Number.isFinite(remaining) && (
+          <span className="ex__lives-wrap">
+            {' · '}
+            <span className={`ex__lives${remaining === 0 ? ' ex__lives--out' : ''}`}>
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M12 20.5s-7.5-4.6-7.5-10.1A4.4 4.4 0 0 1 12 7.6a4.4 4.4 0 0 1 7.5 2.8c0 5.5-7.5 10.1-7.5 10.1Z" fill="currentColor" /></svg>
+              Vidas: {remaining}
+            </span>
+          </span>
+        )}
       </p>
       {Component ? (
         <Component
@@ -128,7 +136,7 @@ export default function ExerciseRunner({ lessonId, onProgress }) {
         <p role="alert">Tipo de exercício desconhecido.</p>
       )}
       {outOfLives && (
-        <p className="course-error" role="alert">
+        <p className="alert alert--danger" role="alert">
           {LIVES_OUT_MESSAGE}
         </p>
       )}
