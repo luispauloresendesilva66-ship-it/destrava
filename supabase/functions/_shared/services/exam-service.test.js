@@ -87,6 +87,7 @@ const expectErr = async (promise, status, code) => {
 }
 
 beforeEach(() => {
+  vi.restoreAllMocks()
   gradeCode.mockReset()
   gradeCode.mockResolvedValue({ passed: true, results: [] })
 })
@@ -273,6 +274,7 @@ describe('submitExam', () => {
   })
 
   it('grading failure leaves the attempt open and throws 503 GRADING_FAILED', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {})
     gradeCode.mockRejectedValue(new Error('wasm'))
     const { repo, attemptId, state } = await started()
     await expectErr(submit(repo, attemptId, allCorrect), 503, 'GRADING_FAILED')
@@ -285,5 +287,70 @@ describe('submitExam', () => {
     repo.getQuestionsByIds.mockResolvedValue(bank.slice(0, 3))
     const out = await submit(repo, attemptId, allCorrect)
     expect(out).toMatchObject({ percent: 75, passed: false, wrongTopics: [] })
+  })
+
+  describe('certificate issuing is idempotent', () => {
+    const unique = () => Object.assign(new Error('duplicate key'), { code: '23505' })
+
+    it('createCertificate fails once: first submit errors, second call recovers one certificate', async () => {
+      const { repo, attemptId, state } = await started()
+      repo.createCertificate.mockRejectedValueOnce(new Error('db down'))
+      await expect(submit(repo, attemptId, allCorrect)).rejects.toThrow('db down')
+      expect(state.certificates).toHaveLength(0)
+
+      const out = await submit(repo, attemptId, {})
+      expect(out).toMatchObject({ passed: true, percent: 100 })
+      expect(out.certificate.status).toBe('active')
+      expect(state.certificates).toHaveLength(1)
+
+      await expectErr(submit(repo, attemptId, {}), 409, 'ALREADY_SUBMITTED')
+      expect(state.certificates).toHaveLength(1)
+    })
+
+    it('getWorkloadInputs failing is recoverable the same way', async () => {
+      const { repo, attemptId, state } = await started()
+      repo.getWorkloadInputs.mockRejectedValueOnce(new Error('db down'))
+      await expect(submit(repo, attemptId, allCorrect)).rejects.toThrow('db down')
+      const out = await submit(repo, attemptId, {})
+      expect(out.certificate).not.toBeNull()
+      expect(state.certificates).toHaveLength(1)
+    })
+
+    it('retries with a fresh code on a code collision', async () => {
+      const { repo, attemptId, state } = await started()
+      repo.createCertificate.mockRejectedValueOnce(unique()).mockRejectedValueOnce(unique())
+      const out = await submit(repo, attemptId, allCorrect)
+      expect(repo.createCertificate).toHaveBeenCalledTimes(3)
+      const codes = repo.createCertificate.mock.calls.map(([row]) => row.code)
+      expect(new Set(codes).size).toBe(3)
+      expect(state.certificates).toHaveLength(1)
+      expect(out.certificate.code).toBe(codes[2])
+    })
+
+    it('a user+level conflict resolves to the existing row', async () => {
+      const { repo, attemptId } = await started()
+      const winner = { userId: 'u1', levelId: 'L1', code: 'DTV-WWWW-XXXX', status: 'active' }
+      repo.createCertificate.mockImplementationOnce(async () => {
+        repo.getCertificate.mockResolvedValue(winner)
+        throw unique()
+      })
+      const out = await submit(repo, attemptId, allCorrect)
+      expect(out.certificate).toEqual({ code: 'DTV-WWWW-XXXX', status: 'active' })
+      expect(repo.createCertificate).toHaveBeenCalledTimes(1)
+    })
+
+    it('gives up after a few collisions', async () => {
+      const { repo, attemptId } = await started()
+      repo.createCertificate.mockRejectedValue(unique())
+      await expect(submit(repo, attemptId, allCorrect)).rejects.toMatchObject({ code: '23505' })
+      expect(repo.createCertificate).toHaveBeenCalledTimes(5)
+    })
+
+    it('a failed (not passed) submitted attempt stays ALREADY_SUBMITTED', async () => {
+      const { repo, attemptId } = await started()
+      await submit(repo, attemptId, {})
+      await expectErr(submit(repo, attemptId, {}), 409, 'ALREADY_SUBMITTED')
+      expect(repo.createCertificate).not.toHaveBeenCalled()
+    })
   })
 })

@@ -81,12 +81,62 @@ async function isCorrect(question, answer) {
   return false
 }
 
+const CERT_ATTEMPTS = 5
+const UNIQUE_VIOLATION = '23505'
+
+// Idempotente: reaproveita o certificado existente; senão insere, sorteando outro código se
+// houver colisão (e lendo a linha existente se o conflito for usuário+nível).
+async function ensureCertificate({ userId, levelId, profile, percent, now, repo }) {
+  const existing = await repo.getCertificate(userId, levelId)
+  if (existing) return { code: existing.code, status: existing.status }
+  const { plan } = profile
+  const inputs = await repo.getWorkloadInputs(levelId, { freeOnly: plan === 'free' })
+  const base = {
+    userId,
+    levelId,
+    fullName: profile.fullName,
+    workloadHours: computeWorkloadHours(inputs),
+    score: percent,
+    status: certificateStatusOnPass(plan),
+    issuedAt: now,
+  }
+  let lastError
+  for (let i = 0; i < CERT_ATTEMPTS; i++) {
+    const row = { ...base, code: generateCertificateCode() }
+    try {
+      await repo.createCertificate(row)
+      return { code: row.code, status: row.status }
+    } catch (err) {
+      if (err?.code !== UNIQUE_VIOLATION) throw err
+      lastError = err
+      const raced = await repo.getCertificate(userId, levelId)
+      if (raced) return { code: raced.code, status: raced.status }
+    }
+  }
+  throw lastError
+}
+
 export async function submitExam({ userId, attemptId, answers, repo, now }) {
   const attempt = await repo.getAttempt(attemptId)
   if (!attempt || attempt.userId !== userId) {
     throw new HttpError(404, 'Prova não encontrada.', 'ATTEMPT_NOT_FOUND')
   }
   if (attempt.submittedAt) {
+    // Aprovada mas sem certificado (falha depois de gravar a nota): emite agora.
+    if (attempt.passed === true && !(await repo.getCertificate(userId, attempt.levelId))) {
+      const profile = await repo.getProfile(userId)
+      if (profile) {
+        const certificate = await ensureCertificate({
+          userId,
+          levelId: attempt.levelId,
+          profile,
+          percent: attempt.percent,
+          now,
+          repo,
+        })
+        return { percent: attempt.percent, passed: true, wrongTopics: [], nextAttemptAt: null, certificate }
+      }
+    }
     throw new HttpError(409, 'Esta prova já foi enviada.', 'ALREADY_SUBMITTED')
   }
   const [profile, found] = await Promise.all([
@@ -125,27 +175,9 @@ export async function submitExam({ userId, attemptId, answers, repo, now }) {
   })
   if (!won) throw new HttpError(409, 'Esta prova já foi enviada.', 'ALREADY_SUBMITTED')
 
-  let certificate = null
-  if (score.passed) {
-    const existing = await repo.getCertificate(userId, attempt.levelId)
-    if (existing) {
-      certificate = { code: existing.code, status: existing.status }
-    } else {
-      const inputs = await repo.getWorkloadInputs(attempt.levelId, { freeOnly: plan === 'free' })
-      const row = {
-        code: generateCertificateCode(),
-        userId,
-        levelId: attempt.levelId,
-        fullName: profile.fullName,
-        workloadHours: computeWorkloadHours(inputs),
-        score: score.percent,
-        status: certificateStatusOnPass(plan),
-        issuedAt: now,
-      }
-      await repo.createCertificate(row)
-      certificate = { code: row.code, status: row.status }
-    }
-  }
+  const certificate = score.passed
+    ? await ensureCertificate({ userId, levelId: attempt.levelId, profile, percent: score.percent, now, repo })
+    : null
 
   const retryAt = score.passed ? null : nextAttemptAt({ lastSubmittedAt: now, plan })
   return {

@@ -101,9 +101,10 @@ export function createRepo(db) {
       startedAt: row.started_at,
       submittedAt: row.submitted_at,
       passed: row.passed,
+      percent: row.percent,
     }
 
-  const ATTEMPT_COLUMNS = 'id, user_id, level_id, question_ids, started_at, submitted_at, passed'
+  const ATTEMPT_COLUMNS = 'id, user_id, level_id, question_ids, started_at, submitted_at, passed, percent'
 
   async function getLevel(levelId) {
     return check(
