@@ -10,6 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "linkedom": "^0.18.14",
     "postcss": "^8.5.32",
     "quickjs-emscripten": "^0.31.0"

@@ -1,0 +1,141 @@
+{
+  "level": {
+    "position": 1,
+    "slug": "primeiro-commit",
+    "name": "Primeiro Commit",
+    "description": "Conteúdo de exemplo para testar o app: os primeiros passos com HTML."
+  },
+  "exam": { "questionCount": 4, "exerciseMinutes": 240, "examMinutes": 60 },
+  "lessons": [
+    {
+      "position": 1,
+      "title": "O que é HTML?",
+      "description": "Conheça a linguagem que dá estrutura a toda página da web.",
+      "durationSeconds": 600,
+      "videoKey": "n1/a01.mp4",
+      "captionsKey": "n1/a01.vtt",
+      "isFree": true,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual tag define o título principal de uma página?",
+            "options": ["<p>", "<h1>", "<div>", "<span>"]
+          },
+          "solution": { "correctIndex": 1 },
+          "explanation": "A tag <h1> marca o título principal. As outras servem para parágrafos e agrupamentos."
+        },
+        {
+          "position": 2,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": { "code": "<___>Olá, mundo!</p>", "blanks": 1 },
+          "solution": { "answers": ["p"] },
+          "explanation": "Todo parágrafo abre com <p> e fecha com </p>."
+        }
+      ]
+    },
+    {
+      "position": 2,
+      "title": "Sua primeira página",
+      "description": "Monte uma página simples com título, parágrafo e lista.",
+      "durationSeconds": 900,
+      "videoKey": "n1/a02.mp4",
+      "captionsKey": "n1/a02.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": { "blocks": ["<ul>", "<li>Item</li>", "</ul>"] },
+          "solution": { "order": [0, 1, 2] },
+          "explanation": "A lista abre com <ul>, tem os itens <li> dentro e fecha com </ul>."
+        },
+        {
+          "position": 2,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Crie um título <h1> com o texto \"Meu site\".",
+            "starter": { "html": "" }
+          },
+          "solution": {
+            "tests": [
+              { "type": "dom-exists", "selector": "h1" },
+              { "type": "dom-text", "selector": "h1", "equals": "Meu site" }
+            ]
+          },
+          "explanation": "Basta escrever <h1>Meu site</h1>."
+        }
+      ]
+    }
+  ],
+  "examQuestions": [
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag cria um link?",
+        "options": ["<link>", "<a>", "<href>", "<url>"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag cria um parágrafo?",
+        "options": ["<p>", "<para>", "<text>", "<br>"]
+      },
+      "answer": { "correctIndex": 0 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag insere uma imagem?",
+        "options": ["<picture>", "<image>", "<img>", "<src>"]
+      },
+      "answer": { "correctIndex": 2 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag cria uma lista com marcadores?",
+        "options": ["<ol>", "<ul>", "<li>", "<dl>"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "code",
+      "topic": "html",
+      "prompt": {
+        "statement": "Crie um título <h1> e um parágrafo <p> na página.",
+        "starter": { "html": "" }
+      },
+      "answer": {
+        "tests": [
+          { "type": "dom-exists", "selector": "h1" },
+          { "type": "dom-exists", "selector": "p" }
+        ]
+      }
+    },
+    {
+      "type": "code",
+      "topic": "html",
+      "prompt": {
+        "statement": "Crie um link <a> com o texto \"Início\".",
+        "starter": { "html": "" }
+      },
+      "answer": {
+        "tests": [{ "type": "dom-text", "selector": "a", "equals": "Início" }]
+      }
+    }
+  ]
+}
