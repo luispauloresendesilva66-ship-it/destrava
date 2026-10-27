@@ -59,7 +59,8 @@ export default function LessonPage() {
   }, [])
 
   const step = state?.find((s) => s.lessons.some((l) => l.lesson.id === lessonId))
-  const current = step?.lessons.find((l) => l.lesson.id === lessonId)?.lesson
+  const currentEntry = step?.lessons.find((l) => l.lesson.id === lessonId)
+  const current = currentEntry?.lesson
 
   return (
     <section className="lesson-page">
@@ -96,7 +97,9 @@ export default function LessonPage() {
               onExpired={getVideoUrl}
             />
           )}
-          <ExerciseRunner lessonId={lessonId} onProgress={refresh} />
+          {currentEntry?.watchable && !problem?.forbidden && (
+            <ExerciseRunner lessonId={lessonId} onProgress={refresh} />
+          )}
         </div>
         {step && (
           <nav aria-label="Aulas do nível">

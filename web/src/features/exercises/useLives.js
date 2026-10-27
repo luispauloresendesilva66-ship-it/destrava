@@ -3,6 +3,7 @@ import { supabase } from '../../lib/supabase'
 import { useSession } from '../auth/useSession.js'
 import { livesRemaining, nextLivesResetAt, startOfDaySaoPaulo } from '@domain/lives.js'
 
+export const LIVES_LOAD_ERROR = 'Não foi possível verificar suas vidas. Tente de novo.'
 export const LIVES_OUT_MESSAGE =
   'Suas vidas acabaram. Elas voltam à meia-noite — ou destrave vidas infinitas no Gold.'
 
@@ -13,28 +14,48 @@ export function useLives() {
   const plan = profile?.plan
   const [errorsToday, setErrorsToday] = useState(0)
   const [loaded, setLoaded] = useState(false)
+  const [error, setError] = useState(null)
+  const [attempt, setAttempt] = useState(0)
   const [now] = useState(() => new Date())
 
   useEffect(() => {
     if (plan !== 'free') return undefined
     let cancelled = false
-    supabase
+    setLoaded(false)
+    setError(null)
+    Promise.resolve(
+      supabase
       .from('exercise_attempts')
       .select('id', { count: 'exact', head: true })
       .eq('correct', false)
-      .gte('created_at', startOfDaySaoPaulo(now).toISOString())
-      .then(({ count, error }) => {
+      .gte('created_at', startOfDaySaoPaulo(now).toISOString()),
+    )
+      .then(({ count, error: err }) => {
         if (cancelled) return
-        if (!error) setErrorsToday(count ?? 0)
+        if (err) setError(LIVES_LOAD_ERROR)
+        else setErrorsToday(count ?? 0)
+        setLoaded(true)
+      })
+      .catch(() => {
+        if (cancelled) return
+        setError(LIVES_LOAD_ERROR)
         setLoaded(true)
       })
     return () => {
       cancelled = true
     }
-  }, [plan, now])
+  }, [plan, now, attempt])
 
+  const reload = useCallback(() => setAttempt((n) => n + 1), [])
   const spend = useCallback(() => setErrorsToday((n) => n + 1), [])
   const resetAt = useMemo(() => nextLivesResetAt(now), [now])
   const remaining = plan ? livesRemaining({ plan, errorsToday }) : null
-  return { remaining, resetAt, spend, loading: !plan || (plan === 'free' && !loaded) }
+  return {
+    remaining,
+    resetAt,
+    spend,
+    reload,
+    error,
+    loading: !plan || (plan === 'free' && !loaded),
+  }
 }

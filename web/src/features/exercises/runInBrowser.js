@@ -7,11 +7,12 @@ export const TIMEOUT_MESSAGE = 'Seu código demorou demais (possível loop infin
 // Roda DENTRO do iframe (é serializado com toString): executa o JS do aluno e confere os
 // testes que dependem de DOM ou de JS. Os de css-decl ficam com a página (resultado null).
 // Mantém as mensagens e a comparação canônica de grade.js.
-function iframeRunner() {
+function iframeRunner(win) {
+  const document = win.document
   const stringify = JSON.stringify
   const parse = JSON.parse
   const { token, js, tests } = parse(document.getElementById('__destrava').textContent)
-  const indirectEval = eval
+  const indirectEval = win.eval
 
   const canonical = (value) => {
     if (Array.isArray(value)) return `[${value.map(canonical).join(',')}]`
@@ -26,18 +27,20 @@ function iframeRunner() {
   const errorText = (err) => {
     if (err && typeof err === 'object') {
       const msg = err.message ?? err.name
-      if (msg) return String(msg)
+      // Chrome embrulha erros de sintaxe do <script> num "Failed to execute 'appendChild'...".
+      if (msg) return String(msg).replace(/^Failed to execute '[^']*' on '[^']*': /, '')
     }
     return String(err)
   }
 
   let failure = null
-  window.addEventListener('error', (e) => {
+  win.addEventListener('error', (e) => {
     if (!failure) failure = `Erro no seu código: ${errorText(e.error ?? e.message)}`
   })
   const script = document.createElement('script')
   script.textContent = js
-  document.body.appendChild(script)
+  // Com HTML vazio o <body> ainda não existe (os scripts caem no <head>).
+  ;(document.body ?? document.head).appendChild(script)
 
   const results = tests.map((test) => {
     try {
@@ -82,7 +85,7 @@ function iframeRunner() {
       return { passed: false, message: `Erro ao corrigir o teste: ${errorText(err)}` }
     }
   })
-  parent.postMessage({ token, results }, '*')
+  win.parent.postMessage({ token, results }, '*')
 }
 
 // JSON dentro de <script>: escapa "<" para o texto do aluno não fechar a tag.
@@ -93,7 +96,7 @@ export function buildRunnerDoc({ html = '', css = '', js = '' }, tests, token) {
   return (
     `${String(html ?? '')}\n<style>${String(css ?? '').replace(/<\/style/gi, '<\\/style')}</style>\n` +
     `<script type="application/json" id="__destrava">${data}</script>\n` +
-    `<script>(${iframeRunner.toString()})()</script>`
+    `<script>(${iframeRunner.toString()})(window)</script>`
   )
 }
 

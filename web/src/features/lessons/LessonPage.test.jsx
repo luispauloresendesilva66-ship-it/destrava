@@ -14,14 +14,15 @@ vi.mock('../../lib/api.js', () => ({
   getVideoUrl: vi.fn(),
   VIDEO_ERROR: 'Não foi possível carregar o vídeo. Tente de novo.',
 }))
-vi.mock('../levels/useCourse.js', () => ({ useCourse: () => ({ state: null }) }))
-vi.mock('../exercises/ExerciseRunner.jsx', () => ({ default: () => null }))
+const course = vi.hoisted(() => ({ state: null }))
+vi.mock('../levels/useCourse.js', () => ({ useCourse: () => ({ state: course.state, refresh: () => {} }) }))
+vi.mock('../exercises/ExerciseRunner.jsx', () => ({ default: () => <div data-testid="runner" /> }))
 
 import LessonPage from './LessonPage.jsx'
 import { getVideoUrl } from '../../lib/api.js'
 
 function renderPage() {
-  render(
+  return render(
     <MemoryRouter
       initialEntries={['/aula/l1']}
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
@@ -60,5 +61,21 @@ describe('LessonPage', () => {
       expect(screen.getByRole('group', { name: 'Velocidade' })).toBeInTheDocument(),
     )
     expect(screen.getByRole('button', { name: '1.25x' })).toBeInTheDocument()
+  })
+
+  it('exercícios só aparecem quando a aula é liberada (mesma trava do vídeo)', async () => {
+    getVideoUrl.mockResolvedValue({ url: 'https://r2.test/v.mp4', captionsUrl: null })
+    const step = (watchable) => [
+      { level: { name: 'N1' }, lessons: [{ lesson: { id: 'l1', title: 'A' }, watchable }] },
+    ]
+    course.state = step(false)
+    const first = renderPage()
+    await waitFor(() => expect(screen.getByRole('group', { name: 'Velocidade' })).toBeInTheDocument())
+    expect(screen.queryByTestId('runner')).toBeNull()
+    first.unmount()
+    course.state = step(true)
+    renderPage()
+    expect(await screen.findByTestId('runner')).toBeInTheDocument()
+    course.state = null
   })
 })

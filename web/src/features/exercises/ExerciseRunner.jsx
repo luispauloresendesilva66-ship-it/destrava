@@ -36,7 +36,7 @@ async function loadExercises(lessonId) {
 
 // Exercícios da aula, um de cada vez. onProgress() avisa a página quando há acerto novo.
 export default function ExerciseRunner({ lessonId, onProgress }) {
-  const { remaining, spend } = useLives()
+  const { remaining, spend, loading: livesLoading, error: livesError, reload } = useLives()
   const [exercises, setExercises] = useState(null)
   const [done, setDone] = useState(() => new Set())
   const [index, setIndex] = useState(0)
@@ -91,7 +91,17 @@ export default function ExerciseRunner({ lessonId, onProgress }) {
       </div>
     )
   }
-  if (!exercises || exercises.length === 0 || remaining === null) return null
+  if (livesError) {
+    return (
+      <div className="course-error" role="alert">
+        <p>{livesError}</p>
+        <button type="button" className="course-button" onClick={reload}>
+          Tentar de novo
+        </button>
+      </div>
+    )
+  }
+  if (!exercises || exercises.length === 0 || livesLoading) return null
 
   const allDone = exercises.every((e) => done.has(e.id))
   const last = index >= exercises.length - 1

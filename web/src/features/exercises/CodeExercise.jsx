@@ -24,11 +24,12 @@ export default function CodeExercise({ exercise, onSubmit, ...shell }) {
   )
   const [files, setFiles] = useState(initial)
   const [tab, setTab] = useState(tabs[0])
-  const [previewDoc, setPreviewDoc] = useState(() => buildPreviewDoc(initial))
+  const [previewDoc, setPreviewDoc] = useState(() => buildPreviewDoc({ ...initial, js: '' }))
 
-  // Pré-visualização ao vivo, com um pequeno atraso para não recarregar a cada tecla.
+  // Pré-visualização ao vivo de HTML e CSS, com um pequeno atraso para não recarregar a cada
+  // tecla. O JS do aluno só roda no preview quando ele aperta "Testar".
   useEffect(() => {
-    const id = setTimeout(() => setPreviewDoc(buildPreviewDoc(files)), 400)
+    const id = setTimeout(() => setPreviewDoc(buildPreviewDoc({ ...files, js: '' })), 400)
     return () => clearTimeout(id)
   }, [files])
 
@@ -36,7 +37,10 @@ export default function CodeExercise({ exercise, onSubmit, ...shell }) {
     <ExerciseShell
       exercise={exercise}
       title={statement}
-      onSubmit={onSubmit}
+      onSubmit={(answer) => {
+        setPreviewDoc(buildPreviewDoc(answer))
+        return onSubmit(answer)
+      }}
       getAnswer={() => files}
       canConfirm
       confirmLabel="Testar"

@@ -1,24 +1,25 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { renderHook, waitFor, act } from '@testing-library/react'
 
-const query = vi.hoisted(() => ({ count: 0, calls: [] }))
+const query = vi.hoisted(() => ({ count: 0, calls: [], error: null }))
 vi.mock('../../lib/supabase', () => {
   const chain = {
     select: (...a) => (query.calls.push(['select', ...a]), chain),
     eq: (...a) => (query.calls.push(['eq', ...a]), chain),
     gte: (...a) => (query.calls.push(['gte', ...a]), chain),
-    then: (res) => res({ count: query.count, error: null }),
+    then: (res) => res({ count: query.count, error: query.error }),
   }
   return { supabase: { from: () => chain } }
 })
 const session = vi.hoisted(() => ({ plan: 'free' }))
 vi.mock('../auth/useSession.js', () => ({ useSession: () => ({ profile: { plan: session.plan } }) }))
 
-import { useLives } from './useLives.js'
+import { useLives, LIVES_LOAD_ERROR } from './useLives.js'
 
 beforeEach(() => {
   query.calls = []
   query.count = 0
+  query.error = null
   session.plan = 'free'
 })
 
@@ -51,5 +52,17 @@ describe('useLives', () => {
     expect(result.current.remaining).toBe(Infinity)
     expect(result.current.loading).toBe(false)
     expect(query.calls).toEqual([])
+  })
+
+  it('falha na contagem vira erro (não finge 5 vidas) e reload tenta de novo', async () => {
+    query.error = { message: 'boom' }
+    const { result } = renderHook(() => useLives())
+    await waitFor(() => expect(result.current.error).toBe(LIVES_LOAD_ERROR))
+    expect(result.current.loading).toBe(false)
+    query.error = null
+    query.count = 1
+    act(() => result.current.reload())
+    await waitFor(() => expect(result.current.error).toBeNull())
+    await waitFor(() => expect(result.current.remaining).toBe(4))
   })
 })
