@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import { SessionContext } from './sessionContext.js'
 
@@ -7,7 +7,8 @@ import { SessionContext } from './sessionContext.js'
 export function SessionProvider({ children }) {
   const [session, setSession] = useState(null)
   const [sessionReady, setSessionReady] = useState(false)
-  const [profileState, setProfileState] = useState({ userId: null, profile: null })
+  const [profileState, setProfileState] = useState({ userId: null, profile: null, error: false })
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     let active = true
@@ -35,7 +36,7 @@ export function SessionProvider({ children }) {
   useEffect(() => {
     let active = true
     if (!userId) {
-      setProfileState({ userId: null, profile: null })
+      setProfileState({ userId: null, profile: null, error: false })
       return undefined
     }
     supabase
@@ -43,25 +44,32 @@ export function SessionProvider({ children }) {
       .select('id, full_name, plan, role')
       .eq('id', userId)
       .single()
-      .then(({ data: row }) => {
-        if (active) setProfileState({ userId, profile: row ?? null })
+      .then(({ data: row, error }) => {
+        if (active) setProfileState({ userId, profile: error ? null : (row ?? null), error: Boolean(error) })
       })
       .catch(() => {
-        if (active) setProfileState({ userId, profile: null })
+        if (active) setProfileState({ userId, profile: null, error: true })
       })
     return () => {
       active = false
     }
-  }, [userId])
+  }, [userId, attempt])
+
+  const retryProfile = useCallback(() => {
+    setProfileState({ userId: null, profile: null, error: false })
+    setAttempt((n) => n + 1)
+  }, [])
 
   const settled = profileState.userId === userId
   const value = useMemo(
     () => ({
       session,
       profile: userId && settled ? profileState.profile : null,
+      profileError: Boolean(userId && settled && profileState.error),
+      retryProfile,
       loading: !sessionReady || (userId !== null && !settled),
     }),
-    [session, userId, settled, profileState.profile, sessionReady],
+    [session, userId, settled, profileState.profile, profileState.error, sessionReady, retryProfile],
   )
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>

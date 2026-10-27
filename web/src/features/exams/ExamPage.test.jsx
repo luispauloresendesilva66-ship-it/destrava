@@ -110,6 +110,17 @@ describe('ExamPage', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Você poderá tentar de novo às 12:00 de 27/10.')
   })
 
+  it('NAME_REQUIRED mantém o formulário do nome com a mensagem', async () => {
+    startExam.mockRejectedValue(
+      Object.assign(new Error('Confirme seu nome completo antes de começar a prova.'), { status: 422, code: 'NAME_REQUIRED' }),
+    )
+    renderPage()
+    fireEvent.click(screen.getByRole('button', { name: 'Começar prova' }))
+    expect(await screen.findByRole('alert')).toHaveTextContent('Confirme seu nome completo antes de começar a prova.')
+    expect(screen.getByLabelText('Nome completo')).toBeInTheDocument()
+    expect(screen.queryByText('Voltar ao mapa de níveis')).toBeNull()
+  })
+
   it('outros erros de início mostram a mensagem do servidor', async () => {
     startExam.mockRejectedValue(Object.assign(new Error('Você já foi aprovado neste nível.'), { status: 409, code: 'ALREADY_PASSED' }))
     renderPage()

@@ -44,7 +44,7 @@ describe('ExamResultPage', () => {
     expect(score).toHaveClass('exam__score--passed')
     expect(screen.getByRole('link', { name: 'Ver meu certificado' })).toHaveAttribute(
       'href',
-      '/certificado/DTV-ABCD-EFGH',
+      '/certificados',
     )
   })
 
@@ -56,7 +56,8 @@ describe('ExamResultPage', () => {
       nextAttemptAt: null,
       certificate: { code: 'DTV-ABCD-EFGH', status: 'locked' },
     })
-    expect(screen.getByText(/certificado será liberado/)).toBeInTheDocument()
+    expect(screen.getByText('Certificado conquistado! Destrave por R$ 39 ou assine o Gold.')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Ver meu certificado' })).toHaveAttribute('href', '/certificados')
   })
 
   it('reprovado: nota, assuntos com link para as aulas e horário exato', async () => {

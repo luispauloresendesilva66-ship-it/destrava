@@ -38,6 +38,18 @@ describe('validateContent', () => {
     expect(validateContent(c)).toContain('Banco de prova tem 5 perguntas, mas a prova pede 20.')
   })
 
+  it('exige ao menos uma pergunta de código no banco de prova', () => {
+    const c = sample()
+    c.examQuestions = c.examQuestions.filter((q) => q.type !== 'code')
+    expect(validateContent(c)).toContain('Banco de prova precisa ter pelo menos uma pergunta de código.')
+  })
+
+  it('exige questionCount de pelo menos 2', () => {
+    const c = sample()
+    c.exam.questionCount = 1
+    expect(validateContent(c).join(' ')).toContain('"questionCount" deve ser pelo menos 2')
+  })
+
   it('exige durationSeconds', () => {
     const c = sample()
     delete c.lessons[0].durationSeconds

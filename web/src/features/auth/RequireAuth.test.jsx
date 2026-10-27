@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 
 vi.mock('../../lib/supabase', () => ({ supabase: {} }))
@@ -46,5 +46,14 @@ describe('RequireAuth', () => {
   it('renderiza o conteúdo com sessão', () => {
     setup({ session: { user: { id: 'u1' } }, profile: null, loading: false })
     expect(screen.getByText('conteúdo protegido')).toBeInTheDocument()
+  })
+
+  it('mostra erro com "Tentar de novo" quando o perfil falha', () => {
+    const retryProfile = vi.fn()
+    setup({ session: { user: { id: 'u1' } }, profile: null, loading: false, profileError: true, retryProfile })
+    expect(screen.getByRole('alert')).toHaveTextContent('Não foi possível carregar seu perfil.')
+    expect(screen.queryByText('conteúdo protegido')).not.toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Tentar de novo' }))
+    expect(retryProfile).toHaveBeenCalledTimes(1)
   })
 })

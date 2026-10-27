@@ -86,7 +86,8 @@ export default function ExamPage() {
     try {
       setExam(await startExam(levelId))
     } catch (err) {
-      setBlocked(startMessage(err))
+      if (err.code === 'NAME_REQUIRED') setProblem(err.message)
+      else setBlocked(startMessage(err))
     } finally {
       setBusy(false)
     }

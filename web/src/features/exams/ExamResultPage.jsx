@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { formatRetry } from './formatRetry.js'
+import { LOCKED_CERTIFICATE_MESSAGE } from '../certificates/messages.js'
 import './exams.css'
 
 // Aulas do nível que ensinam os assuntos errados: { [topic]: [{ id, title }] }.
@@ -63,9 +64,9 @@ export default function ExamResultPage() {
         {result.certificate && (
           <>
             {result.certificate.status === 'locked' && (
-              <p>Seu certificado será liberado quando você assinar o plano Gold.</p>
+              <p>{LOCKED_CERTIFICATE_MESSAGE}</p>
             )}
-            <Link className="course-link" to={`/certificado/${result.certificate.code}`}>
+            <Link className="course-link" to="/certificados">
               Ver meu certificado
             </Link>
           </>

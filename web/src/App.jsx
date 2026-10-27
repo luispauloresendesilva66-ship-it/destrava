@@ -14,11 +14,8 @@ const ExamPage = lazy(() => import('./features/exams/ExamPage.jsx'))
 const ExamResultPage = lazy(() => import('./features/exams/ExamResultPage.jsx'))
 const CertificatesPage = lazy(() => import('./features/certificates/CertificatesPage.jsx'))
 const VerifyCertificatePage = lazy(() => import('./features/certificates/VerifyCertificatePage.jsx'))
+import HomePage from './features/home/HomePage.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
-
-function Home() {
-  return <h1>Bem-vindo ao Destrava</h1>
-}
 
 export default function App() {
   return (
@@ -27,7 +24,7 @@ export default function App() {
         <Layout>
           <Suspense fallback={<p role="status">Carregando...</p>}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/cadastro" element={<SignupPage />} />
             <Route path="/entrar" element={<LoginPage />} />
             <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />

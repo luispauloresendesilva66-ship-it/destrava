@@ -14,8 +14,8 @@ vi.mock('../../lib/api.js', () => ({
   getVideoUrl: vi.fn(),
   VIDEO_ERROR: 'Não foi possível carregar o vídeo. Tente de novo.',
 }))
-const course = vi.hoisted(() => ({ state: null }))
-vi.mock('../levels/useCourse.js', () => ({ useCourse: () => ({ state: course.state, refresh: () => {} }) }))
+const course = vi.hoisted(() => ({ state: null, plan: 'gold' }))
+vi.mock('../levels/useCourse.js', () => ({ useCourse: () => ({ state: course.state, plan: course.plan, refresh: () => {} }) }))
 vi.mock('../exercises/ExerciseRunner.jsx', () => ({ default: () => <div data-testid="runner" /> }))
 
 import LessonPage from './LessonPage.jsx'
@@ -74,6 +74,22 @@ describe('LessonPage', () => {
     expect(screen.queryByTestId('runner')).toBeNull()
     first.unmount()
     course.state = step(true)
+    renderPage()
+    expect(await screen.findByTestId('runner')).toBeInTheDocument()
+    course.state = null
+  })
+
+  it('aula de amostra no plano free é só para assistir (sem exercícios)', async () => {
+    getVideoUrl.mockResolvedValue({ url: 'https://r2.test/v.mp4', captionsUrl: null })
+    course.state = [
+      { level: { name: 'N1' }, lessons: [{ lesson: { id: 'l1', title: 'A', is_sample: true }, watchable: true }] },
+    ]
+    course.plan = 'free'
+    const first = renderPage()
+    await waitFor(() => expect(screen.getByRole('group', { name: 'Velocidade' })).toBeInTheDocument())
+    expect(screen.queryByTestId('runner')).toBeNull()
+    first.unmount()
+    course.plan = 'gold'
     renderPage()
     expect(await screen.findByTestId('runner')).toBeInTheDocument()
     course.state = null

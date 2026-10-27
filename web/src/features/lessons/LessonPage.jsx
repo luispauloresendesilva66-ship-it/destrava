@@ -22,7 +22,7 @@ async function loadStartAt(lessonId) {
 
 export default function LessonPage() {
   const { lessonId } = useParams()
-  const { state, refresh } = useCourse()
+  const { state, refresh, plan } = useCourse()
   const [video, setVideo] = useState(null)
   const [problem, setProblem] = useState(null) // { message, forbidden }
   const [attempt, setAttempt] = useState(0)
@@ -61,6 +61,8 @@ export default function LessonPage() {
   const step = state?.find((s) => s.lessons.some((l) => l.lesson.id === lessonId))
   const currentEntry = step?.lessons.find((l) => l.lesson.id === lessonId)
   const current = currentEntry?.lesson
+  // Spec §7: aula de amostra no plano free é só para assistir, sem exercícios.
+  const watchOnly = plan === 'free' && current?.is_sample === true
 
   return (
     <section className="lesson-page">
@@ -97,7 +99,7 @@ export default function LessonPage() {
               onExpired={getVideoUrl}
             />
           )}
-          {currentEntry?.watchable && !problem?.forbidden && (
+          {currentEntry?.watchable && !watchOnly && !problem?.forbidden && (
             <ExerciseRunner lessonId={lessonId} onProgress={refresh} />
           )}
         </div>

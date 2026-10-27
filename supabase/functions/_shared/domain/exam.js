@@ -2,15 +2,29 @@ import { retakeCooldownMs } from './plans.js';
 
 export const PASS_PERCENT = 90;
 
-// Fisher-Yates over a copy; never mutates the bank. random() must return [0, 1).
-export function drawQuestions(bank, count, random = Math.random) {
-  if (bank.length < count) throw new Error('Question bank too small');
-  const pool = bank.slice();
+// Fisher-Yates over a copy; never mutates the input. random() must return [0, 1).
+function shuffled(list, random) {
+  const pool = list.slice();
   for (let i = pool.length - 1; i > 0; i--) {
     const j = Math.floor(random() * (i + 1));
     [pool[i], pool[j]] = [pool[j], pool[i]];
   }
-  return pool.slice(0, count);
+  return pool;
+}
+
+// Spec §10: every exam has at least one code question when the bank has any.
+// One code question is picked at random, the rest are drawn from the remaining bank,
+// and the final order is shuffled.
+export function drawQuestions(bank, count, random = Math.random) {
+  if (bank.length < count) throw new Error('Question bank too small');
+  const codeQuestions = bank.filter((q) => q.type === 'code');
+  if (count < 1 || codeQuestions.length === 0) return shuffled(bank, random).slice(0, count);
+  const mandatory = codeQuestions[Math.floor(random() * codeQuestions.length)];
+  const rest = shuffled(
+    bank.filter((q) => q !== mandatory),
+    random,
+  ).slice(0, count - 1);
+  return shuffled([mandatory, ...rest], random);
 }
 
 export function scoreAttempt({ questions, results }) {

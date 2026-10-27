@@ -3,6 +3,9 @@ const PURPLE = [83, 74, 183]
 const LAVENDER = [238, 237, 254]
 const GREEN = [151, 196, 89]
 
+export const CERTIFICATE_FOOTER =
+  'Curso livre de formação inicial e continuada, conforme a Lei nº 9.394/96 e o Decreto nº 5.154/2004.'
+
 export function formatIssuedDate(issuedAt) {
   // America/Sao_Paulo é UTC−3 fixo (sem horário de verão).
   const d = new Date(new Date(issuedAt).getTime() - 3 * 60 * 60 * 1000)
@@ -19,6 +22,17 @@ export function buildCertificateLines({ fullName, levelName, workloadHours, scor
     `com carga horária de ${hours} e média ${score}%.`,
     `Emitido em ${formatIssuedDate(issuedAt)} · Código ${code}`,
   ]
+}
+
+// Reduz a fonte (já em negrito) até o texto caber em uma linha; piso de minSize.
+export function fitFontSize(doc, text, maxWidth, startSize = 30, minSize = 16) {
+  let size = startSize
+  doc.setFontSize(size)
+  while (size > minSize && doc.getTextWidth(text) > maxWidth) {
+    size -= 1
+    doc.setFontSize(size)
+  }
+  return size
 }
 
 function drawLogo(doc, x, y, h) {
@@ -69,9 +83,9 @@ export async function downloadCertificatePdf(cert) {
   doc.setFontSize(16)
   doc.text(l1.slice(0, l1.length - cert.fullName.length).trim(), W / 2, 86, { align: 'center' })
   doc.setFont('helvetica', 'bold')
-  doc.setFontSize(30)
   doc.setTextColor(...PURPLE)
-  doc.text(cert.fullName, W / 2, 102, { align: 'center', maxWidth: W - 60 })
+  fitFontSize(doc, cert.fullName, W - 60)
+  doc.text(cert.fullName, W / 2, 102, { align: 'center' })
   doc.setTextColor(...NIGHT)
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(18)
@@ -100,6 +114,11 @@ export async function downloadCertificatePdf(cert) {
   doc.text(l4, W / 2, 160, { align: 'center' })
   doc.setFontSize(9)
   doc.text(url, W / 2, 167, { align: 'center' })
+
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(8)
+  doc.setTextColor(...NIGHT)
+  doc.text(CERTIFICATE_FOOTER, W / 2, 182, { align: 'center' })
 
   doc.setFont('helvetica', 'italic')
   doc.setFontSize(11)

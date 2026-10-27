@@ -25,11 +25,17 @@ import { SessionProvider } from './SessionProvider.jsx'
 import { useSession } from './useSession.js'
 
 function Probe() {
-  const { session, profile, loading } = useSession()
+  const { session, profile, loading, profileError, retryProfile } = useSession()
   return (
-    <p data-testid="state">
-      {loading ? 'loading' : 'ready'}|{session ? 'in' : 'out'}|{profile?.full_name ?? 'none'}
-    </p>
+    <>
+      <p data-testid="state">
+        {loading ? 'loading' : 'ready'}|{session ? 'in' : 'out'}|{profile?.full_name ?? 'none'}
+        {profileError ? '|error' : ''}
+      </p>
+      <button type="button" onClick={retryProfile}>
+        retry
+      </button>
+    </>
   )
 }
 
@@ -91,5 +97,29 @@ describe('SessionProvider', () => {
     )
     unmount()
     expect(unsubscribe).toHaveBeenCalled()
+  })
+
+  it('expõe erro do perfil e permite tentar de novo', async () => {
+    render(
+      <SessionProvider>
+        <Probe />
+      </SessionProvider>,
+    )
+    await act(async () => {
+      authCallback('INITIAL_SESSION', userSession)
+    })
+    await act(async () => {
+      resolveProfile({ data: null, error: { message: 'network' } })
+    })
+    await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('ready|in|none|error'))
+
+    await act(async () => {
+      screen.getByRole('button', { name: 'retry' }).click()
+    })
+    expect(screen.getByTestId('state')).toHaveTextContent('loading|in|none')
+    await act(async () => {
+      resolveProfile({ data: { id: 'u1', full_name: 'Maria' }, error: null })
+    })
+    await waitFor(() => expect(screen.getByTestId('state')).toHaveTextContent('ready|in|Maria'))
   })
 })

@@ -117,6 +117,7 @@ export function validateContent(content) {
   if (!isObj(exam)) errors.push('Prova: falta o bloco "exam".')
   else {
     if (!isPosInt(exam.questionCount)) errors.push('Prova: "questionCount" deve ser um inteiro maior que zero.')
+    else if (exam.questionCount < 2) errors.push('Prova: "questionCount" deve ser pelo menos 2 (precisa de uma pergunta de código e outra).')
     else questionCount = exam.questionCount
     for (const k of ['exerciseMinutes', 'examMinutes']) {
       if (!isPosInt(exam[k])) errors.push(`Prova: "${k}" deve ser um inteiro maior que zero.`)
@@ -213,6 +214,9 @@ export function validateContent(content) {
         checkTests(q.answer.tests, Q, errors)
       }
     })
+    if (!examQuestions.some((q) => isObj(q) && q.type === 'code')) {
+      errors.push('Banco de prova precisa ter pelo menos uma pergunta de código.')
+    }
     if (questionCount !== null && examQuestions.length < questionCount) {
       errors.push(`Banco de prova tem ${examQuestions.length} perguntas, mas a prova pede ${questionCount}.`)
     }

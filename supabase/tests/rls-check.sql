@@ -68,6 +68,13 @@ set local role anon;
 select * from verify_certificate('DTV-XXXX-XXXX');
 rollback;
 
+-- 9b) Esperado (após a migration 0003): 0 linhas para um certificado com status 'locked'
+-- (troque o código por um certificado free real); com status 'active' deve voltar 1 linha.
+begin;
+set local role anon;
+select * from verify_certificate('<CODIGO-DE-CERTIFICADO-LOCKED>');
+rollback;
+
 -- 10) Esperado: ERRO "permission denied for table profiles" como visitante anônimo.
 begin;
 set local role anon;

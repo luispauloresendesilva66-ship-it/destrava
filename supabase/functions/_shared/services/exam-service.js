@@ -11,6 +11,9 @@ export async function startExam({ userId, levelId, repo, now, random = Math.rand
   const [profile, level] = await Promise.all([repo.getProfile(userId), repo.getLevel(levelId)])
   if (!profile || !level) throw new HttpError(404, 'Nível não encontrado.')
   const { plan } = profile
+  if (typeof profile.fullName !== 'string' || profile.fullName.trim().length < 3) {
+    throw new HttpError(422, 'Confirme seu nome completo antes de começar a prova.', 'NAME_REQUIRED')
+  }
 
   const passedLevelPositions = await repo.getPassedLevelPositions(userId)
   const levelUnlocked = canAccessLevel({

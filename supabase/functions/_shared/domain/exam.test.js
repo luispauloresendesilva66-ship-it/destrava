@@ -26,6 +26,22 @@ describe('drawQuestions', () => {
     expect(a).toEqual(c);
     expect(b.map((q) => q.id)).toEqual(snapshot);
   });
+  it('always includes a code question when the bank has one', () => {
+    const b = bank(60).map((q, i) => ({ ...q, type: i === 37 ? 'code' : 'multiple_choice' }));
+    for (let n = 0; n < 50; n++) {
+      const out = drawQuestions(b, 5);
+      expect(out).toHaveLength(5);
+      expect(new Set(out.map((q) => q.id)).size).toBe(5);
+      expect(out.some((q) => q.type === 'code')).toBe(true);
+    }
+    for (const r of [0, 0.5, 0.999]) {
+      expect(drawQuestions(b, 5, () => r).some((q) => q.type === 'code')).toBe(true);
+    }
+  });
+  it('still draws when the bank has no code question', () => {
+    const b = bank(10).map((q) => ({ ...q, type: 'multiple_choice' }));
+    expect(drawQuestions(b, 4)).toHaveLength(4);
+  });
   it('throws when bank too small', () => {
     expect(() => drawQuestions(bank(5), 20)).toThrow('Question bank too small');
   });

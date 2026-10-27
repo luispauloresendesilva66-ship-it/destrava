@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../../lib/supabase'
 import { useSession } from '../auth/useSession.js'
 import { downloadCertificatePdf, formatIssuedDate } from './certificatePdf.js'
+import { LOCKED_CERTIFICATE_MESSAGE } from './messages.js'
 import './certificates.css'
 
 export default function CertificatesPage() {
@@ -81,7 +82,7 @@ export default function CertificatesPage() {
                   Baixar PDF
                 </button>
               ) : (
-                <p>Certificado conquistado! Destrave por R$ 39 ou assine o Gold.</p>
+                <p>{LOCKED_CERTIFICATE_MESSAGE}</p>
               )}
             </li>
           ))}

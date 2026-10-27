@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { buildCertificateLines } from './certificatePdf.js'
+import { buildCertificateLines, CERTIFICATE_FOOTER } from './certificatePdf.js'
 
 const base = {
   fullName: 'Ana Souza',
@@ -26,5 +26,10 @@ describe('buildCertificateLines', () => {
   })
   it('data no fuso de São Paulo (madrugada UTC vira dia anterior)', () => {
     expect(buildCertificateLines({ ...base, issuedAt: '2026-10-28T01:00:00Z' })[3]).toContain('27/10/2026')
+  })
+  it('rodapé legal exato', () => {
+    expect(CERTIFICATE_FOOTER).toBe(
+      'Curso livre de formação inicial e continuada, conforme a Lei nº 9.394/96 e o Decreto nº 5.154/2004.',
+    )
   })
 })

@@ -24,10 +24,10 @@ const bank = [
 ]
 const allCorrect = { q1: 1, q2: 0, q3: 2, q4: { html: '<h1></h1>', css: '', js: '' } }
 
-function makeRepo({ plan = 'gold', level = L1, passed = [], attempts = [], certificates = [], questions = bank } = {}) {
+function makeRepo({ plan = 'gold', fullName = 'Ana Souza', level = L1, passed = [], attempts = [], certificates = [], questions = bank } = {}) {
   const state = { attempts: [...attempts], certificates: [...certificates], seq: 0 }
   const repo = {
-    getProfile: vi.fn(async () => ({ plan, fullName: 'Ana Souza' })),
+    getProfile: vi.fn(async () => ({ plan, fullName })),
     getLevel: vi.fn(async () => level),
     getExamConfig: vi.fn(async () => ({ questionCount: 4, exerciseMinutes: 240, examMinutes: 60 })),
     getQuestionBank: vi.fn(async () => questions),
@@ -93,6 +93,22 @@ beforeEach(() => {
 })
 
 describe('startExam', () => {
+  it('requires a confirmed full name', async () => {
+    for (const fullName of ['', '  a ', null]) {
+      const { repo } = makeRepo({ fullName })
+      const err = await expectErr(start(repo), 422, 'NAME_REQUIRED')
+      expect(err.message).toBe('Confirme seu nome completo antes de começar a prova.')
+      expect(repo.createAttempt).not.toHaveBeenCalled()
+    }
+  })
+
+  it('always draws a code question when the bank has one', async () => {
+    const big = Array.from({ length: 12 }, (_, i) => ({ ...bank[0], id: `m${i}` })).concat(bank[3])
+    const { repo } = makeRepo({ questions: big })
+    const { questions } = await start(repo, { random: () => 0 })
+    expect(questions.some((q) => q.type === 'code')).toBe(true)
+  })
+
   it('startExam returns the open attempt', async () => {
     const { repo } = makeRepo()
     const a = await start(repo)
