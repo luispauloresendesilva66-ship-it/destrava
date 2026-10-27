@@ -1,4 +1,8 @@
 -- Destrava: core schema, RLS and public certificate verification.
+--
+-- CONVENTION: every new table in public MUST enable row level security and repeat the
+-- revoke-all / explicit-grant pattern below (anon, authenticated, service_role). Never rely
+-- on platform default grants.
 
 -- ---------------------------------------------------------------- tables
 create table public.profiles (
@@ -44,14 +48,14 @@ create table public.exercises (
 
 create table public.exercise_attempts (
   id bigserial primary key,
-  user_id uuid not null default auth.uid() references auth.users (id),
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
   exercise_id uuid not null references public.exercises (id),
   correct boolean,
   created_at timestamptz default now()
 );
 
 create table public.lesson_progress (
-  user_id uuid not null default auth.uid() references auth.users (id),
+  user_id uuid not null default auth.uid() references auth.users (id) on delete cascade,
   lesson_id uuid not null references public.lessons (id),
   watched_seconds int default 0,
   updated_at timestamptz default now(),
@@ -80,7 +84,7 @@ create table public.exam_answers (
 
 create table public.exam_attempts (
   id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users (id),
+  user_id uuid not null references auth.users (id) on delete cascade,
   level_id uuid not null references public.levels (id),
   question_ids uuid[],
   started_at timestamptz default now(),
@@ -94,13 +98,14 @@ create table public.exam_attempts (
 
 create table public.certificates (
   id uuid primary key default gen_random_uuid(),
-  code text unique,
-  user_id uuid not null references auth.users (id),
+  code text unique not null,
+  -- LGPD: deleting a user cascades to their certificates; verification then shows "Certificado não encontrado".
+  user_id uuid not null references auth.users (id) on delete cascade,
   level_id uuid not null references public.levels (id),
   full_name text,
   workload_hours int,
   score int,
-  status text check (status in ('active', 'locked', 'revoked')),
+  status text not null check (status in ('active', 'locked', 'revoked')),
   issued_at timestamptz default now(),
   unique (user_id, level_id)
 );
@@ -147,6 +152,11 @@ grant select on public.profiles, public.lessons, public.exercises, public.exam_c
 grant select, insert on public.exercise_attempts to authenticated;
 grant select, insert, update on public.lesson_progress to authenticated;
 grant usage on sequence public.exercise_attempts_id_seq to authenticated;
+
+-- service_role bypasses RLS but not privileges: grant explicitly (exam Edge Functions, import, plan/role updates).
+grant usage on schema public to service_role;
+grant all on all tables in schema public to service_role;
+grant usage, select on all sequences in schema public to service_role;
 
 -- ---------------------------------------------------------------- policies
 -- profiles: read own row only. NO update policy: name changes go through update_my_name().
@@ -243,8 +253,8 @@ $$;
 revoke execute on function public.handle_new_user() from public, anon, authenticated;
 revoke execute on function public.update_my_name(text) from public, anon, authenticated;
 revoke execute on function public.verify_certificate(text) from public, anon, authenticated;
-grant execute on function public.update_my_name(text) to authenticated;
-grant execute on function public.verify_certificate(text) to anon, authenticated;
+grant execute on function public.update_my_name(text) to authenticated, service_role;
+grant execute on function public.verify_certificate(text) to anon, authenticated, service_role;
 
 -- ---------------------------------------------------------------- seed
 insert into public.levels (position, slug, name) values
