@@ -21,6 +21,23 @@
   --c-red-soft: #E3A08F;       /* borda de erro */
   --c-red-tint: #FDF1EE;       /* fundo de erro */
 
+  /* ---- Palco noturno (cabeçalho, heróis, painéis de marca) ---- */
+  --c-night-950: #120F33;
+  --c-night-900: #1A1640;
+  --c-night-700: #33296F;
+  --c-stage-text: #FFFFFF;     /* 17:1 no #1A1640 */
+  --c-stage-muted: #B8B3E6;    /* 8.6:1 no #1A1640, 7.3:1 no #26215C */
+  --c-stage-accent: #C9C2FF;   /* 10.3:1 no #1A1640; foco no escuro */
+
+  /* ---- Acentos vívidos ---- */
+  /* hue = preenchimento/brilho/borda (texto em cima: night-950) · ink = texto no branco · tint = fundo leve */
+  --c-violet: #8B6CFF;        --c-violet-ink: #5B3FD6;  --c-violet-tint: #F1EDFF;  --c-violet-deep: #7048E8;
+  --c-cyan: #3EC5FF;          --c-cyan-ink: #00658F;    --c-cyan-tint: #E6F7FF;
+  --c-magenta: #F0509E;       --c-magenta-ink: #B01D6B; --c-magenta-tint: #FDEAF3;
+  --c-orange: #FF8A3D;        --c-orange-ink: #A84A00;  --c-orange-tint: #FFF1E6;
+  --c-gold: #F5BE3C;          --c-gold-ink: #845A00;    --c-gold-tint: #FFF6DD;
+  --c-on-vivid: var(--c-night-950); /* 5.0:1 no violeta, 5.6 magenta, 7.8 laranja, 9.3 ciano, 10.8 dourado */
+
   /* Neutros puxados para o roxo-noite */
   --c-gray-0: #FFFFFF;
   --c-gray-25: #F6F5FD;
@@ -61,6 +78,7 @@
 
   /* ---- Tipografia ---- */
   --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', var(--font-sans);
   --font-mono: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;   /* 12 */
@@ -98,6 +116,7 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-full: 999px;
 
   /* ---- Elevação (sombras tingidas de roxo-noite) ---- */
@@ -106,6 +125,32 @@
   --shadow-md: 0 6px 16px -4px rgb(38 33 92 / 0.12), 0 2px 4px rgb(38 33 92 / 0.05);
   --shadow-lg: 0 18px 40px -12px rgb(38 33 92 / 0.22);
   --shadow-focus: 0 0 0 3px rgb(83 74 183 / 0.28);
+  --shadow-card: 0 1px 2px rgb(38 33 92 / 0.05), 0 8px 24px -12px rgb(38 33 92 / 0.18);
+  --shadow-card-hover: 0 2px 4px rgb(38 33 92 / 0.06), 0 18px 40px -14px rgb(83 74 183 / 0.32);
+
+  /* ---- Gradientes ---- */
+  --grad-primary: linear-gradient(135deg, #534AB7 0%, #7048E8 100%);       /* branco em cima: 6.9 → 5.6:1 */
+  --grad-primary-hover: linear-gradient(135deg, #433A9E 0%, #6A4BE0 100%); /* 9.0 → 5.7:1 */
+  --grad-headline: linear-gradient(92deg, #C9C2FF 0%, #8FD8FF 48%, #F7A3D2 100%); /* ≥ 7.6:1 no palco */
+  --grad-vivid: linear-gradient(120deg, var(--c-violet), var(--c-cyan) 50%, var(--c-magenta));
+  --grad-journey: linear-gradient(180deg, var(--c-violet), var(--c-cyan) 25%, var(--c-magenta) 50%, var(--c-orange) 75%, var(--c-gold));
+  --grad-success: linear-gradient(135deg, #B5DB7E 0%, var(--c-green) 100%); /* night-950 em cima: ≥ 9:1 */
+  --grad-gold: linear-gradient(135deg, #FFE7A3 0%, #F5BE3C 50%, #E08A1E 100%);     /* --on-gold ≥ 5.3:1 */
+  --grad-platinum: linear-gradient(135deg, #F4F3FB 0%, #C2BEE0 55%, #9E97D6 100%); /* night ≥ 5.4:1 */
+  --on-gold: #3D2700;
+  --on-platinum: var(--c-night);
+  --grad-stage:
+    radial-gradient(55% 65% at 88% 8%, rgb(127 119 221 / 0.42), transparent 62%),
+    radial-gradient(45% 55% at 6% 96%, rgb(62 197 255 / 0.16), transparent 66%),
+    radial-gradient(40% 45% at 40% 0%, rgb(240 80 158 / 0.12), transparent 70%),
+    linear-gradient(180deg, var(--c-night-900) 0%, var(--c-night) 100%);
+  --texture-dots: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1.4px);
+  --texture-size: 22px 22px;
+
+  /* ---- Brilhos ---- */
+  --glow-primary: 0 10px 28px -8px rgb(112 72 232 / 0.6);
+  --glow-soft: 0 0 0 1px rgb(255 255 255 / 0.06), 0 24px 60px -20px rgb(18 15 51 / 0.55);
+  --glow-success: 0 10px 30px -10px rgb(151 196 89 / 0.7);
 
   /* ---- Camadas ---- */
   --z-base: 0;
@@ -117,6 +162,7 @@
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
   --duration-fast: 120ms;
   --duration-base: 200ms;
+  --duration-slow: 300ms;
   --transition-base: var(--duration-base) var(--ease-out);
 
   /* ---- Layout ---- */
@@ -135,5 +181,6 @@
   :root {
     --duration-fast: 0ms;
     --duration-base: 0ms;
+    --duration-slow: 0ms;
   }
 }

@@ -8,6 +8,7 @@ import {
   translateAuthError,
 } from './authErrors.js'
 import { useSession } from './useSession.js'
+import AuthShell from './AuthShell.jsx'
 import './auth.css'
 
 export default function NewPasswordPage() {
@@ -41,54 +42,60 @@ export default function NewPasswordPage() {
 
   if (loading) {
     return (
-      <section className="card auth-card">
-        <h1>Nova senha</h1>
-        <p className="loading" role="status">Carregando...</p>
-      </section>
+      <AuthShell>
+        <section className="card auth-card">
+          <h1>Nova senha</h1>
+          <p className="loading" role="status">Carregando...</p>
+        </section>
+      </AuthShell>
     )
   }
 
   if (!session) {
     return (
-      <section className="card auth-card">
-        <h1>Nova senha</h1>
-        <p className="form-error" role="alert">
-          {INVALID_LINK}
-        </p>
-        <p className="auth-alt">
-          <Link to="/esqueci-senha">Pedir um novo link</Link>
-        </p>
-      </section>
+      <AuthShell>
+        <section className="card auth-card">
+          <h1>Nova senha</h1>
+          <p className="form-error" role="alert">
+            {INVALID_LINK}
+          </p>
+          <p className="auth-alt">
+            <Link to="/esqueci-senha">Pedir um novo link</Link>
+          </p>
+        </section>
+      </AuthShell>
     )
   }
 
   return (
-    <section className="card auth-card">
-      <h1>Nova senha</h1>
-      <form className="auth-form" onSubmit={handleSubmit} noValidate>
-        <label className="label" htmlFor="new-password">Nova senha</label>
-        <input
-          className="input"
-          id="new-password"
-          type="password"
-          autoComplete="new-password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="help-text">Use pelo menos 8 caracteres.</p>
-        {error && (
-          <p className="form-error" role="alert">
-            {error}
-          </p>
-        )}
-        <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
-          {busy ? 'Salvando...' : 'Salvar nova senha'}
-        </button>
-      </form>
-      <p className="auth-alt">
-        <Link to="/entrar">Voltar para entrar</Link>
-      </p>
-    </section>
+    <AuthShell>
+      <section className="card auth-card">
+        <h1>Nova senha</h1>
+        <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          <label className="label" htmlFor="new-password">Nova senha</label>
+          <input
+            className="input"
+            id="new-password"
+            type="password"
+            autoComplete="new-password"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <p className="help-text">Use pelo menos 8 caracteres.</p>
+          {error && (
+            <p className="form-error" role="alert">
+              {error}
+            </p>
+          )}
+          <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
+            {busy ? 'Salvando...' : 'Salvar nova senha'}
+          </button>
+        </form>
+        <p className="auth-alt">
+          <Link to="/entrar">Voltar para entrar</Link>
+        </p>
+      </section>
+    </AuthShell>
   )
 }

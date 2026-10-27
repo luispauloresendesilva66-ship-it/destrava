@@ -27,6 +27,17 @@ async function loadReviewLessons(levelId, topics) {
   }
 }
 
+// Confete decorativo (formas paradas que flutuam de leve; parado com movimento reduzido).
+function Confetti() {
+  return (
+    <div className="confetti" aria-hidden="true">
+      {Array.from({ length: 14 }, (_, i) => (
+        <span key={i} className={`confetti__piece confetti__piece--${i + 1}`} />
+      ))}
+    </div>
+  )
+}
+
 export default function ExamResultPage() {
   const { levelId } = useParams()
   const result = useLocation().state?.result
@@ -59,6 +70,7 @@ export default function ExamResultPage() {
   if (result.passed) {
     return (
       <section className="page page--narrow exam-page exam-result exam-result--passed">
+        <Confetti />
         <h1>Parabéns, você foi aprovado!</h1>
         <p className="exam__score exam__score--passed">{result.percent}%</p>
         {result.certificate && (

@@ -28,6 +28,29 @@ describe('HomePage', () => {
     expect(screen.getByRole('link', { name: 'Criar conta' })).toHaveAttribute('href', '/cadastro')
   })
 
+  it('visitante vê os recursos e os três planos, sem botão de compra', () => {
+    setup({ session: null, profile: null, loading: false })
+    for (const title of [
+      'Videoaulas curtas',
+      'Exercícios interativos com vidas',
+      'Prova de nível com nota mínima de 90%',
+      'Certificado com QR Code verificável',
+    ]) {
+      expect(screen.getByRole('heading', { name: title })).toBeInTheDocument()
+    }
+    expect(screen.getByText('R$ 0')).toBeInTheDocument()
+    expect(screen.getByText('R$ 39,99')).toBeInTheDocument()
+    expect(screen.getByText('R$ 49,99')).toBeInTheDocument()
+    expect(screen.getByText('Mais escolhido')).toBeInTheDocument()
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
+    expect(screen.getAllByRole('link')).toHaveLength(2)
+  })
+
+  it('a ilustração do editor é decorativa', () => {
+    setup({ session: null, profile: null, loading: false })
+    expect(screen.getByText('Certificado válido').closest('[aria-hidden="true"]')).not.toBeNull()
+  })
+
   it('com sessão redireciona para /painel', () => {
     setup({ session: { user: { id: 'u1' } }, profile: null, loading: false })
     expect(screen.getByText('painel')).toBeInTheDocument()

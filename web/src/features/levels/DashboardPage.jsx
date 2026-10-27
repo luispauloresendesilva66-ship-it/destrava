@@ -11,9 +11,11 @@ const ICONS = {
   xp: 'm12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5Z',
 }
 
+const CHIP = { lives: 'magenta', streak: 'orange', xp: 'violet' }
+
 function StatIcon({ name }) {
   return (
-    <span className={`stat__icon stat__icon--${name}`} aria-hidden="true">
+    <span className={`icon-chip icon-chip--${CHIP[name]} stat__icon`} aria-hidden="true">
       <svg viewBox="0 0 24 24" width="20" height="20" focusable="false">
         <path d={ICONS[name]} fill="currentColor" />
       </svg>
@@ -23,11 +25,18 @@ function StatIcon({ name }) {
 
 export default function DashboardPage() {
   const { profile } = useSession()
-  const { stats, loading, error, refresh } = useCourse()
+  const { stats, state, loading, error, refresh } = useCourse()
+  // Cor do nível da próxima aula (1 a 5, ciclando).
+  const nextLevelIndex = stats?.nextLesson
+    ? (state ?? []).findIndex((s) => s.level.id === stats.nextLesson.level_id)
+    : -1
+  const nextLevelClass = `lvl-${(Math.max(nextLevelIndex, 0) % 5) + 1}`
 
   return (
     <section className="page dashboard">
-      <h1>Olá, {profile?.full_name ?? ''}</h1>
+      <div className="stage on-dark dashboard__hero">
+        <h1>Olá, {profile?.full_name ?? ''}</h1>
+      </div>
 
       {loading && <p className="loading" role="status">Carregando...</p>}
 
@@ -44,25 +53,25 @@ export default function DashboardPage() {
         <>
           <div className="stats">
             {stats.lives !== null && (
-              <div className="stat">
+              <div className="stat stat--lives">
                 <StatIcon name="lives" />
                 <strong>{stats.lives}</strong>
                 <span>Vidas restantes</span>
               </div>
             )}
-            <div className="stat">
+            <div className="stat stat--streak">
               <StatIcon name="streak" />
               <strong>{stats.streakDays}</strong>
               <span>Dias seguidos</span>
             </div>
-            <div className="stat">
+            <div className="stat stat--xp">
               <StatIcon name="xp" />
               <strong>{stats.xp}</strong>
               <span>XP</span>
             </div>
           </div>
 
-          <div className="card card--accent next-lesson">
+          <div className={`card card--featured next-lesson ${nextLevelClass}`}>
             <h2>Próxima aula</h2>
             {stats.nextLesson ? (
               <>

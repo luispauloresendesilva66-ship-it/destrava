@@ -23,11 +23,17 @@
   gap: var(--space-3);
 }
 
+/* Moldura escura com brilho na cor do nível. */
 .player__frame {
+  position: relative;
   overflow: hidden;
-  background: var(--c-night);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
+  background: var(--c-night-950);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 0 0 6px rgb(26 22 64 / 0.06),
+    0 30px 60px -28px var(--lvl-hue, var(--c-violet)),
+    0 18px 40px -20px rgb(18 15 51 / 0.6);
   /* No celular o vídeo encosta nas bordas da tela. */
   margin-inline: calc(var(--space-4) * -1);
   border-radius: 0;
@@ -37,13 +43,15 @@
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: var(--c-night);
+  background: var(--c-night-950);
 }
 
 .player__loading {
   aspect-ratio: 16 / 9;
-  background: var(--color-surface-sunken);
-  border-radius: var(--radius-md);
+  color: var(--c-stage-muted);
+  background: var(--grad-stage);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glow-soft);
 }
 
 .player__speeds {
@@ -52,7 +60,17 @@
 
 /* Barra lateral com as aulas do nível */
 .lesson-aside {
+  position: relative;
+  overflow: hidden;
   padding: var(--space-4);
+}
+
+.lesson-aside::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--lvl-grad, var(--grad-primary));
 }
 
 .lesson-aside h2 {
@@ -62,25 +80,26 @@
   font-weight: var(--weight-bold);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--lvl-ink, var(--color-text-muted));
   border-bottom: 1px solid var(--color-border);
 }
 
 .lesson-aside .lesson-list a[aria-current='page'] {
-  color: var(--color-primary);
+  color: var(--lvl-ink, var(--color-primary));
   font-weight: var(--weight-bold);
-  background: var(--color-primary-soft);
+  background: var(--lvl-tint, var(--color-primary-soft));
+  box-shadow: inset 3px 0 0 var(--lvl-hue, var(--color-primary));
 }
 
 .lesson-aside .lesson-list a[aria-current='page']::before {
-  background: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--c-purple-tint);
+  background: var(--lvl-hue, var(--color-primary));
+  box-shadow: 0 0 0 3px var(--color-surface), 0 0 10px var(--lvl-hue, var(--color-primary));
 }
 
 @media (min-width: 600px) {
   .player__frame {
     margin-inline: 0;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-lg);
   }
 }
 

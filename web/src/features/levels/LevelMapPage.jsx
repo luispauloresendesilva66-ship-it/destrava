@@ -35,8 +35,11 @@ export default function LevelMapPage() {
       <ol className="level-list">
         {state.map((step, index) => {
           const { level, unlocked, passed, examAvailable, lessons } = step
+          const doneCount = lessons.filter((l) => l.done).length
+          const pct = lessons.length ? Math.round((doneCount / lessons.length) * 100) : 0
           const cls = [
             'level-step',
+            `lvl-${(index % 5) + 1}`,
             !unlocked && 'level-step--locked',
             passed && 'level-step--passed',
           ]
@@ -53,13 +56,18 @@ export default function LevelMapPage() {
                 aria-label={`Degrau ${index + 1}: ${level.name}${unlocked ? '' : ', bloqueado'}${passed ? ', aprovado' : ''}`}
                 onClick={onHeadClick}
               >
-                <span className="level-step__num" aria-hidden="true">
+                <span className="lvl-badge level-step__num" aria-hidden="true">
                   {index + 1}
                 </span>
                 <span className="level-step__name">{level.name}</span>
                 {!unlocked && <LockBadge />}
                 {passed && <span className="badge badge--success passed-tag">Aprovado</span>}
               </button>
+              {lessons.length > 0 && (
+                <div className="level-step__progress" aria-hidden="true">
+                  <span style={{ width: `${pct}%` }} />
+                </div>
+              )}
               {noticeFor === level.id && !unlocked && (
                 <p className="level-notice" role="status">
                   Disponível no plano Gold

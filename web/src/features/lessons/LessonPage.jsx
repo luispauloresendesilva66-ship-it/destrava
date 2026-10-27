@@ -59,13 +59,14 @@ export default function LessonPage() {
   }, [])
 
   const step = state?.find((s) => s.lessons.some((l) => l.lesson.id === lessonId))
+  const levelClass = `lvl-${((step ? state.indexOf(step) : 0) % 5) + 1}`
   const currentEntry = step?.lessons.find((l) => l.lesson.id === lessonId)
   const current = currentEntry?.lesson
   // Spec §7: aula de amostra no plano free é só para assistir, sem exercícios.
   const watchOnly = plan === 'free' && current?.is_sample === true
 
   return (
-    <section className="page page--wide lesson-page">
+    <section className={`page page--wide lesson-page ${levelClass}`}>
       <h1>{current?.title ?? 'Aula'}</h1>
       <div className="lesson-layout">
         <div className="lesson-main">

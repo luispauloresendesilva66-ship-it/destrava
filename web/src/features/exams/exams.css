@@ -29,6 +29,17 @@
 
 .exam__bar { margin-top: calc(var(--space-3) * -1); }
 
+/* Pergunta: cartão com filete em gradiente no topo. */
+.exam__question { position: relative; overflow: hidden; }
+
+.exam__question::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--grad-vivid);
+}
+
 .exam__question {
   display: flex;
   flex-direction: column;
@@ -59,28 +70,40 @@
 
 /* Resultado */
 .exam-result {
-  padding: var(--space-6) var(--space-5);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding: var(--space-8) var(--space-5);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
 }
 
+/* Aprovado: comemoração em verde (conquista). */
 .exam-result--passed {
   align-items: center;
   text-align: center;
   background:
-    radial-gradient(100% 70% at 50% 0%, var(--color-success-bg), transparent 70%),
+    radial-gradient(90% 60% at 50% 0%, rgb(151 196 89 / 0.28), transparent 70%),
     var(--color-surface);
-  border-top: 6px solid var(--color-success);
+  border-color: #CFE5B2;
+  box-shadow: 0 0 0 1px rgb(151 196 89 / 0.5), 0 30px 60px -30px rgb(151 196 89 / 0.9), var(--shadow-card);
 }
 
+.exam-result--passed h1 { font-size: var(--text-3xl); letter-spacing: -0.035em; }
+
+/* Reprovado: acolhedor, sem vermelho nem verde. */
 .exam-result--failed {
-  border-top: 6px solid var(--c-purple-soft);
+  background:
+    radial-gradient(80% 50% at 100% 0%, rgb(139 108 255 / 0.14), transparent 70%),
+    var(--color-surface);
+  border-top: 5px solid var(--c-purple-soft);
 }
 
 .exam__score {
   margin: 0;
+  font-family: var(--font-display);
   font-size: var(--text-4xl);
   font-weight: var(--weight-black);
   line-height: 1;
@@ -89,17 +112,19 @@
   color: var(--color-text);
 }
 
-/* Verde de marca como fundo; texto em verde escuro para manter contraste AA. */
+/* Anel verde (realce); número em verde escuro para manter AA (7:1). */
 .exam__score--passed {
   display: inline-grid;
   place-items: center;
-  width: 128px;
-  height: 128px;
+  width: 148px;
+  height: 148px;
   font-size: var(--text-3xl);
   color: var(--color-success-text);
-  background: var(--color-surface);
-  border: 6px solid var(--color-success);
+  background:
+    radial-gradient(closest-side, var(--color-surface) 80%, transparent 81%),
+    conic-gradient(from 200deg, #B5DB7E, var(--c-green), #6FA83A, #B5DB7E);
   border-radius: 50%;
+  box-shadow: var(--glow-success);
 }
 
 .exam__topics {
@@ -114,7 +139,8 @@
 .exam__topics li {
   padding: var(--space-3) var(--space-4);
   font-weight: var(--weight-semibold);
-  background: var(--color-surface-sunken);
+  background: var(--c-violet-tint);
+  border-left: 3px solid var(--c-violet);
   border-radius: var(--radius-sm);
 }
 
@@ -130,8 +156,50 @@
 .exam-result .btn { align-self: flex-start; }
 .exam-result--passed .btn { align-self: center; }
 
+/* Confete: formas visíveis desde o início; só flutuam (transform). */
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.confetti__piece {
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--piece, var(--c-violet));
+  opacity: 0.85;
+  transform: rotate(var(--r, 0deg));
+  animation: confetti-float 3.2s ease-in-out infinite alternate;
+}
+
+.confetti__piece:nth-child(3n) { width: 12px; height: 12px; border-radius: 50%; }
+.confetti__piece:nth-child(4n) { width: 18px; height: 6px; }
+
+.confetti__piece--1 { top: 8%; left: 8%; --piece: var(--c-violet); --r: -20deg; }
+.confetti__piece--2 { top: 16%; left: 22%; --piece: var(--c-gold); --r: 30deg; animation-delay: -0.6s; }
+.confetti__piece--3 { top: 5%; left: 40%; --piece: var(--c-cyan); animation-delay: -1.2s; }
+.confetti__piece--4 { top: 12%; left: 64%; --piece: var(--c-magenta); --r: 45deg; animation-delay: -0.3s; }
+.confetti__piece--5 { top: 5%; left: 82%; --piece: var(--c-green); --r: -35deg; animation-delay: -1.8s; }
+.confetti__piece--6 { top: 22%; left: 92%; --piece: var(--c-orange); --r: 15deg; animation-delay: -0.9s; }
+.confetti__piece--7 { top: 32%; left: 4%; --piece: var(--c-cyan); --r: 60deg; animation-delay: -2.1s; }
+.confetti__piece--8 { top: 48%; left: 10%; --piece: var(--c-gold); animation-delay: -1.5s; }
+.confetti__piece--9 { top: 42%; left: 88%; --piece: var(--c-violet); --r: -50deg; animation-delay: -0.4s; }
+.confetti__piece--10 { top: 60%; left: 94%; --piece: var(--c-magenta); --r: 25deg; animation-delay: -2.4s; }
+.confetti__piece--11 { top: 72%; left: 5%; --piece: var(--c-orange); --r: -15deg; animation-delay: -1s; }
+.confetti__piece--12 { top: 84%; left: 88%; --piece: var(--c-green); --r: 70deg; animation-delay: -1.7s; }
+.confetti__piece--13 { top: 90%; left: 18%; --piece: var(--c-violet); --r: 35deg; animation-delay: -0.7s; }
+.confetti__piece--14 { top: 26%; left: 76%; --piece: var(--c-gold); --r: -40deg; animation-delay: -2.7s; }
+
+@keyframes confetti-float {
+  from { transform: translateY(0) rotate(var(--r, 0deg)); }
+  to { transform: translateY(8px) rotate(calc(var(--r, 0deg) + 25deg)); }
+}
+
 @media (min-width: 768px) {
   .exam-page h1 { font-size: var(--text-3xl); }
-  .exam-result { padding: var(--space-10) var(--space-8); }
+  .exam-result { padding: var(--space-12) var(--space-10); }
   .exam-page > .ex__footer { margin-inline: 0; padding-inline: 0; }
 }

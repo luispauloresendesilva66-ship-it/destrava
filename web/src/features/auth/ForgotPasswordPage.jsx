@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { translateAuthError } from './authErrors.js'
+import AuthShell from './AuthShell.jsx'
 import './auth.css'
 
 export default function ForgotPasswordPage() {
@@ -31,35 +32,37 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <section className="card auth-card">
-      <h1>Recuperar senha</h1>
-      {sent ? (
-        <p className="alert" role="status">Se esse e-mail tiver cadastro, enviamos um link para criar uma nova senha.</p>
-      ) : (
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <label className="label" htmlFor="forgot-email">E-mail</label>
-          <input
-            className="input"
-            id="forgot-email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          {error && (
-            <p className="form-error" role="alert">
-              {error}
-            </p>
-          )}
-          <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
-            {busy ? 'Enviando...' : 'Enviar link'}
-          </button>
-        </form>
-      )}
-      <p className="auth-alt">
-        <Link to="/entrar">Voltar para entrar</Link>
-      </p>
-    </section>
+    <AuthShell>
+      <section className="card auth-card">
+        <h1>Recuperar senha</h1>
+        {sent ? (
+          <p className="alert" role="status">Se esse e-mail tiver cadastro, enviamos um link para criar uma nova senha.</p>
+        ) : (
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <label className="label" htmlFor="forgot-email">E-mail</label>
+            <input
+              className="input"
+              id="forgot-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            {error && (
+              <p className="form-error" role="alert">
+                {error}
+              </p>
+            )}
+            <button type="submit" className="btn btn--primary btn--block auth-submit" disabled={busy}>
+              {busy ? 'Enviando...' : 'Enviar link'}
+            </button>
+          </form>
+        )}
+        <p className="auth-alt">
+          <Link to="/entrar">Voltar para entrar</Link>
+        </p>
+      </section>
+    </AuthShell>
   )
 }
