@@ -52,6 +52,13 @@ describe('LevelMapPage', () => {
     expect(screen.getByRole('button', { name: /Degrau 1.*aprovado/ })).toBeInTheDocument()
   })
 
+  it('oferece a prova só em nível liberado e ainda não aprovado', () => {
+    setup('gold')
+    const links = screen.getAllByRole('link', { name: 'Fazer a prova' })
+    expect(links).toHaveLength(1)
+    expect(links[0]).toHaveAttribute('href', '/prova/L2')
+  })
+
   it('limpa o aviso ao clicar em outro nível', () => {
     setup('free')
     fireEvent.click(screen.getByRole('button', { name: /Degrau 2.*bloqueado/ }))

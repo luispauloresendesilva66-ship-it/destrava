@@ -34,7 +34,7 @@ export default function LevelMapPage() {
       <h1>Mapa de níveis</h1>
       <ol className="level-list">
         {state.map((step, index) => {
-          const { level, unlocked, passed, lessons } = step
+          const { level, unlocked, passed, examAvailable, lessons } = step
           const cls = [
             'level-step',
             !unlocked && 'level-step--locked',
@@ -82,6 +82,11 @@ export default function LevelMapPage() {
                   </li>
                 ))}
               </ul>
+              {examAvailable && !passed && (
+                <Link className="course-link level-step__exam" to={`/prova/${level.id}`}>
+                  Fazer a prova
+                </Link>
+              )}
             </li>
           )
         })}

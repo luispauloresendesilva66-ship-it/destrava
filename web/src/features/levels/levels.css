@@ -41,3 +41,4 @@
 .lesson-list a, .lesson-list .lesson-off { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px; color: var(--c-night); }
 .lesson-list a { text-decoration: underline; }
 .lesson-off { color: var(--c-purple); }
+.level-step__exam { margin: 0 12px 12px; }

@@ -9,6 +9,8 @@ import { SessionProvider } from './features/auth/SessionProvider.jsx'
 import DashboardPage from './features/levels/DashboardPage.jsx'
 import LevelMapPage from './features/levels/LevelMapPage.jsx'
 import LessonPage from './features/lessons/LessonPage.jsx'
+import ExamPage from './features/exams/ExamPage.jsx'
+import ExamResultPage from './features/exams/ExamResultPage.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
 function Home() {
@@ -49,6 +51,22 @@ export default function App() {
               element={
                 <RequireAuth>
                   <LessonPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/prova/:levelId"
+              element={
+                <RequireAuth>
+                  <ExamPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/prova/:levelId/resultado"
+              element={
+                <RequireAuth>
+                  <ExamResultPage />
                 </RequireAuth>
               }
             />

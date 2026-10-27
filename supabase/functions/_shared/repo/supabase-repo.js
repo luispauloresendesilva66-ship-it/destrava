@@ -80,5 +80,203 @@ export function createRepo(db) {
     })
   }
 
-  return { getProfile, getLesson, getPassedLevelPositions, isPreviousLessonDone }
+  // ---------------------------------------------------------------- provas (Task 13)
+  const toQuestion = (row) => {
+    const joined = Array.isArray(row.exam_answers) ? row.exam_answers[0] : row.exam_answers
+    return {
+      id: row.id,
+      type: row.type,
+      topic: row.topic,
+      prompt: row.prompt,
+      answer: joined?.answer ?? null,
+    }
+  }
+
+  const toAttempt = (row) =>
+    row && {
+      id: row.id,
+      userId: row.user_id,
+      levelId: row.level_id,
+      questionIds: row.question_ids ?? [],
+      startedAt: row.started_at,
+      submittedAt: row.submitted_at,
+      passed: row.passed,
+    }
+
+  const ATTEMPT_COLUMNS = 'id, user_id, level_id, question_ids, started_at, submitted_at, passed'
+
+  async function getLevel(levelId) {
+    return check(
+      await db.from('levels').select('id, position, name').eq('id', levelId).maybeSingle(),
+    )
+  }
+
+  async function getExamConfig(levelId) {
+    const row = check(
+      await db
+        .from('exam_configs')
+        .select('question_count, exercise_minutes, exam_minutes')
+        .eq('level_id', levelId)
+        .maybeSingle(),
+    )
+    return row && {
+      questionCount: row.question_count,
+      exerciseMinutes: row.exercise_minutes ?? 0,
+      examMinutes: row.exam_minutes ?? 0,
+    }
+  }
+
+  async function getQuestionBank(levelId) {
+    const rows = check(
+      await db
+        .from('exam_questions')
+        .select('id, type, topic, prompt, exam_answers(answer)')
+        .eq('level_id', levelId),
+    )
+    return rows.map(toQuestion)
+  }
+
+  async function getQuestionsByIds(ids) {
+    if (ids.length === 0) return []
+    const rows = check(
+      await db
+        .from('exam_questions')
+        .select('id, type, topic, prompt, exam_answers(answer)')
+        .in('id', ids),
+    )
+    return rows.map(toQuestion)
+  }
+
+  async function getOpenAttempt(userId, levelId) {
+    return toAttempt(
+      check(
+        await db
+          .from('exam_attempts')
+          .select(ATTEMPT_COLUMNS)
+          .eq('user_id', userId)
+          .eq('level_id', levelId)
+          .is('submitted_at', null)
+          .maybeSingle(),
+      ),
+    )
+  }
+
+  async function getLastSubmittedAttempt(userId, levelId) {
+    const rows = check(
+      await db
+        .from('exam_attempts')
+        .select(ATTEMPT_COLUMNS)
+        .eq('user_id', userId)
+        .eq('level_id', levelId)
+        .not('submitted_at', 'is', null)
+        .order('submitted_at', { ascending: false })
+        .limit(1),
+    )
+    return toAttempt(rows[0] ?? null)
+  }
+
+  async function createAttempt({ userId, levelId, questionIds, startedAt }) {
+    const row = check(
+      await db
+        .from('exam_attempts')
+        .insert({
+          user_id: userId,
+          level_id: levelId,
+          question_ids: questionIds,
+          started_at: startedAt.toISOString(),
+        })
+        .select(ATTEMPT_COLUMNS)
+        .single(),
+    )
+    return toAttempt(row)
+  }
+
+  async function deleteOpenAttempt(attemptId) {
+    check(await db.from('exam_attempts').delete().eq('id', attemptId).is('submitted_at', null))
+  }
+
+  async function getAttempt(attemptId) {
+    return toAttempt(
+      check(
+        await db.from('exam_attempts').select(ATTEMPT_COLUMNS).eq('id', attemptId).maybeSingle(),
+      ),
+    )
+  }
+
+  // Atômico: só grava se ainda estiver aberta. false = outra requisição já enviou.
+  async function submitAttemptIfOpen(attemptId, result) {
+    const rows = check(
+      await db
+        .from('exam_attempts')
+        .update({
+          submitted_at: result.submittedAt.toISOString(),
+          correct: result.correct,
+          total: result.total,
+          percent: result.percent,
+          passed: result.passed,
+          wrong_topics: result.wrongTopics,
+        })
+        .eq('id', attemptId)
+        .is('submitted_at', null)
+        .select('id'),
+    )
+    return rows.length > 0
+  }
+
+  async function getWorkloadInputs(levelId, { freeOnly }) {
+    let query = db.from('lessons').select('duration_seconds').eq('level_id', levelId)
+    if (freeOnly) query = query.eq('is_free', true)
+    const [lessons, config] = await Promise.all([query, getExamConfig(levelId)])
+    return {
+      lessonDurationsSeconds: check(lessons).map((l) => l.duration_seconds),
+      exerciseMinutes: config?.exerciseMinutes ?? 0,
+      examMinutes: config?.examMinutes ?? 0,
+    }
+  }
+
+  async function getCertificate(userId, levelId) {
+    return check(
+      await db
+        .from('certificates')
+        .select('code, status')
+        .eq('user_id', userId)
+        .eq('level_id', levelId)
+        .maybeSingle(),
+    )
+  }
+
+  async function createCertificate(cert) {
+    check(
+      await db.from('certificates').insert({
+        code: cert.code,
+        user_id: cert.userId,
+        level_id: cert.levelId,
+        full_name: cert.fullName,
+        workload_hours: cert.workloadHours,
+        score: cert.score,
+        status: cert.status,
+        issued_at: cert.issuedAt.toISOString(),
+      }),
+    )
+  }
+
+  return {
+    getProfile,
+    getLesson,
+    getPassedLevelPositions,
+    isPreviousLessonDone,
+    getLevel,
+    getExamConfig,
+    getQuestionBank,
+    getQuestionsByIds,
+    getOpenAttempt,
+    getLastSubmittedAttempt,
+    createAttempt,
+    deleteOpenAttempt,
+    getAttempt,
+    submitAttemptIfOpen,
+    getWorkloadInputs,
+    getCertificate,
+    createCertificate,
+  }
 }
