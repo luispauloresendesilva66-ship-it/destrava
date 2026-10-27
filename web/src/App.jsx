@@ -6,7 +6,8 @@ import ForgotPasswordPage from './features/auth/ForgotPasswordPage.jsx'
 import NewPasswordPage from './features/auth/NewPasswordPage.jsx'
 import RequireAuth from './features/auth/RequireAuth.jsx'
 import { SessionProvider } from './features/auth/SessionProvider.jsx'
-import DashboardPlaceholder from './features/auth/DashboardPlaceholder.jsx'
+import DashboardPage from './features/levels/DashboardPage.jsx'
+import LevelMapPage from './features/levels/LevelMapPage.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
 function Home() {
@@ -30,7 +31,15 @@ export default function App() {
               path="/painel"
               element={
                 <RequireAuth>
-                  <DashboardPlaceholder />
+                  <DashboardPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/niveis"
+              element={
+                <RequireAuth>
+                  <LevelMapPage />
                 </RequireAuth>
               }
             />
