@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
 import { translateAuthError } from './authErrors.js'
+import { useSession } from './useSession.js'
 import './auth.css'
 
 export default function LoginPage() {
   const navigate = useNavigate()
+  const { session, loading } = useSession()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -15,14 +17,21 @@ export default function LoginPage() {
     event.preventDefault()
     setError('')
     setBusy(true)
-    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
-    setBusy(false)
-    if (signInError) {
-      setError(translateAuthError(signInError))
-      return
+    try {
+      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
+      if (signInError) {
+        setError(translateAuthError(signInError))
+        return
+      }
+      navigate('/painel')
+    } catch (thrown) {
+      setError(translateAuthError(thrown))
+    } finally {
+      setBusy(false)
     }
-    navigate('/painel')
   }
+
+  if (!loading && session) return <Navigate to="/painel" replace />
 
   return (
     <section className="auth-card">

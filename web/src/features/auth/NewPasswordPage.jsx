@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../../lib/supabase'
-import { MIN_PASSWORD_LENGTH, PASSWORD_TOO_SHORT, translateAuthError } from './authErrors.js'
+import {
+  INVALID_LINK,
+  MIN_PASSWORD_LENGTH,
+  PASSWORD_TOO_SHORT,
+  translateAuthError,
+} from './authErrors.js'
+import { useSession } from './useSession.js'
 import './auth.css'
 
 export default function NewPasswordPage() {
   const navigate = useNavigate()
+  const { session, loading } = useSession()
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
@@ -18,13 +25,41 @@ export default function NewPasswordPage() {
       return
     }
     setBusy(true)
-    const { error: updateError } = await supabase.auth.updateUser({ password })
-    setBusy(false)
-    if (updateError) {
-      setError(translateAuthError(updateError))
-      return
+    try {
+      const { error: updateError } = await supabase.auth.updateUser({ password })
+      if (updateError) {
+        setError(translateAuthError(updateError))
+        return
+      }
+      navigate('/painel')
+    } catch (thrown) {
+      setError(translateAuthError(thrown))
+    } finally {
+      setBusy(false)
     }
-    navigate('/painel')
+  }
+
+  if (loading) {
+    return (
+      <section className="auth-card">
+        <h1>Nova senha</h1>
+        <p className="auth-status">Carregando...</p>
+      </section>
+    )
+  }
+
+  if (!session) {
+    return (
+      <section className="auth-card">
+        <h1>Nova senha</h1>
+        <p className="auth-error" role="alert">
+          {INVALID_LINK}
+        </p>
+        <p className="auth-alt">
+          <Link to="/esqueci-senha">Pedir um novo link</Link>
+        </p>
+      </section>
+    )
   }
 
   return (

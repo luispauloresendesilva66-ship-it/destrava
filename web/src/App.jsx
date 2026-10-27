@@ -5,6 +5,7 @@ import LoginPage from './features/auth/LoginPage.jsx'
 import ForgotPasswordPage from './features/auth/ForgotPasswordPage.jsx'
 import NewPasswordPage from './features/auth/NewPasswordPage.jsx'
 import RequireAuth from './features/auth/RequireAuth.jsx'
+import { SessionProvider } from './features/auth/SessionProvider.jsx'
 import DashboardPlaceholder from './features/auth/DashboardPlaceholder.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
@@ -15,25 +16,27 @@ function Home() {
 export default function App() {
   return (
     <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cadastro" element={<SignupPage />} />
-          <Route path="/entrar" element={<LoginPage />} />
-          <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
-          <Route path="/nova-senha" element={<NewPasswordPage />} />
-          <Route path="/termos" element={<TermsPage />} />
-          <Route path="/privacidade" element={<PrivacyPage />} />
-          <Route
-            path="/painel"
-            element={
-              <RequireAuth>
-                <DashboardPlaceholder />
-              </RequireAuth>
-            }
-          />
-        </Routes>
-      </Layout>
+      <SessionProvider>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<SignupPage />} />
+            <Route path="/entrar" element={<LoginPage />} />
+            <Route path="/esqueci-senha" element={<ForgotPasswordPage />} />
+            <Route path="/nova-senha" element={<NewPasswordPage />} />
+            <Route path="/termos" element={<TermsPage />} />
+            <Route path="/privacidade" element={<PrivacyPage />} />
+            <Route
+              path="/painel"
+              element={
+                <RequireAuth>
+                  <DashboardPlaceholder />
+                </RequireAuth>
+              }
+            />
+          </Routes>
+        </Layout>
+      </SessionProvider>
     </BrowserRouter>
   )
 }

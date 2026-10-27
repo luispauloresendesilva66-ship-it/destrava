@@ -25,17 +25,22 @@ export default function SignupPage() {
       return
     }
     setBusy(true)
-    const { error: signUpError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: { data: { full_name: fullName.trim() } },
-    })
-    setBusy(false)
-    if (signUpError) {
-      setError(translateAuthError(signUpError))
-      return
+    try {
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: fullName.trim() } },
+      })
+      if (signUpError) {
+        setError(translateAuthError(signUpError))
+        return
+      }
+      setDone(true)
+    } catch (thrown) {
+      setError(translateAuthError(thrown))
+    } finally {
+      setBusy(false)
     }
-    setDone(true)
   }
 
   if (done) {

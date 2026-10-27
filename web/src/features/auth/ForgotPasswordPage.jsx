@@ -14,15 +14,20 @@ export default function ForgotPasswordPage() {
     event.preventDefault()
     setError('')
     setBusy(true)
-    const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/nova-senha`,
-    })
-    setBusy(false)
-    if (resetError) {
-      setError(translateAuthError(resetError))
-      return
+    try {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/nova-senha`,
+      })
+      if (resetError) {
+        setError(translateAuthError(resetError))
+        return
+      }
+      setSent(true)
+    } catch (thrown) {
+      setError(translateAuthError(thrown))
+    } finally {
+      setBusy(false)
     }
-    setSent(true)
   }
 
   return (
