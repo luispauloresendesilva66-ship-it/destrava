@@ -11,6 +11,8 @@ import LevelMapPage from './features/levels/LevelMapPage.jsx'
 import LessonPage from './features/lessons/LessonPage.jsx'
 import ExamPage from './features/exams/ExamPage.jsx'
 import ExamResultPage from './features/exams/ExamResultPage.jsx'
+import CertificatesPage from './features/certificates/CertificatesPage.jsx'
+import VerifyCertificatePage from './features/certificates/VerifyCertificatePage.jsx'
 import { TermsPage, PrivacyPage } from './features/auth/LegalPages.jsx'
 
 function Home() {
@@ -70,6 +72,15 @@ export default function App() {
                 </RequireAuth>
               }
             />
+            <Route
+              path="/certificados"
+              element={
+                <RequireAuth>
+                  <CertificatesPage />
+                </RequireAuth>
+              }
+            />
+            <Route path="/certificado/:code" element={<VerifyCertificatePage />} />
           </Routes>
         </Layout>
       </SessionProvider>

@@ -1,0 +1,12 @@
+@import '../levels/levels.css';
+
+.cert-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.cert-item { padding: var(--space); background: var(--c-lavender); border-radius: var(--radius); color: var(--c-night); }
+.cert-item h2 { margin: 0 0 4px; font-size: 1.125rem; color: var(--c-night); }
+.cert-item p { margin: 0 0 8px; }
+.cert-verify { padding: var(--space); border-radius: var(--radius); background: var(--c-lavender); color: var(--c-night); }
+.cert-verify h1 { margin: 0 0 8px; }
+.cert-verify--valid h1 { color: var(--c-green); }
+.cert-verify dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; }
+.cert-verify dt { font-weight: 600; }
+.cert-verify dd { margin: 0; }

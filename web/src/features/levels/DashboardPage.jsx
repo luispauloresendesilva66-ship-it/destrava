@@ -59,6 +59,9 @@ export default function DashboardPage() {
           <Link className="course-link" to="/niveis">
             Ver mapa de níveis
           </Link>
+          <Link className="course-link" to="/certificados">
+            Meus certificados
+          </Link>
         </>
       )}
 
