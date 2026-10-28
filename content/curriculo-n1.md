@@ -7,7 +7,7 @@
 | 1 | O que é HTML? | Entender o que é HTML e escrever a primeira página com a estrutura básica. | `<!DOCTYPE>`, `html`, `head`, `body`, `meta charset`, `title`, `h1`, `p` | 7 (gravada) |
 | 2 | Sua primeira página | Montar uma página "sobre mim" com títulos em hierarquia, parágrafos, ênfase e comentários. | `h1`–`h6`, `p`, `br`, `strong`, `em`, `<!-- -->` | 10 |
 | 3 | Links | Ligar páginas entre si e a outros sites, e entender caminhos de arquivo. | `a` (`href`, `target`), links internos com `#id`, `mailto:` | 10 |
-| 4 | Imagens | Colocar imagens na página com texto alternativo e tamanho adequado. | `img` (`src`, `alt`, `width`, `height`), `figure`, `figcaption` | 9 |
+| 4 | Imagens | Colocar imagens na página com texto alternativo e tamanho adequado. | `img` (`src`, `alt`, `width`, `height`), `figure`, `figcaption` | 10 |
 | 5 | Listas | Organizar itens em listas com e sem ordem, inclusive listas dentro de listas. | `ul`, `ol`, `li`, listas aninhadas | 8 |
 | 6 | Tabelas | Mostrar dados em linhas e colunas, com cabeçalho e legenda. | `table`, `caption`, `thead`, `tbody`, `tr`, `th`, `td` | 10 |
 | 7 | Formulários: o básico | Criar um formulário de contato simples, com rótulos ligados aos campos. | `form`, `label`, `input` (`text`, `email`), `textarea`, `button` | 12 |
