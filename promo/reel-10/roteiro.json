@@ -1,0 +1,58 @@
+{
+  "id": "reel-10",
+  "titulo": "Veja o HTML de qualquer site",
+  "tipo": "dica",
+  "cenas": [
+    {
+      "fala": "Dica rápida: quer ver o HTML por trás de um site?",
+      "titulo": "Veja por *trás* do site",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<h1>Minha página</h1><p>Tudo aqui é HTML.</p>"
+      }
+    },
+    {
+      "fala": "No computador, abra a página e aperte Control e U ao mesmo tempo.",
+      "titulo": "Control mais *U*",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "Ctrl",
+          "+",
+          "U"
+        ]
+      }
+    },
+    {
+      "fala": "Vai abrir uma aba com o código-fonte. São as mesmas tags que você aprende nas aulas: títulos, parágrafos, links e imagens.",
+      "titulo": "É o código-*fonte*",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n<head>\n  <title>Minha página</title>\n</head>\n<body>\n  <h1>Minha página</h1>\n</body>\n</html>",
+        "destaque": [
+          7
+        ]
+      }
+    },
+    {
+      "fala": "No começo parece muita coisa. Procure as tags que você já conhece e veja como cada site foi montado.",
+      "titulo": "Procure o que já *sabe*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "h1",
+          "p",
+          "a",
+          "img"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "id": "reel-14",
+  "titulo": "A tag que não fecha",
+  "tipo": "dica",
+  "cenas": [
+    {
+      "fala": "Dica rápida: você sabia que a tag de imagem não tem fechamento?",
+      "titulo": "A tag que não *fecha*",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<p>Texto</p>\n<a href=\"#\">Link</a>\n<img src=\"ana.jpg\" alt=\"Ana sorrindo\">",
+        "destaque": [
+          3
+        ]
+      }
+    },
+    {
+      "fala": "O parágrafo e o link envolvem um texto. A imagem não envolve nada: ela é o próprio conteúdo.",
+      "titulo": "Ela é o *conteúdo*",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<p>Texto</p><a href=\"#\">Link</a><br><img src=\"ana.jpg\" alt=\"Ana sorrindo\">"
+      }
+    },
+    {
+      "fala": "Por isso a gente chama a img de tag vazia. Você abre, coloca o src e o alt, e pronto. Nada de barra img no final.",
+      "titulo": "Tag *vazia*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<img src=\"ana.jpg\" alt=\"Ana sorrindo\">"
+      }
+    },
+    {
+      "fala": "O br, a quebra de linha, segue a mesma ideia. Também não tem fechamento.",
+      "titulo": "O br *também*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "img: sem fechamento",
+          "br: sem fechamento",
+          "p e a: fecham"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

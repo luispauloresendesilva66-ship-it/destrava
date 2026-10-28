@@ -1,0 +1,59 @@
+{
+  "id": "reel-15",
+  "titulo": "Preço justo, sem dívida",
+  "tipo": "pitch",
+  "cenas": [
+    {
+      "fala": "Doze vezes que não acabam nunca. Já caiu nessa?",
+      "titulo": "Parcela sem *fim*?",
+      "visual": {
+        "tipo": "price-tags",
+        "tags": [
+          "12x de R$ 199",
+          "Matrícula + taxa",
+          "Fidelidade de 12 meses"
+        ]
+      }
+    },
+    {
+      "fala": "Na Destrava, você começa no plano grátis: o primeiro nível em versão reduzida, aulas de amostra e exercícios.",
+      "titulo": "Começa *grátis*",
+      "visual": {
+        "tipo": "phone-exercise",
+        "pergunta": "Qual atributo descreve uma imagem?",
+        "opcoes": [
+          "src",
+          "alt",
+          "href"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "Quando os planos pagos chegarem, eles serão mensais: Gold, trinta e nove e noventa e nove, e Platinum, quarenta e nove e noventa e nove.",
+      "titulo": "Preço *mensal*",
+      "visual": {
+        "tipo": "plan-cards"
+      }
+    },
+    {
+      "fala": "Sem parcela que vira dívida, cancela quando quiser, e o seu nome não vai pro SPC nem pro Serasa.",
+      "titulo": "Sem *dívida*",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "Sem fidelidade",
+          "Cancela quando quiser",
+          "Seu nome longe do SPC"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

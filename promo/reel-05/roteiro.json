@@ -1,0 +1,55 @@
+{
+  "id": "reel-05",
+  "titulo": "Um h1 por página",
+  "tipo": "dica",
+  "cenas": [
+    {
+      "fala": "Dica rápida: quantos h1 a sua página deveria ter?",
+      "titulo": "Quantos *h1*?",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<h1>Sobre mim</h1>\n<h1>Meus projetos</h1>\n<h1>Contato</h1>",
+        "destaque": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "fala": "O h1 é o título principal. É como o título de um livro: ele diz do que a página inteira trata.",
+      "titulo": "O título *principal*",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<h1>Sobre mim</h1><p>Oi, eu sou a Ana.</p>"
+      }
+    },
+    {
+      "fala": "Por isso, use um h1 só. As seções ficam com h2, e as partes dentro delas, com h3.",
+      "titulo": "Um só, o *resto* em degraus",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<h1>Sobre mim</h1>\n<h2>Meus projetos</h2>\n<h3>Página pessoal</h3>\n<h2>Contato</h2>"
+      }
+    },
+    {
+      "fala": "Assim, quem usa leitor de tela e os sites de busca entendem a ordem do seu conteúdo.",
+      "titulo": "Ordem que todo mundo *entende*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "Um h1 por página",
+          "Seções com h2",
+          "Sem pular degraus"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

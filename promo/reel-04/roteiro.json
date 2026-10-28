@@ -1,0 +1,54 @@
+{
+  "id": "reel-04",
+  "titulo": "Errou? Perde uma vida",
+  "tipo": "produto",
+  "cenas": [
+    {
+      "fala": "Já pensou aprender programação como se fosse um jogo?",
+      "titulo": "Aprender como um *jogo*",
+      "visual": {
+        "tipo": "phone-lesson"
+      }
+    },
+    {
+      "fala": "Na Destrava, depois de cada videoaula curta, vem uma rodada de exercícios rápidos pra fixar o que você viu.",
+      "titulo": "Assistiu? *Pratica*",
+      "visual": {
+        "tipo": "phone-exercise",
+        "pergunta": "Qual tag cria um parágrafo?",
+        "opcoes": [
+          "<h1>",
+          "<p>",
+          "<a>"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "No plano grátis, você tem cinco vidas por dia. Cada erro gasta uma, e elas voltam no dia seguinte.",
+      "titulo": "Cinco *vidas* por dia",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "5 vidas por dia",
+          "Recarrega amanhã"
+        ]
+      }
+    },
+    {
+      "fala": "E tem exercício de código de verdade: você escreve o HTML e vê o resultado aparecendo na hora.",
+      "titulo": "Código ao *vivo*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<h1>Minha primeira página</h1>\n<p>Feita por mim!</p>"
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

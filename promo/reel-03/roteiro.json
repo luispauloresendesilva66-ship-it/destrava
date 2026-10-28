@@ -1,0 +1,50 @@
+{
+  "id": "reel-03",
+  "titulo": "Precisa ser bom em matemática?",
+  "tipo": "mito",
+  "cenas": [
+    {
+      "fala": "Mito ou verdade: pra programar, você precisa ser bom em matemática?",
+      "titulo": "Precisa saber *matemática*?",
+      "visual": {
+        "tipo": "myth-fact",
+        "mito": "Precisa ser gênio da matemática",
+        "verdade": "Pra começar, precisa de lógica e prática"
+      }
+    },
+    {
+      "fala": "Pra começar, não. Escrever HTML é organizar conteúdo: título, parágrafo, link, imagem.",
+      "titulo": "É organizar *conteúdo*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<h1>Oi, eu sou a Ana</h1>\n<p>Estou aprendendo HTML.</p>"
+      }
+    },
+    {
+      "fala": "O que mais ajuda é ter paciência, ler com atenção e praticar um pouco todo dia.",
+      "titulo": "Prática vence *talento*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "Paciência",
+          "Atenção",
+          "Um pouco por dia"
+        ]
+      }
+    },
+    {
+      "fala": "Algumas áreas usam mais matemática, sim. Mas isso vem depois, e dá pra aprender no caminho, um passo de cada vez.",
+      "titulo": "Um passo de cada *vez*",
+      "visual": {
+        "tipo": "level-steps"
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

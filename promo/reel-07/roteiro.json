@@ -1,0 +1,52 @@
+{
+  "id": "reel-07",
+  "titulo": "Sem pressão pra começar",
+  "tipo": "pitch",
+  "cenas": [
+    {
+      "fala": "Vagas limitadas. Últimas horas. Só hoje. Cansou de curso que te apressa?",
+      "titulo": "Cansou da *pressa*?",
+      "visual": {
+        "tipo": "price-tags",
+        "tags": [
+          "Vagas limitadas!",
+          "Últimas horas!",
+          "Só hoje!"
+        ]
+      }
+    },
+    {
+      "fala": "Aqui não tem contagem regressiva. Você começa grátis, quando quiser, no seu ritmo.",
+      "titulo": "No seu *ritmo*",
+      "visual": {
+        "tipo": "logo-unlock"
+      }
+    },
+    {
+      "fala": "São aulas curtas em português, do zero, e exercícios que funcionam até no celular.",
+      "titulo": "Cabe no seu *dia*",
+      "visual": {
+        "tipo": "phone-lesson"
+      }
+    },
+    {
+      "fala": "E, se um dia quiser o plano pago, ele é mensal: sem fidelidade e sem parcela que vira dívida.",
+      "titulo": "Sem *amarras*",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "Sem fidelidade",
+          "Cancela quando quiser",
+          "Sem parcela longa"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

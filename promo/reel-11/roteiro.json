@@ -1,0 +1,48 @@
+{
+  "id": "reel-11",
+  "titulo": "Como funciona a prova e o certificado",
+  "tipo": "produto",
+  "cenas": [
+    {
+      "fala": "Como você sabe que aprendeu de verdade? Na Destrava, cada nível termina com uma prova.",
+      "titulo": "Aprendeu de *verdade*?",
+      "visual": {
+        "tipo": "level-steps"
+      }
+    },
+    {
+      "fala": "Pra passar, precisa acertar noventa por cento. Não passou? Tudo bem: revisa e tenta de novo.",
+      "titulo": "Noventa por *cento*",
+      "visual": {
+        "tipo": "exam-progress",
+        "percent": 92
+      }
+    },
+    {
+      "fala": "Passou, ganha o certificado do nível, com o seu nome e um QR Code.",
+      "titulo": "Certificado com *QR*",
+      "visual": {
+        "tipo": "certificate-qr"
+      }
+    },
+    {
+      "fala": "Qualquer pessoa aponta a câmera pro código e confere numa página pública que o certificado é válido.",
+      "titulo": "Qualquer um *confere*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "Seu nome",
+          "Nível concluído",
+          "Verificação pública"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

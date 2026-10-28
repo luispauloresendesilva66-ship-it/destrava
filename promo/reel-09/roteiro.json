@@ -1,0 +1,57 @@
+{
+  "id": "reel-09",
+  "titulo": "Precisa de computador caro?",
+  "tipo": "mito",
+  "cenas": [
+    {
+      "fala": "Mito ou verdade: pra aprender a programar, você precisa de um computador caro?",
+      "titulo": "Precisa de computador *caro*?",
+      "visual": {
+        "tipo": "myth-fact",
+        "mito": "Precisa de computador caro",
+        "verdade": "Dá pra começar com o que você tem"
+      }
+    },
+    {
+      "fala": "Mito! HTML é texto. O que você precisa é de um navegador, e isso qualquer aparelho tem.",
+      "titulo": "HTML é *texto*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<h1>Olá, mundo!</h1>\n<p>Isso aqui é só texto.</p>"
+      }
+    },
+    {
+      "fala": "Na Destrava, dá pra assistir às aulas e fazer os exercícios até no celular. É só instalar o app pela tela inicial.",
+      "titulo": "Começa no *celular*",
+      "visual": {
+        "tipo": "phone-exercise",
+        "pergunta": "O HTML roda em qual programa?",
+        "opcoes": [
+          "No navegador",
+          "Só em computador caro",
+          "Em nenhum"
+        ],
+        "correta": 0
+      }
+    },
+    {
+      "fala": "Mais pra frente, um computador simples ajuda nos projetos maiores. Mas ele não precisa ser caro pra você começar.",
+      "titulo": "Simples já *serve*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "Um navegador",
+          "Vontade de praticar",
+          "Um pouco de tempo"
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

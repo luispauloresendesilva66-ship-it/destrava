@@ -1,0 +1,53 @@
+{
+  "id": "reel-08",
+  "titulo": "Pare de escrever \"clique aqui\"",
+  "tipo": "dica",
+  "cenas": [
+    {
+      "fala": "Dica rápida: pare de escrever clique aqui nos seus links.",
+      "titulo": "Chega de clique *aqui*",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<p>Para ver meu portfólio, <a href=\"#\">clique aqui</a>.</p>"
+      }
+    },
+    {
+      "fala": "Quem usa leitor de tela costuma pular de link em link. E ouvir clique aqui, clique aqui, não diz nada.",
+      "titulo": "Link que não *diz* nada",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "clique aqui",
+          "clique aqui",
+          "clique aqui"
+        ]
+      }
+    },
+    {
+      "fala": "O certo é colocar o link nas palavras que dizem pra onde ele leva.",
+      "titulo": "Diga pra *onde* vai",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<p>Veja o <a href=\"portfolio.html\">meu portfólio</a>.</p>",
+        "destaque": [
+          1
+        ]
+      }
+    },
+    {
+      "fala": "Fica mais claro pra todo mundo, e os sites de busca também entendem melhor a sua página.",
+      "titulo": "Mais *claro* pra todos",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<p>Veja o <a href=\"portfolio.html\">meu portfólio</a>.</p>"
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

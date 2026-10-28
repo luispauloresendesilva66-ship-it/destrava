@@ -1,0 +1,54 @@
+{
+  "id": "reel-01",
+  "titulo": "Cansado de curso caro?",
+  "tipo": "pitch",
+  "cenas": [
+    {
+      "fala": "Cansado de gastar caro com curso que promete demais?",
+      "titulo": "Cansado de curso *caro*?",
+      "visual": {
+        "tipo": "price-tags",
+        "tags": [
+          "12x de R$ 199",
+          "Vagas limitadas!",
+          "Últimas horas!"
+        ]
+      }
+    },
+    {
+      "fala": "Eu te apresento a Destrava: um curso de programação que começa do zero, em português, no seu ritmo.",
+      "titulo": "Programação do *zero*",
+      "visual": {
+        "tipo": "logo-unlock"
+      }
+    },
+    {
+      "fala": "Videoaulas curtas, exercícios pra praticar na hora, e você só sobe de nível quando aprende de verdade: a prova pede noventa por cento.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "level-steps"
+      }
+    },
+    {
+      "fala": "Passou? Ganha certificado com QR Code que qualquer pessoa pode conferir.",
+      "titulo": "Certificado que se *confere*",
+      "visual": {
+        "tipo": "certificate-qr"
+      }
+    },
+    {
+      "fala": "Tem plano grátis pra começar. E o pago é mensal: sem parcelamento que vira dívida, cancela quando quiser, e o seu nome não vai pro SPC nem pro Serasa.",
+      "titulo": "Preço *justo*",
+      "visual": {
+        "tipo": "plan-cards"
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Destrava sua *carreira*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

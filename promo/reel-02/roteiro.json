@@ -1,0 +1,57 @@
+{
+  "id": "reel-02",
+  "titulo": "Sua imagem tem alt?",
+  "tipo": "dica",
+  "cenas": [
+    {
+      "fala": "Dica rápida de HTML: a sua imagem aparece pra todo mundo? Nem sempre.",
+      "titulo": "Sua imagem tem *alt*?",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<h1>Sobre mim</h1><img src=\"quebrada.jpg\" alt=\"\">"
+      }
+    },
+    {
+      "fala": "Quem usa leitor de tela não enxerga a foto. E, se a internet estiver lenta, a imagem pode nem carregar.",
+      "titulo": "Nem todo mundo *vê*",
+      "visual": {
+        "tipo": "badges",
+        "itens": [
+          "Leitor de tela",
+          "Internet lenta",
+          "Imagem quebrada"
+        ]
+      }
+    },
+    {
+      "fala": "Por isso existe o atributo alt, o texto alternativo. Ele descreve a imagem em palavras.",
+      "titulo": "Texto *alternativo*",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<img src=\"ana.jpg\"\n     alt=\"Ana sorrindo, com um caderno na mão\">",
+        "destaque": [
+          2
+        ]
+      }
+    },
+    {
+      "fala": "Conte o que a imagem mostra, curto e direto. Não precisa começar com foto de, porque o leitor de tela já avisa.",
+      "titulo": "Descreva o *essencial*",
+      "visual": {
+        "tipo": "checklist",
+        "itens": [
+          "Diga o que aparece",
+          "Seja curto",
+          "Sem \"foto de...\""
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

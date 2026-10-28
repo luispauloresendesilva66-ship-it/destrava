@@ -1,0 +1,61 @@
+{
+  "id": "reel-06",
+  "titulo": "Desafio: qual é o maior título?",
+  "tipo": "desafio",
+  "cenas": [
+    {
+      "fala": "Desafio do dia! Qual dessas tags cria o maior título da página?",
+      "titulo": "Desafio do *dia*",
+      "visual": {
+        "tipo": "quiz",
+        "pergunta": "Qual tag cria o maior título?",
+        "opcoes": [
+          "<h6>",
+          "<h1>",
+          "<title>"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "Agá seis, agá um, ou title? Pensa um pouquinho. Três, dois, um.",
+      "titulo": "Pensa *rápido*",
+      "visual": {
+        "tipo": "quiz",
+        "pergunta": "Qual tag cria o maior título?",
+        "opcoes": [
+          "<h6>",
+          "<h1>",
+          "<title>"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "Resposta: agá um! Os títulos vão de agá um, o maior, até agá seis, o menor.",
+      "titulo": "Resposta: *h1*",
+      "visual": {
+        "tipo": "browser-preview",
+        "html": "<h1>Título h1</h1><h3>Título h3</h3><h6>Título h6</h6>"
+      }
+    },
+    {
+      "fala": "E a pegadinha: a tag title não aparece na página. Ela é o nome que fica na aba do navegador.",
+      "titulo": "A *pegadinha*",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<head>\n  <title>Página da Ana</title>\n</head>",
+        "destaque": [
+          2
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

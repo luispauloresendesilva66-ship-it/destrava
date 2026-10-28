@@ -1,0 +1,61 @@
+{
+  "id": "reel-12",
+  "titulo": "Desafio: qual tag cria um link?",
+  "tipo": "desafio",
+  "cenas": [
+    {
+      "fala": "Desafio do dia! Qual dessas tags cria um link que a pessoa pode clicar?",
+      "titulo": "Desafio do *dia*",
+      "visual": {
+        "tipo": "quiz",
+        "pergunta": "Qual tag cria um link clicável?",
+        "opcoes": [
+          "<link>",
+          "<a>",
+          "<href>"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "Link, a, ou href? Parece fácil, mas tem pegadinha. Três, dois, um.",
+      "titulo": "Tem *pegadinha*",
+      "visual": {
+        "tipo": "quiz",
+        "pergunta": "Qual tag cria um link clicável?",
+        "opcoes": [
+          "<link>",
+          "<a>",
+          "<href>"
+        ],
+        "correta": 1
+      }
+    },
+    {
+      "fala": "Resposta: a tag a! E o href é o atributo que diz o endereço pra onde o link leva.",
+      "titulo": "Resposta: a tag *a*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<a href=\"contato.html\">Fale comigo</a>"
+      }
+    },
+    {
+      "fala": "E a tag link? Ela fica no head e liga a página a outros arquivos, como o estilo. Ela não aparece pra clicar.",
+      "titulo": "E a tag *link*?",
+      "visual": {
+        "tipo": "code-typing",
+        "codigo": "<head>\n  <link rel=\"stylesheet\" href=\"estilo.css\">\n</head>",
+        "destaque": [
+          2
+        ]
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}

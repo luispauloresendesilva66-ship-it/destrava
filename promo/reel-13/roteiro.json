@@ -1,0 +1,45 @@
+{
+  "id": "reel-13",
+  "titulo": "É tarde pra começar?",
+  "tipo": "mito",
+  "cenas": [
+    {
+      "fala": "Mito ou verdade: depois de uma certa idade, já é tarde pra aprender a programar?",
+      "titulo": "É *tarde* pra começar?",
+      "visual": {
+        "tipo": "myth-fact",
+        "mito": "Já passou da idade",
+        "verdade": "Dá pra aprender em qualquer fase"
+      }
+    },
+    {
+      "fala": "Mito. Programar é uma habilidade, e habilidade se aprende com prática, em qualquer fase da vida.",
+      "titulo": "Habilidade se *aprende*",
+      "visual": {
+        "tipo": "code-and-preview",
+        "codigo": "<h1>Comecei hoje</h1>\n<p>E tá tudo bem.</p>"
+      }
+    },
+    {
+      "fala": "O segredo é não tentar aprender tudo de uma vez. Uma aula curta por dia já te tira do lugar.",
+      "titulo": "Uma aula por *dia*",
+      "visual": {
+        "tipo": "phone-lesson"
+      }
+    },
+    {
+      "fala": "Começa pelo HTML, sobe um nível quando estiver pronto, e respeita o seu tempo.",
+      "titulo": "No seu *tempo*",
+      "visual": {
+        "tipo": "level-steps"
+      }
+    },
+    {
+      "fala": "Destrava sua carreira. Um nível de cada vez. Comece grátis hoje.",
+      "titulo": "Um nível de cada *vez*",
+      "visual": {
+        "tipo": "end-card"
+      }
+    }
+  ]
+}
