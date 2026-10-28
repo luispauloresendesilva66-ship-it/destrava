@@ -13,3 +13,5 @@ video/.remotion/
 video/out/
 .remotion/
 aulas/*/amostras-voz/
+promo/**/audio/
+promo/**/out/
