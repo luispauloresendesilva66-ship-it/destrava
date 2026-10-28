@@ -2,15 +2,24 @@ import React from 'react'
 import { C, FONT } from '../theme.js'
 
 // Janela de navegador genérica (sem marcas reais).
-export const BrowserMock = ({ tabTitle = 'Nova aba', url = 'meusite.com.br', width = 760, height = 520, children, style, tabHighlight = false, highlightColor = C.purpleSoft }) => (
+// tabs (opcional): [{ title, active?, opacity? }] — várias abas; sem `tabs`, mostra só `tabTitle`.
+export const BrowserMock = ({ tabTitle = 'Nova aba', url = 'meusite.com.br', width = 760, height = 520, children, style, tabHighlight = false, highlightColor = C.purpleSoft, tabs }) => (
   <div style={{ width, height, borderRadius: 18, background: C.white, boxShadow: '0 24px 60px rgba(38,33,92,0.28)', overflow: 'hidden', display: 'flex', flexDirection: 'column', fontFamily: FONT, border: `2px solid ${C.purpleSoft}55`, ...style }}>
-    <div style={{ background: '#DDDAF6', padding: '12px 16px 0', display: 'flex', alignItems: 'flex-end', gap: 14 }}>
-      <div style={{ display: 'flex', gap: 8, paddingBottom: 14 }}>
+    <div style={{ background: '#DDDAF6', padding: '12px 16px 0', display: 'flex', alignItems: 'flex-end', gap: tabs ? 6 : 14 }}>
+      <div style={{ display: 'flex', gap: 8, paddingBottom: 14, marginRight: tabs ? 8 : 0 }}>
         {['#E87B7B', '#E8C47B', '#9CCF8A'].map((c) => <div key={c} style={{ width: 14, height: 14, borderRadius: '50%', background: c, opacity: 0.8 }} />)}
       </div>
-      <div style={{ background: C.white, borderRadius: '12px 12px 0 0', padding: '10px 22px', fontSize: 22, color: C.night, minWidth: 220, maxWidth: 420, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', boxShadow: tabHighlight ? `0 0 0 4px ${highlightColor}` : 'none' }}>
-        {tabTitle}
-      </div>
+      {tabs ? (
+        tabs.map((t, i) => (
+          <div key={i} style={{ background: t.active ? C.white : '#C9C5EE', borderRadius: '12px 12px 0 0', padding: '10px 18px', fontSize: 20, color: C.night, minWidth: 0, maxWidth: 300, flexShrink: 1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', opacity: t.opacity == null ? 1 : t.opacity, boxShadow: t.active && tabHighlight ? `0 0 0 4px ${highlightColor}` : 'none' }}>
+            {t.title}
+          </div>
+        ))
+      ) : (
+        <div style={{ background: C.white, borderRadius: '12px 12px 0 0', padding: '10px 22px', fontSize: 22, color: C.night, minWidth: 220, maxWidth: 420, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', boxShadow: tabHighlight ? `0 0 0 4px ${highlightColor}` : 'none' }}>
+          {tabTitle}
+        </div>
+      )}
     </div>
     <div style={{ background: C.white, padding: '10px 18px', borderBottom: '2px solid #ECEBFA' }}>
       <div style={{ background: C.lavender, borderRadius: 999, padding: '6px 20px', fontSize: 20, color: C.purple }}>{url}</div>

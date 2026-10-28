@@ -7,6 +7,7 @@ export const C = {
   lavender: '#EEEDFE',
   green: '#97C459', // só para sucesso / conquista
   red: '#D9534F', // só para erro
+  link: '#2F5BD3', // texto de link dentro das prévias do navegador (Aula 3+)
   white: '#FFFFFF',
 }
 export const FONT = "'Segoe UI', system-ui, -apple-system, Arial, sans-serif"

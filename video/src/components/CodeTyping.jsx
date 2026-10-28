@@ -64,8 +64,9 @@ export function colorize(text) {
  * highlights[].color — cor própria do marca-texto (padrão: highlightColor).
  * wrap — quebra linhas longas dentro da largura (a linha lógica continua uma só: numeração e destaque).
  * markSpaces — espaços seguidos (2+) aparecem como pontinhos cinza.
+ * numbers — numeração própria por linha exibida (trechos de um arquivo maior); padrão 1, 2, 3...
  */
-export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fontSize = 40, width, lineNumbers = true, cursor = true, highlightColor = 'rgba(127,119,221,0.55)', lineColor = 'rgba(127,119,221,0.22)', wrap = false, markSpaces = false, style }) => {
+export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fontSize = 40, width, lineNumbers = true, cursor = true, highlightColor = 'rgba(127,119,221,0.55)', lineColor = 'rgba(127,119,221,0.22)', wrap = false, markSpaces = false, numbers, style }) => {
   const frame = useCurrentFrame()
   const full = segments.map((s) => s.text).join('')
   const colors = colorize(full)
@@ -128,7 +129,7 @@ export const CodeTyping = ({ segments, highlights = [], lineHighlights = [], fon
         }
         return (
           <div key={li} style={{ display: 'flex', [wrap ? 'minHeight' : 'height']: lineH, background: hl ? lineColor : 'transparent', boxShadow: hl ? `inset 6px 0 0 ${C.purpleSoft}` : 'none' }}>
-            {lineNumbers && <span style={{ width: fontSize * 1.8, textAlign: 'right', paddingRight: fontSize * 0.7, color: '#6E69A8', flexShrink: 0 }}>{li + 1}</span>}
+            {lineNumbers && <span style={{ width: fontSize * 1.8, textAlign: 'right', paddingRight: fontSize * 0.7, color: '#6E69A8', flexShrink: 0 }}>{numbers && numbers[li] != null ? numbers[li] : li + 1}</span>}
             <span style={wrap ? { whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', minWidth: 0 } : { whiteSpace: 'pre' }}>
               {runs.map((r, ri) => (
                 <span key={ri} style={{ color: r.c, background: r.m || 'transparent' }}>{r.t}</span>
