@@ -127,6 +127,135 @@
           "explanation": "Uma solução: <h2>O que estou aprendendo</h2> e, embaixo, <p>Estou aprendendo <strong>HTML</strong>.</p>. O <strong> fica dentro do <p> e fecha antes dele."
         }
       ]
+    },
+    {
+      "position": 3,
+      "title": "Links",
+      "description": "Ligue páginas entre si e a outros sites, entenda caminhos de arquivo e crie links para seções e para e-mail.",
+      "durationSeconds": 626,
+      "videoKey": "N1/a03.mp4",
+      "captionsKey": "N1/a03.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "A Ana quer um link para o site de receitas dela. Qual texto de link é o melhor?",
+            "options": [
+              "Para ver as minhas receitas, <a href=\"https://receitas.example.com\">clique aqui</a>.",
+              "Veja as <a href=\"https://receitas.example.com\">minhas receitas favoritas</a>.",
+              "Veja as minhas receitas: <a href=\"https://receitas.example.com\">aqui</a>.",
+              "Veja as minhas receitas: <a href=\"https://receitas.example.com\">link</a>."
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "O texto do link precisa dizer para onde ele leva, mesmo lido sozinho. \"Clique aqui\", \"aqui\" e \"link\" não dizem nada para quem usa leitor de tela ou só passa o olho pela página."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "O site da Ana tem index.html na pasta principal e projetos.html dentro da pasta paginas. Qual href o link de volta, dentro de projetos.html, deve usar para chegar ao index.html?",
+            "options": [
+              "index.html",
+              "paginas/index.html",
+              "../index.html",
+              "https://index.html"
+            ]
+          },
+          "solution": {
+            "correctIndex": 2
+          },
+          "explanation": "De dentro da pasta paginas, o index.html está uma pasta acima. O ../ sobe uma pasta, então o caminho relativo é ../index.html."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<a ___=\"https://receitas.example.com\" target=\"___\" rel=\"noopener\">minhas receitas favoritas</a>",
+            "blanks": 2
+          },
+          "solution": {
+            "answers": [
+              "href",
+              "_blank"
+            ]
+          },
+          "explanation": "O href diz para onde o link leva. O target=\"_blank\" abre o link em outra aba; use com moderação e sempre junto com rel=\"noopener\"."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<p>Ana Souza<br>",
+              "<a",
+              "href=\"mailto:ana@example.com\">",
+              "ana@example.com",
+              "</a>",
+              "</p>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "O link fica dentro do parágrafo da assinatura. A tag <a> abre com o href=\"mailto:...\" dentro dela, depois vem o texto que a pessoa vê (o próprio e-mail), o </a> e, por fim, o </p>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Na página da Ana: 1) crie um link para a página projetos.html com o texto \"meus projetos\"; 2) coloque no <h2> o atributo id=\"aprendendo\"; 3) crie um link com o texto \"O que estou aprendendo\" que leve para essa seção (href=\"#aprendendo\").",
+            "starter": {
+              "html": "<h1>Olá, eu sou a Ana</h1>\n<!-- Escreva os links abaixo -->\n\n<h2>O que estou aprendendo</h2>\n<p>Estou aprendendo <strong>HTML</strong>.</p>\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "a[href=\"projetos.html\"]"
+              },
+              {
+                "type": "dom-text",
+                "selector": "a[href=\"projetos.html\"]",
+                "equals": "meus projetos"
+              },
+              {
+                "type": "dom-text",
+                "selector": "h2#aprendendo",
+                "equals": "O que estou aprendendo"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "a[href=\"#aprendendo\"]"
+              },
+              {
+                "type": "dom-text",
+                "selector": "a[href=\"#aprendendo\"]",
+                "equals": "O que estou aprendendo"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <p><a href=\"projetos.html\">meus projetos</a> · <a href=\"#aprendendo\">O que estou aprendendo</a></p> e <h2 id=\"aprendendo\">O que estou aprendendo</h2>. O caminho relativo leva à outra página; a cerquilha leva ao elemento com aquele id."
+        }
+      ]
     }
   ],
   "examQuestions": [
