@@ -41,7 +41,7 @@ describe('HomePage', () => {
     expect(screen.getByText('R$ 0')).toBeInTheDocument()
     expect(screen.getByText('R$ 39,99')).toBeInTheDocument()
     expect(screen.getByText('R$ 49,99')).toBeInTheDocument()
-    expect(screen.getByText('Mais escolhido')).toBeInTheDocument()
+    expect(screen.getByText('Recomendado')).toBeInTheDocument()
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
     expect(screen.getAllByRole('link')).toHaveLength(2)
   })

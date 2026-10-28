@@ -63,7 +63,7 @@ const PLANS = [
     price: 'R$ 39,99',
     featured: true,
     items: [
-      'Trilha completa, níveis 1 a 5',
+      'Todos os níveis, conforme forem lançados',
       'Exercícios ilimitados',
       'Provas de todos os níveis',
       'Certificado incluso',
@@ -76,8 +76,8 @@ const PLANS = [
     items: [
       'Tudo do Gold',
       'Refazer a prova sem espera',
-      'Projetos de portfólio guiados',
-      'Trilha de carreira: currículo, LinkedIn e GitHub',
+      'Projetos de portfólio guiados (em breve)',
+      'Trilha de carreira: currículo, LinkedIn e GitHub (em breve)',
     ],
   },
 ]
@@ -183,7 +183,7 @@ export default function HomePage() {
         <ul className="plan-grid">
           {PLANS.map((p) => (
             <li key={p.id} className={`plan-card plan-card--${p.id}${p.featured ? ' plan-card--featured' : ''}`}>
-              {p.featured && <p className="plan-card__ribbon">Mais escolhido</p>}
+              {p.featured && <p className="plan-card__ribbon">Recomendado</p>}
               <span className={`badge badge--${p.id}`}>{p.name}</span>
               <p className="plan-card__price">
                 <strong>{p.price}</strong>
