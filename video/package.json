@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:reels && remotion studio src/index.js",
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:reels && remotion studio src/index.js",
     "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
     "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
@@ -17,6 +17,9 @@
     "prep:n1a04": "node scripts/prep-audio.mjs n1-a04-imagens n1-a04",
     "still:n1a04": "npm run prep:n1a04 && node scripts/stills.mjs AulaN1A04 n1-a04-imagens",
     "render:n1a04": "npm run prep:n1a04 && remotion render src/index.js AulaN1A04 ../aulas/n1-a04-imagens/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n1a05": "node scripts/prep-audio.mjs n1-a05-listas n1-a05",
+    "still:n1a05": "npm run prep:n1a05 && node scripts/stills.mjs AulaN1A05 n1-a05-listas",
+    "render:n1a05": "npm run prep:n1a05 && remotion render src/index.js AulaN1A05 ../aulas/n1-a05-listas/out/a05.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:reels": "node scripts/prep-reel.mjs all",
     "still:reel": "node scripts/reel.mjs still",
     "still:reels": "node scripts/reel.mjs still all",

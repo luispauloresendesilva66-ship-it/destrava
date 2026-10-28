@@ -4,9 +4,10 @@ import { C, FONT } from '../theme.js'
 import { timeCaptions } from '../lib/captions.js'
 
 // Legendas queimadas: texto branco sobre faixa noite semitransparente, na base do quadro.
-export const Captions = ({ text, audioFrames }) => {
+// fix (opcional): substituições só na legenda (ver timeCaptions).
+export const Captions = ({ text, audioFrames, fix }) => {
   const frame = useCurrentFrame()
-  const chunks = useMemo(() => timeCaptions(text, audioFrames), [text, audioFrames])
+  const chunks = useMemo(() => timeCaptions(text, audioFrames, fix), [text, audioFrames, fix])
   const cur = chunks.find((c) => frame >= c.from && frame < c.to)
   if (!cur) return null
   const op = interpolate(frame, [cur.from, cur.from + 4, cur.to - 3, cur.to], [0, 1, 1, 0.6], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })

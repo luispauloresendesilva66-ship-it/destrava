@@ -22,7 +22,7 @@ export const makeLesson = ({ publicId, blocks, scenes }) => {
         <AbsoluteFill style={{ opacity: fadeIn }}>
           <Scene block={block} frames={timing.audioFrames} />
         </AbsoluteFill>
-        <Captions text={block.fala} audioFrames={timing.audioFrames} />
+        <Captions text={block.fala} audioFrames={timing.audioFrames} fix={block.captionFix} />
         {timing.file && <Audio src={staticFile(timing.file)} />}
       </AbsoluteFill>
     )

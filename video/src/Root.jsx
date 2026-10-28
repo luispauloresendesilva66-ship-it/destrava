@@ -8,6 +8,8 @@ import { AulaN1A03, calculateAulaN1A03Metadata } from './aulas/n1-a03/Aula.jsx'
 import { BLOCKS as BLOCKS_A03 } from './aulas/n1-a03/blocks.js'
 import { AulaN1A04, calculateAulaN1A04Metadata } from './aulas/n1-a04/Aula.jsx'
 import { BLOCKS as BLOCKS_A04 } from './aulas/n1-a04/blocks.js'
+import { AulaN1A05, calculateAulaN1A05Metadata } from './aulas/n1-a05/Aula.jsx'
+import { BLOCKS as BLOCKS_A05 } from './aulas/n1-a05/blocks.js'
 import { FPS, H, W } from './theme.js'
 import { Reel } from './reels/Reel.jsx'
 import { calculateReelMetadata } from './reels/data.js'
@@ -56,6 +58,16 @@ export const Root = () => (
       durationInFrames={FPS * 60}
       defaultProps={placeholder(BLOCKS_A04)}
       calculateMetadata={calculateAulaN1A04Metadata}
+    />
+    <Composition
+      id="AulaN1A05"
+      component={AulaN1A05}
+      width={W}
+      height={H}
+      fps={FPS}
+      durationInFrames={FPS * 60}
+      defaultProps={placeholder(BLOCKS_A05)}
+      calculateMetadata={calculateAulaN1A05Metadata}
     />
     {/* Reels verticais: um template para todos — props { id: 'reel-NN' } (promo/<id>/roteiro.json) */}
     <Composition

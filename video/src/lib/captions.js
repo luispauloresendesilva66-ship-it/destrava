@@ -45,14 +45,25 @@ export function splitCaptions(text) {
 }
 
 // [{text, from, to}] em frames, relativo ao início do bloco.
-export function timeCaptions(text, audioFrames) {
-  const chunks = splitCaptions(text)
+// fix (opcional): [[dito, mostrado], ...] — trechos que a voz diz por extenso (ex.: "u éle") e a legenda
+// mostra como no código (ex.: "ul"). O tempo continua proporcional ao texto falado, e o trecho nunca é
+// partido entre duas legendas (os espaços internos viram um "word joiner" durante a divisão).
+const JOIN = "⁠"
+export function timeCaptions(text, audioFrames, fix) {
+  let spoken = text
+  for (const [said] of fix || []) spoken = spoken.split(said).join(said.replace(/ /g, JOIN))
+  const chunks = splitCaptions(spoken)
   const total = chunks.reduce((a, c) => a + c.length, 0)
+  const show = (c) => {
+    let t = c
+    for (const [said, shown] of fix || []) t = t.split(said.replace(/ /g, JOIN)).join(shown)
+    return t.split(JOIN).join(" ")
+  }
   let acc = 0
   return chunks.map((c) => {
     const from = Math.round((acc / total) * audioFrames)
     acc += c.length
     const to = Math.round((acc / total) * audioFrames)
-    return { text: c, from, to }
+    return { text: show(c), from, to }
   })
 }
