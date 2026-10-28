@@ -379,6 +379,133 @@
           "explanation": "Uma solução: <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\"> e, abaixo do <h2>, <figure><img src=\"imagens/projeto-receitas.png\" alt=\"Tela do site de receitas, com a lista de pratos\"><figcaption>Meu primeiro projeto: um site de receitas</figcaption></figure>."
         }
       ]
+    },
+    {
+      "position": 5,
+      "title": "Listas",
+      "description": "Organize itens em listas com marcadores e numeradas, escolha a certa pelo significado e coloque uma lista dentro de outra.",
+      "durationSeconds": 470,
+      "videoKey": "N1/a05.mp4",
+      "captionsKey": "N1/a05.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "A Ana vai escrever o passo a passo da receita de bolo de caneca, em que a ordem dos passos importa. Qual tag ela deve usar para a lista?",
+            "options": [
+              "<ul>",
+              "<ol>",
+              "<li>",
+              "<p> com <br> entre os passos"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "Quando a ordem importa, use a lista ordenada <ol>, e o navegador numera os passos sozinho. A <ul> é para quando a ordem não importa, a <li> é cada item (e não a lista) e o <br> só parece lista, sem ser uma."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual destes códigos coloca a lista de frutas dentro do item \"Frutas\" do jeito certo?",
+            "options": [
+              "<ul><li>Frutas</li><ul><li>Banana</li><li>Maçã</li></ul></ul>",
+              "<ul><li>Frutas<ul><li>Banana</li><li>Maçã</li></ul></li></ul>",
+              "<ul><li>Frutas<li>Banana</li><li>Maçã</li></li></ul>",
+              "<ul><li>Frutas<ul><li>Banana</li><li>Maçã</li></li></ul></ul>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "A lista de dentro mora dentro de um <li>: abre o <li>Frutas, abre a <ul> interna com os itens, fecha a </ul> e só então fecha o </li>. Na primeira opção a <ul> ficou solta dentro da <ul>; na terceira falta a lista interna; na quarta o fechamento está na ordem errada."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<ul>\n  <___>Arroz</li>\n  <li>Feijão</li>\n  <li>Café</li>\n</___>",
+            "blanks": 2
+          },
+          "solution": {
+            "answers": [
+              "li",
+              "ul"
+            ]
+          },
+          "explanation": "Cada item é um <li>, que abre e fecha, e a lista inteira fica dentro de <ul> ... </ul>. Como a ordem das compras não importa, a lista é não ordenada."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<ol>",
+              "<li>Misture os ingredientes na caneca</li>",
+              "<li>Leve ao micro-ondas por três minutos</li>",
+              "<li>Espere esfriar e sirva</li>",
+              "</ol>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "A <ol> abre a lista ordenada, os passos entram como <li> na ordem em que devem ser feitos, e a </ol> fecha a lista. O navegador numera 1, 2, 3 sozinho."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Na página da Ana: 1) abaixo do <h2>Lista de compras</h2>, crie uma <ul> com os itens \"Arroz\", \"Feijão\" e \"Frutas\", nessa ordem; dentro do item \"Frutas\", coloque outra <ul> com \"Banana\" e \"Maçã\"; 2) abaixo do <h2>Bolo de caneca</h2>, crie uma <ol> com os três passos: \"Misture os ingredientes na caneca\", \"Leve ao micro-ondas por três minutos\" e \"Espere esfriar e sirva\".",
+            "starter": {
+              "html": "<h2>Lista de compras</h2>\n<!-- 1) Coloque a lista de compras aqui -->\n\n<h2>Bolo de caneca</h2>\n<!-- 2) Coloque o passo a passo aqui -->\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-text",
+                "selector": "ul > li:first-child",
+                "equals": "Arroz"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "ul > li > ul > li:nth-child(2)"
+              },
+              {
+                "type": "dom-text",
+                "selector": "ul > li > ul > li:first-child",
+                "equals": "Banana"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "ol > li:nth-child(3)"
+              },
+              {
+                "type": "dom-text",
+                "selector": "ol > li:first-child",
+                "equals": "Misture os ingredientes na caneca"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <ul><li>Arroz</li><li>Feijão</li><li>Frutas<ul><li>Banana</li><li>Maçã</li></ul></li></ul> e, abaixo do segundo <h2>, <ol><li>Misture os ingredientes na caneca</li><li>Leve ao micro-ondas por três minutos</li><li>Espere esfriar e sirva</li></ol>. A lista das frutas fica dentro do <li> de \"Frutas\"."
+        }
+      ]
     }
   ],
   "examQuestions": [
