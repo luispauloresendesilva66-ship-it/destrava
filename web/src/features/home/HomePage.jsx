@@ -114,7 +114,7 @@ function EditorArt() {
         </span>
         <span>
           <strong>Certificado válido</strong>
-          <small>Nível 1 · HTML e CSS</small>
+          <small>Nível 1 · Primeiro Commit</small>
         </span>
       </div>
       <div className="editor-art__xp">+10 XP</div>
