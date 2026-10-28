@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && remotion studio src/index.js",
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && remotion studio src/index.js",
     "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
     "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
@@ -13,7 +13,10 @@
     "render:n1a02": "npm run prep:n1a02 && remotion render src/index.js AulaN1A02 ../aulas/n1-a02-sua-primeira-pagina/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a03": "node scripts/prep-audio.mjs n1-a03-links n1-a03",
     "still:n1a03": "npm run prep:n1a03 && node scripts/stills.mjs AulaN1A03 n1-a03-links",
-    "render:n1a03": "npm run prep:n1a03 && remotion render src/index.js AulaN1A03 ../aulas/n1-a03-links/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite"
+    "render:n1a03": "npm run prep:n1a03 && remotion render src/index.js AulaN1A03 ../aulas/n1-a03-links/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n1a04": "node scripts/prep-audio.mjs n1-a04-imagens n1-a04",
+    "still:n1a04": "npm run prep:n1a04 && node scripts/stills.mjs AulaN1A04 n1-a04-imagens",
+    "render:n1a04": "npm run prep:n1a04 && remotion render src/index.js AulaN1A04 ../aulas/n1-a04-imagens/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.539",
