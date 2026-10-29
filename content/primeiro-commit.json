@@ -506,6 +506,136 @@
           "explanation": "Uma solução: <ul><li>Arroz</li><li>Feijão</li><li>Frutas<ul><li>Banana</li><li>Maçã</li></ul></li></ul> e, abaixo do segundo <h2>, <ol><li>Misture os ingredientes na caneca</li><li>Leve ao micro-ondas por três minutos</li><li>Espere esfriar e sirva</li></ol>. A lista das frutas fica dentro do <li> de \"Frutas\"."
         }
       ]
+    },
+    {
+      "position": 6,
+      "title": "Tabelas",
+      "description": "Mostre dados em linhas e colunas com cabeçalhos, legenda e partes bem separadas, e saiba quando uma tabela não é a escolha certa.",
+      "durationSeconds": 463,
+      "videoKey": "N1/a06.mp4",
+      "captionsKey": "N1/a06.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Em qual destes casos uma tabela é a escolha certa?",
+            "options": [
+              "Dividir a página em menu à esquerda e texto à direita",
+              "O horário de estudos da semana, com dia, horário e assunto",
+              "A lista de compras: arroz, feijão e café",
+              "Centralizar a foto de perfil da Ana"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "Tabela é para dados que fazem sentido em linhas e colunas, como o horário de estudos (cada dia cruza com horário e assunto). Montar o layout ou posicionar uma imagem é trabalho do CSS, e uma sequência de itens sem colunas é uma lista."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual destes códigos monta uma linha de tabela do jeito certo?",
+            "options": [
+              "<table><td>Segunda</td><td>HTML</td></table>",
+              "<table><tr><td>Segunda</td><td>HTML</td></tr></table>",
+              "<table><tr>Segunda</tr><tr>HTML</tr></table>",
+              "<tr><table><td>Segunda</td><td>HTML</td></table></tr>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "A <table> é a caixa, cada linha é um <tr> e cada célula é um <td> dentro da linha. Na primeira opção as células estão soltas, sem <tr>; na terceira o texto está direto no <tr>, sem célula; na quarta a ordem das caixas está invertida."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<table>\n  <___>Horário de estudos da semana</caption>\n  <tr>\n    <___>Dia</th>\n    <th>Assunto</th>\n  </tr>\n  <tr>\n    <td>Segunda</td>\n    <___>HTML</td>\n  </tr>\n</table>",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "caption",
+              "th",
+              "td"
+            ]
+          },
+          "explanation": "O título da tabela é a <caption>, logo depois de abrir a <table>. Os nomes das colunas são cabeçalhos, então usam <th>. E os dados de cada linha ficam em <td>."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<table>",
+              "<caption>Preços da cantina</caption>",
+              "<thead><tr><th>Item</th><th>Preço</th></tr></thead>",
+              "<tbody><tr><td>Suco</td><td>R$ 5,00</td></tr></tbody>",
+              "</table>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "A <table> abre a tabela e a <caption> vem logo em seguida, antes de qualquer linha. Depois vem a <thead>, com a linha dos cabeçalhos, e a <tbody>, com as linhas de dados. Por fim, a </table> fecha tudo."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Abaixo do <h2>Minha rotina de estudos</h2>, crie uma <table> com: 1) a <caption> \"Horário de estudos da semana\"; 2) uma <thead> com uma linha de cabeçalhos <th>: \"Dia\" e \"Assunto\"; 3) uma <tbody> com duas linhas de <td>: \"Segunda\" e \"HTML\", depois \"Quarta\" e \"CSS\".",
+            "starter": {
+              "html": "<h2>Minha rotina de estudos</h2>\n<!-- Coloque a tabela aqui -->\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-text",
+                "selector": "table > caption",
+                "equals": "Horário de estudos da semana"
+              },
+              {
+                "type": "dom-text",
+                "selector": "table thead tr th:first-child",
+                "equals": "Dia"
+              },
+              {
+                "type": "dom-text",
+                "selector": "table thead tr th:nth-child(2)",
+                "equals": "Assunto"
+              },
+              {
+                "type": "dom-text",
+                "selector": "table tbody tr:first-child td:first-child",
+                "equals": "Segunda"
+              },
+              {
+                "type": "dom-text",
+                "selector": "table tbody tr:nth-child(2) td:nth-child(2)",
+                "equals": "CSS"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <table><caption>Horário de estudos da semana</caption><thead><tr><th>Dia</th><th>Assunto</th></tr></thead><tbody><tr><td>Segunda</td><td>HTML</td></tr><tr><td>Quarta</td><td>CSS</td></tr></tbody></table>. A <caption> vem logo depois de abrir a <table>, e cada célula fica dentro de um <tr>."
+        }
+      ]
     }
   ],
   "examQuestions": [
