@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:reels && remotion studio src/index.js",
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:n1a07 && npm run prep:reels && remotion studio src/index.js",
     "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
     "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
@@ -23,6 +23,9 @@
     "prep:n1a06": "node scripts/prep-audio.mjs n1-a06-tabelas n1-a06",
     "still:n1a06": "npm run prep:n1a06 && node scripts/stills.mjs AulaN1A06 n1-a06-tabelas",
     "render:n1a06": "npm run prep:n1a06 && remotion render src/index.js AulaN1A06 ../aulas/n1-a06-tabelas/out/a06.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n1a07": "node scripts/prep-audio.mjs n1-a07-formularios n1-a07",
+    "still:n1a07": "npm run prep:n1a07 && node scripts/stills.mjs AulaN1A07 n1-a07-formularios",
+    "render:n1a07": "npm run prep:n1a07 && remotion render src/index.js AulaN1A07 ../aulas/n1-a07-formularios/out/a07.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:reels": "node scripts/prep-reel.mjs all",
     "still:reel": "node scripts/reel.mjs still",
     "still:reels": "node scripts/reel.mjs still all",
