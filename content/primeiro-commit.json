@@ -764,6 +764,134 @@
           "explanation": "Uma solução: <form><label for=\"nome\">Nome</label><input type=\"text\" id=\"nome\" name=\"nome\"><label for=\"email\">E-mail</label><input type=\"email\" id=\"email\" name=\"email\"><button type=\"submit\">Enviar</button></form>. O for de cada <label> repete o id do seu campo, e o <input> não tem tag de fechamento."
         }
       ]
+    },
+    {
+      "position": 8,
+      "title": "Tags semânticas",
+      "description": "Divida a página em regiões com significado, como topo, menu, conteúdo principal, seções e rodapé, em vez de caixas genéricas.",
+      "durationSeconds": 508,
+      "videoKey": "N1/a08.mp4",
+      "captionsKey": "N1/a08.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual tag guarda o menu principal de links da página?",
+            "options": [
+              "<header>",
+              "<nav>",
+              "<section>",
+              "<footer>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "A <nav> marca a navegação principal, o menu. Ela pode até ficar dentro da <header>, mas a <header> é o topo da página inteira, a <section> é um assunto com título e a <footer> é o rodapé."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Quando a <div> ainda é a escolha certa?",
+            "options": [
+              "Nunca: toda <div> deve ser trocada por uma tag semântica",
+              "Para guardar o conteúdo principal da página",
+              "Quando você precisa de uma caixa só para agrupar coisas pelo visual, sem significado próprio",
+              "Para o menu, quando ele tem poucos links"
+            ]
+          },
+          "solution": {
+            "correctIndex": 2
+          },
+          "explanation": "A <div> é uma caixa genérica, sem significado. Ela continua certa quando o grupo existe só por causa da aparência, como uma caixa que segura dois cartões lado a lado. O conteúdo principal vai na <main> e o menu vai na <nav>."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<___>\n  <h1>Olá, eu sou a Ana</h1>\n</header>\n<___>\n  <section>\n    <h2>Quem sou eu</h2>\n  </section>\n</main>\n<___>\n  <p>Feito pela Ana</p>\n</footer>",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "header",
+              "main",
+              "footer"
+            ]
+          },
+          "explanation": "A <header> abre o topo da página, a <main> guarda o conteúdo principal (só uma por página) e a <footer> é o rodapé. Cada tag de abertura combina com a tag de fechamento de mesmo nome."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<header>",
+              "<h1>Olá, eu sou a Ana</h1>",
+              "</header>",
+              "<main>",
+              "<section id=\"quem-sou\"><h2>Quem sou eu</h2></section>",
+              "</main>",
+              "<footer><p>Feito pela Ana</p></footer>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "explanation": "A página começa pelo topo, a <header>, com o <h1> dentro. Depois vem a <main>, com as seções do conteúdo principal. E, por último, a <footer>, o rodapé."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "A página da Ana está numa sopa de <div>. Troque cada caixa pela tag semântica certa: 1) o topo, com o <h1>, vira uma <header>; 2) a caixa do menu, com o link, vira uma <nav> dentro da <header>; 3) a caixa do conteúdo vira a <main>; 4) a caixa \"Quem sou eu\", com o seu <h2> e o id=\"quem-sou\", vira uma <section> dentro da <main>; 5) o rodapé vira uma <footer>. Mantenha os textos e o link como estão.",
+            "starter": {
+              "html": "<div class=\"topo\">\n  <h1>Olá, eu sou a Ana</h1>\n  <div class=\"menu\">\n    <a href=\"#quem-sou\">Quem sou eu</a>\n  </div>\n</div>\n<div class=\"conteudo\">\n  <div id=\"quem-sou\">\n    <h2>Quem sou eu</h2>\n    <p>Estou aprendendo a programar.</p>\n  </div>\n</div>\n<div class=\"rodape\">\n  <p>Feito pela Ana</p>\n</div>\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-text",
+                "selector": "header h1",
+                "equals": "Olá, eu sou a Ana"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "header nav a[href=\"#quem-sou\"]"
+              },
+              {
+                "type": "dom-text",
+                "selector": "main section#quem-sou h2",
+                "equals": "Quem sou eu"
+              },
+              {
+                "type": "dom-text",
+                "selector": "footer p",
+                "equals": "Feito pela Ana"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <header><h1>Olá, eu sou a Ana</h1><nav><a href=\"#quem-sou\">Quem sou eu</a></nav></header><main><section id=\"quem-sou\"><h2>Quem sou eu</h2><p>Estou aprendendo a programar.</p></section></main><footer><p>Feito pela Ana</p></footer>. Os textos não mudam: só as caixas genéricas ganham nomes com significado."
+        }
+      ]
     }
   ],
   "examQuestions": [
