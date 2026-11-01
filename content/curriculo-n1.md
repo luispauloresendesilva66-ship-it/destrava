@@ -10,11 +10,11 @@
 | 4 | Imagens | Colocar imagens na página com texto alternativo e tamanho adequado. | `img` (`src`, `alt`, `width`, `height`), `figure`, `figcaption` | 10 |
 | 5 | Listas | Organizar itens em listas com e sem ordem, inclusive listas dentro de listas. | `ul`, `ol`, `li`, listas aninhadas | 8 |
 | 6 | Tabelas | Mostrar dados em linhas e colunas, com cabeçalho e legenda. | `table`, `caption`, `thead`, `tbody`, `tr`, `th`, `td` | 9 |
-| 7 | Formulários: o básico | Criar um formulário de contato simples, com rótulos ligados aos campos. | `form`, `label`, `input` (`text`, `email`), `textarea`, `button` | 12 |
+| 7 | Formulários: o básico | Criar um formulário de contato simples, com rótulos ligados aos campos. | `form`, `label`, `input` (`text`, `email`), `textarea`, `button` | 11 |
 | 8 | Tags semânticas | Dividir a página em regiões com significado, em vez de caixas genéricas. | `header`, `nav`, `main`, `section`, `article`, `footer`, `div` (quando usar) | 10 |
 | 9 | Projeto final: seu primeiro site pessoal | Juntar tudo numa página pessoal própria, revisar com uma checklist e salvar a primeira versão. | todas as anteriores | 15 |
 
-**Total estimado:** cerca de 91 minutos de vídeo, mais os exercícios de cada aula e a prova do nível.
+**Total estimado:** cerca de 90 minutos de vídeo, mais os exercícios de cada aula e a prova do nível.
 
 ## Observações para a decisão
 

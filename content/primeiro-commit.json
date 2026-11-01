@@ -636,6 +636,134 @@
           "explanation": "Uma solução: <table><caption>Horário de estudos da semana</caption><thead><tr><th>Dia</th><th>Assunto</th></tr></thead><tbody><tr><td>Segunda</td><td>HTML</td></tr><tr><td>Quarta</td><td>CSS</td></tr></tbody></table>. A <caption> vem logo depois de abrir a <table>, e cada célula fica dentro de um <tr>."
         }
       ]
+    },
+    {
+      "position": 7,
+      "title": "Formulários: o básico",
+      "description": "Crie um formulário de contato com campos de texto e de e-mail, uma área de mensagem e um botão, ligando cada rótulo ao seu campo.",
+      "durationSeconds": 571,
+      "videoKey": "N1/a07.mp4",
+      "captionsKey": "N1/a07.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Por que ligar o <label> ao campo com for e id?",
+            "options": [
+              "Para o texto do rótulo ficar em negrito",
+              "Para clicar no rótulo levar ao campo e o leitor de tela anunciar o nome do campo",
+              "Para o formulário enviar a mensagem por e-mail sozinho",
+              "Porque sem isso o campo não aparece na página"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "Com o for do <label> igual ao id do campo, clicar no rótulo coloca o cursor no campo, e o leitor de tela anuncia o rótulo junto com o campo. A ligação não muda a aparência, não envia nada e o campo aparece mesmo sem ela."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual destes códigos cria um campo de e-mail com o rótulo ligado do jeito certo?",
+            "options": [
+              "<label>E-mail</label><input type=\"email\" id=\"email\" name=\"email\">",
+              "<label for=\"email\">E-mail</label><input type=\"email\" id=\"email\" name=\"email\">",
+              "<label for=\"email\">E-mail</label><input type=\"email\" id=\"e-mail\" name=\"email\">",
+              "<input type=\"email\" name=\"email\" placeholder=\"E-mail\"></input>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "O for do <label> e o id do <input> precisam ter exatamente o mesmo valor. Na primeira opção falta o for; na terceira os valores são diferentes (email e e-mail); na quarta o placeholder faz o papel do rótulo e o <input> foi fechado, mas ele não tem tag de fechamento."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<form>\n  <label ___=\"email\">E-mail</label>\n  <input type=\"___\" id=\"email\" name=\"email\">\n  <label for=\"mensagem\">Mensagem</label>\n  <___ id=\"mensagem\" name=\"mensagem\"></textarea>\n</form>",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "for",
+              "email",
+              "textarea"
+            ]
+          },
+          "explanation": "O atributo for liga o <label> ao campo de mesmo id. O type=\"email\" avisa ao navegador que o campo é um endereço de e-mail. E a mensagem, que pode ter várias linhas, usa a <textarea>, que abre e fecha."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<form>",
+              "<label for=\"nome\">Nome</label>",
+              "<input type=\"text\" id=\"nome\" name=\"nome\">",
+              "<button type=\"submit\">Enviar</button>",
+              "</form>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "A <form> abre a caixa do formulário. Dentro dela vem o <label> com o rótulo e, logo depois, o <input> ligado a ele pelo id. O botão de enviar fica no fim, e a </form> fecha tudo."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Abaixo do <h2>Fale comigo</h2>, crie uma <form> com: 1) um <label> \"Nome\" ligado a um <input> de type=\"text\" com id=\"nome\"; 2) um <label> \"E-mail\" ligado a um <input> de type=\"email\" com id=\"email\"; 3) um <button> de type=\"submit\" com o texto \"Enviar\". Lembre: o for de cada <label> deve ser igual ao id do seu campo.",
+            "starter": {
+              "html": "<h2>Fale comigo</h2>\n<!-- Coloque o formulário aqui -->\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-text",
+                "selector": "form label[for=\"nome\"]",
+                "equals": "Nome"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "form input#nome[type=\"text\"]"
+              },
+              {
+                "type": "dom-text",
+                "selector": "form label[for=\"email\"]",
+                "equals": "E-mail"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "form input#email[type=\"email\"]"
+              },
+              {
+                "type": "dom-text",
+                "selector": "form button[type=\"submit\"]",
+                "equals": "Enviar"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <form><label for=\"nome\">Nome</label><input type=\"text\" id=\"nome\" name=\"nome\"><label for=\"email\">E-mail</label><input type=\"email\" id=\"email\" name=\"email\"><button type=\"submit\">Enviar</button></form>. O for de cada <label> repete o id do seu campo, e o <input> não tem tag de fechamento."
+        }
+      ]
     }
   ],
   "examQuestions": [
