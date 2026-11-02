@@ -5,7 +5,7 @@
     "name": "Primeiro Commit",
     "description": "Conteúdo de exemplo para testar o app: os primeiros passos com HTML."
   },
-  "exam": { "questionCount": 4, "exerciseMinutes": 240, "examMinutes": 60 },
+  "exam": { "questionCount": 10, "exerciseMinutes": 240, "examMinutes": 60 },
   "lessons": [
     {
       "position": 1,
