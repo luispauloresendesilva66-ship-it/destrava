@@ -892,6 +892,139 @@
           "explanation": "Uma solução: <header><h1>Olá, eu sou a Ana</h1><nav><a href=\"#quem-sou\">Quem sou eu</a></nav></header><main><section id=\"quem-sou\"><h2>Quem sou eu</h2><p>Estou aprendendo a programar.</p></section></main><footer><p>Feito pela Ana</p></footer>. Os textos não mudam: só as caixas genéricas ganham nomes com significado."
         }
       ]
+    },
+    {
+      "position": 9,
+      "title": "Projeto final: seu primeiro site pessoal",
+      "description": "Junte tudo o que aprendeu numa página pessoal com a sua cara, revise com uma checklist, salve a primeira versão e prepare-se para a prova do nível.",
+      "durationSeconds": 697,
+      "videoKey": "N1/a09.mp4",
+      "captionsKey": "N1/a09.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Na checklist de revisão, quantos <h1> a sua página pessoal deve ter?",
+            "options": [
+              "Um só, para o título principal da página",
+              "Um em cada seção",
+              "Nenhum, porque o <title> já faz esse papel",
+              "Quantos você quiser, desde que estejam dentro da <main>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "A página tem um <h1> só, com o título principal. Cada seção usa o seu <h2>. O <title> é outra coisa: é o texto da aba do navegador, que fica no <head>."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "html",
+          "prompt": {
+            "question": "Qual dupla faz o link \"Fale comigo\" do menu levar até a seção de contato?",
+            "options": [
+              "<a href=\"contato\">Fale comigo</a> e <section id=\"#contato\">",
+              "<a href=\"#contato\">Fale comigo</a> e <section id=\"contato\">",
+              "<a id=\"#contato\">Fale comigo</a> e <section href=\"contato\">",
+              "<a href=\"#contato\">Fale comigo</a> e <section name=\"contato\">"
+            ]
+          },
+          "solution": {
+            "correctIndex": 1
+          },
+          "explanation": "No href do link vai a cerquilha seguida do id: href=\"#contato\". Na seção, o id vai sem a cerquilha: id=\"contato\". O atributo name não serve para esse pulo."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "html",
+          "prompt": {
+            "code": "<img src=\"imagens/foto.jpg\" ___=\"Foto de perfil, sorrindo\">\n<label ___=\"email\">E-mail</label>\n<input type=\"email\" ___=\"email\" name=\"email\">",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "alt",
+              "for",
+              "id"
+            ]
+          },
+          "explanation": "O alt descreve a imagem para quem não consegue vê-la. O for da <label> repete o id do campo, e é isso que liga o rótulo ao <input>. Dois itens da checklist de revisão de uma vez."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "html",
+          "prompt": {
+            "blocks": [
+              "<!DOCTYPE html>",
+              "<html lang=\"pt-BR\">",
+              "<head><meta charset=\"UTF-8\"><title>Minha página</title></head>",
+              "<body>",
+              "<header><h1>Olá, eu sou a Ana</h1></header>",
+              "<main><section id=\"sobre\"><h2>Sobre mim</h2></section></main>",
+              "<footer><p>Feito pela Ana</p></footer>",
+              "</body>",
+              "</html>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          "explanation": "Primeiro o DOCTYPE, depois a <html>, com o <head> e as informações da página. Dentro do <body>, o topo (<header>), o conteúdo principal (<main>) e o rodapé (<footer>). Por fim, fecham o <body> e a <html>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "html",
+          "prompt": {
+            "statement": "Mini projeto final: monte a sua página pessoal, com o seu nome. 1) Uma <header> com um <h1> e uma <nav> com um link para \"#sobre\". 2) Uma <main> com uma <section id=\"sobre\">, que tenha um <h2>, um <p> e uma <img> com um texto alternativo (alt) descrevendo a imagem. 3) Uma <footer> com um parágrafo <p>.",
+            "starter": {
+              "html": "<!-- 1) O topo: header com o h1 e a nav com um link para #sobre -->\n\n<!-- 2) O conteúdo principal: main com a section id=\"sobre\" (h2, p e img com alt) -->\n\n<!-- 3) O rodapé: footer com um parágrafo -->\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "header h1"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "header nav a[href=\"#sobre\"]"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "main section#sobre h2"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "main section#sobre img[alt]:not([alt=\"\"])"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "footer p"
+              }
+            ]
+          },
+          "explanation": "Uma solução: <header><h1>Olá, eu sou a Ana</h1><nav><ul><li><a href=\"#sobre\">Sobre mim</a></li></ul></nav></header><main><section id=\"sobre\"><h2>Sobre mim</h2><p>Estou aprendendo HTML.</p><img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\"></section></main><footer><p>Feito pela Ana, em 2026.</p></footer>. Troque os textos da Ana pelos seus: a estrutura é a mesma."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -954,6 +1087,153 @@
       },
       "answer": {
         "tests": [{ "type": "dom-text", "selector": "a", "equals": "Início" }]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual parte do arquivo HTML guarda o conteúdo que aparece na tela para quem visita?",
+        "options": ["<head>", "<body>", "<title>", "<meta>"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Para que serve a linha <meta charset=\"UTF-8\"> no <head>?",
+        "options": ["Para os acentos e o ç aparecerem certinho", "Para dar o título da aba do navegador", "Para deixar o texto em negrito", "Para ligar a página a outro site"]
+      },
+      "answer": { "correctIndex": 0 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag marca um trecho do texto como importante?",
+        "options": ["<em>", "<strong>", "<br>", "<p>"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Como se escreve um comentário em HTML?",
+        "options": ["<!-- comentário -->", "// comentário", "<comment>comentário</comment>", "# comentário"]
+      },
+      "answer": { "correctIndex": 0 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual href leva até a seção com id=\"contato\" na mesma página?",
+        "options": ["contato.html", "id=contato", "#contato", "@contato"]
+      },
+      "answer": { "correctIndex": 2 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual atributo, com o valor _blank, faz um link abrir em outra aba?",
+        "options": ["href", "target", "alt", "src"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Para que serve o atributo alt de uma imagem?",
+        "options": ["Dizer o caminho do arquivo da imagem", "Definir a largura da imagem", "Descrever a imagem para quem não consegue vê-la", "Fazer a imagem abrir em outra aba"]
+      },
+      "answer": { "correctIndex": 2 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag cria uma lista numerada?",
+        "options": ["<ul>", "<ol>", "<li>", "<list>"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Numa tabela, qual tag cria uma célula de cabeçalho, como \"Dia\" ou \"Assunto\"?",
+        "options": ["<td>", "<tr>", "<th>", "<caption>"]
+      },
+      "answer": { "correctIndex": 2 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual tag dá um título para a tabela inteira?",
+        "options": ["<caption>", "<thead>", "<title>", "<th>"]
+      },
+      "answer": { "correctIndex": 0 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "O que liga uma <label> ao seu campo do formulário?",
+        "options": ["O for da <label> igual ao id do campo", "O name da <label> igual ao name do campo", "A <label> ficar logo acima do campo", "O type do campo igual ao texto da <label>"]
+      },
+      "answer": { "correctIndex": 0 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Qual campo é o certo para uma mensagem de várias linhas?",
+        "options": ["<input type=\"text\">", "<label>", "<textarea>", "<button>"]
+      },
+      "answer": { "correctIndex": 2 }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "html",
+      "prompt": {
+        "question": "Quantas <main> uma página deve ter?",
+        "options": ["Uma por seção", "Uma só", "Duas: uma no topo e outra no rodapé", "Nenhuma, ela é opcional e não deve ser usada"]
+      },
+      "answer": { "correctIndex": 1 }
+    },
+    {
+      "type": "code",
+      "topic": "html",
+      "prompt": {
+        "statement": "Crie um formulário <form> com uma <label for=\"email\"> ligada a um campo <input type=\"email\" id=\"email\"> e um botão <button>.",
+        "starter": { "html": "" }
+      },
+      "answer": {
+        "tests": [
+          { "type": "dom-exists", "selector": "form label[for=\"email\"]" },
+          { "type": "dom-exists", "selector": "form input[type=\"email\"]#email" },
+          { "type": "dom-exists", "selector": "form button" }
+        ]
+      }
+    },
+    {
+      "type": "code",
+      "topic": "html",
+      "prompt": {
+        "statement": "Monte a estrutura de uma página pessoal: uma <header> com um <h1>, uma <main> com uma <img> que tenha um texto alternativo (alt) e uma <footer> com um parágrafo <p>.",
+        "starter": { "html": "" }
+      },
+      "answer": {
+        "tests": [
+          { "type": "dom-exists", "selector": "header h1" },
+          { "type": "dom-exists", "selector": "main img[alt]:not([alt=\"\"])" },
+          { "type": "dom-exists", "selector": "footer p" }
+        ]
       }
     }
   ]
