@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:n1a07 && npm run prep:n1a08 && npm run prep:n1a09 && npm run prep:n2a01 && npm run prep:n2a02 && npm run prep:reels && remotion studio src/index.js",
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:n1a07 && npm run prep:n1a08 && npm run prep:n1a09 && npm run prep:n2a01 && npm run prep:n2a02 && npm run prep:n2a03 && npm run prep:reels && remotion studio src/index.js",
     "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
     "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
@@ -38,6 +38,9 @@
     "prep:n2a02": "node scripts/prep-audio.mjs n2-a02-seletores n2-a02",
     "still:n2a02": "npm run prep:n2a02 && node scripts/stills.mjs AulaN2A02 n2-a02-seletores",
     "render:n2a02": "npm run prep:n2a02 && remotion render src/index.js AulaN2A02 ../aulas/n2-a02-seletores/out/a02.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n2a03": "node scripts/prep-audio.mjs n2-a03-cores n2-a03",
+    "still:n2a03": "npm run prep:n2a03 && node scripts/stills.mjs AulaN2A03 n2-a03-cores",
+    "render:n2a03": "npm run prep:n2a03 && remotion render src/index.js AulaN2A03 ../aulas/n2-a03-cores/out/a03.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:reels": "node scripts/prep-reel.mjs all",
     "still:reel": "node scripts/reel.mjs still",
     "still:reels": "node scripts/reel.mjs still all",
