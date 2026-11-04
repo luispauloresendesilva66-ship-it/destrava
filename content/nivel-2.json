@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 4. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 4 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 5. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 5 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -558,6 +558,144 @@
           "explanation": "Uma solução. No CSS: body { font-family: Verdana, Arial, sans-serif; font-size: 18px; line-height: 1.6; } h1 { text-align: center; } nav a { text-decoration: none; font-weight: bold; }. Por herança, a fonte, o tamanho e o espaço entre as linhas do body valem para a página toda. O line-height vai sem unidade: 1.6 quer dizer 1,6 vez o tamanho da letra. E os links do menu perderam o sublinhado, mas ganharam negrito, para continuarem com cara de link. Para o corretor, bold e 700 são valores diferentes, por isso aqui ele pede bold."
         }
       ]
+    },
+    {
+      "position": 5,
+      "title": "O modelo de caixa",
+      "description": "Descubra que todo elemento é uma caixa e controle o espaço de dentro (padding), a borda (border) e o espaço de fora (margin), com os atalhos de 1, 2 e 4 valores, cantos arredondados e a ferramenta de inspeção do navegador.",
+      "durationSeconds": 608,
+      "videoKey": "N2/a05.mp4",
+      "captionsKey": "N2/a05.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "De dentro para fora, qual é a ordem das camadas de uma caixa no CSS?",
+            "options": [
+              "Conteúdo, padding, border, margin",
+              "Conteúdo, margin, border, padding",
+              "Margin, padding, conteúdo, border",
+              "Border, conteúdo, padding, margin"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "No centro fica o conteúdo (o texto ou a imagem). Em volta dele, o padding, o espaço de dentro. Depois, a border, a linha que contorna a caixa. E, por fora de tudo, a margin, o espaço que afasta a caixa das vizinhas. Como num quadro: a foto, o passe-partout, a moldura e a distância até o próximo quadro."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "O que faz a declaração padding: 8px 16px;?",
+            "options": [
+              "Coloca 8px em cima e embaixo, e 16px à direita e à esquerda",
+              "Coloca 8px à esquerda e 16px à direita",
+              "Coloca 8px em cima e 16px embaixo",
+              "Coloca 8px dentro da borda e 16px fora dela"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Com dois valores, o primeiro vale para em cima e embaixo, e o segundo para os dois lados. Com um valor, todos os lados ficam iguais. Com quatro, a ordem é a do relógio, começando ao meio-dia: em cima, direita, embaixo, esquerda. E o espaço fora da borda é a margin, não o padding."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "section {\n  /* espaço de dentro, entre o texto e a borda */\n  ___: 16px;\n  /* borda contínua: largura, estilo e cor */\n  border: 2px ___ #264653;\n}\n\nimg {\n  /* a foto quadrada vira um círculo */\n  border-radius: ___;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "padding",
+              "solid",
+              "50%"
+            ]
+          },
+          "explanation": "O espaço de dentro da caixa, entre o conteúdo e a borda, é o padding. Na border, o estilo fica entre a largura e a cor: solid é a linha contínua (dashed é tracejada, dotted é pontilhada). Sem o estilo, a borda não aparece. E border-radius: 50% curva cada canto até a metade do lado: numa foto quadrada, como a da Ana, o resultado é um círculo."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              ".destaque {",
+              "padding: 8px 16px;",
+              "border-left: 4px solid #b5452c;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra da classe destaque: o seletor, com o ponto, e a chave que abre. Depois, as declarações: o padding com dois valores (8px em cima e embaixo, 16px nos lados) e a borda só do lado esquerdo, com largura, estilo e cor. Por último, a chave que fecha e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Transforme as seções da Ana em cartões, na aba CSS. Escreva cada valor exatamente como está aqui, na mesma ordem. 1) Na regra section, coloque padding: 16px. 2) Na mesma regra section, coloque border: 2px solid #264653 (largura, estilo e cor, nessa ordem). 3) Na mesma regra section, coloque border-radius: 8px. 4) Na mesma regra section, coloque margin-bottom: 24px (a propriedade só do lado de baixo, não o atalho margin). 5) Crie a regra img com border-radius: 50%.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "section {\n  background-color: #ffffff;\n  /* 1) espaço de dentro (padding: 16px) */\n  /* 2) borda (border: 2px solid #264653) */\n  /* 3) cantos arredondados (border-radius: 8px) */\n  /* 4) espaço embaixo, entre os cartões (margin-bottom: 24px) */\n}\n\n/* 5) img: foto redonda (border-radius: 50%) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "section",
+                "property": "padding",
+                "value": "16px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "section",
+                "property": "border",
+                "value": "2px solid #264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": "section",
+                "property": "border-radius",
+                "value": "8px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "section",
+                "property": "margin-bottom",
+                "value": "24px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "img",
+                "property": "border-radius",
+                "value": "50%"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: section { background-color: #ffffff; padding: 16px; border: 2px solid #264653; border-radius: 8px; margin-bottom: 24px; } img { border-radius: 50%; }. O fundo branco cobre o conteúdo e o padding, mas não a margin: por isso o creme do body aparece entre os cartões. Na border, a ordem é largura, estilo e cor, e sem o solid ela não aparece. Para o corretor, margin-bottom: 24px e margin: 0 0 24px 0 são escritas diferentes, por isso aqui ele pede margin-bottom."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -928,6 +1066,81 @@
             "selector": "p",
             "property": "line-height",
             "value": "1.6"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "A Ana escreveu border: 2px #264653; e a borda não apareceu. O que está faltando?",
+        "options": [
+          "O estilo da borda, como solid",
+          "A cor em rgb, no lugar do código hexadecimal",
+          "Um border-radius",
+          "Um padding maior"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Na declaração margin: 10px 20px 30px 40px;, qual é o espaço do lado esquerdo?",
+        "options": [
+          "40px",
+          "10px",
+          "20px",
+          "30px"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Um cartão tem background-color: #ffffff, padding: 16px e margin-bottom: 24px. Qual área fica branca, junto com o conteúdo?",
+        "options": [
+          "A do padding",
+          "A da margin",
+          "A do padding e a da margin",
+          "Nenhuma das duas"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, crie a regra img com border-radius: 50% e border: 3px solid #264653.",
+        "starter": {
+          "html": "<img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "img",
+            "property": "border-radius",
+            "value": "50%"
+          },
+          {
+            "type": "css-decl",
+            "selector": "img",
+            "property": "border",
+            "value": "3px solid #264653"
           }
         ]
       }
