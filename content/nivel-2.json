@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 10. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 10 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 11. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 11 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -1393,6 +1393,149 @@
           "explanation": "Uma solução. No HTML, no começo: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">. No CSS: header { display: flex; justify-content: space-between; align-items: center; flex-direction: column; } nav ul { display: flex; gap: 16px; list-style: none; padding: 0; flex-wrap: wrap; } e, no fim, @media (min-width: 768px) { header { flex-direction: row; } body { font-size: 1.25rem; } }. As regras de fora são o celular: o topo empilhado e o menu que pode quebrar a linha. O @media só muda o que precisa nas telas de 768px para cima, e fica no fim para vencer as regras de fora. Para o corretor, a meta precisa ter name=\"viewport\" e width=device-width no content, e 1.25rem não é o mesmo que 20px. Ele não confere se a regra está dentro do @media, nem se é min-width ou max-width: isso fica com você."
         }
       ]
+    },
+    {
+      "position": 11,
+      "title": "Hover e transição",
+      "description": "Faça a página responder ao mouse e ao teclado: as pseudo-classes :hover e :focus-visible no menu e nos cartões da Ana, a transition para a mudança ficar suave, o transform: translateY para o cartão subir e o cuidado com quem pediu menos movimento.",
+      "durationSeconds": 469,
+      "videoKey": "N2/a11.mp4",
+      "captionsKey": "N2/a11.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana escreveu nav a:hover { background-color: #264653; transition: background-color 0.3s ease; }. Quando o mouse entra no link, o fundo muda suave. O que acontece quando o mouse sai?",
+            "options": [
+              "O fundo volta num pulo, porque a transition saiu junto com a regra :hover",
+              "O fundo volta suave, igual à ida",
+              "O fundo continua azul para sempre",
+              "O link some da página"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "A regra nav a:hover só vale enquanto o mouse está por cima. Quando ele sai, a regra inteira para de valer, e a transition que estava dentro dela vai junto: a volta vira um pulo. Por isso a transition vai na regra normal, nav a { transition: background-color 0.3s ease; }. Assim ela vale o tempo todo, na ida e na volta."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Uma pessoa navega pela página da Ana só com o teclado, apertando a tecla Tab. Qual seletor faz o link selecionado ficar com o mesmo destaque do mouse?",
+            "options": [
+              "nav a:hover, nav a:focus-visible",
+              "nav a:hover",
+              "nav a :hover",
+              "nav a.hover"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O :hover só acontece com o mouse por cima, e quem usa o teclado nunca passa o mouse. O :focus-visible é o estado de quem foi selecionado pelo teclado. Juntando os dois com vírgula, a mesma regra vale nos dois casos. Com espaço antes dos dois pontos (nav a :hover), o seletor muda de sentido, e .hover é uma classe, não um estado."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "nav a {\n  /* suave, em 0,3 segundo */\n  transition: background-color 0.3s ___;\n}\n\nnav a:hover,\nnav a:___ {\n  background-color: #264653;\n  color: #ffffff;\n}\n\n.cartao:hover {\n  /* sobe 4px */\n  ___: translateY(___);\n}",
+            "blanks": 4
+          },
+          "solution": {
+            "answers": [
+              "ease",
+              "focus-visible",
+              "transform",
+              "-4px"
+            ]
+          },
+          "explanation": "A transition tem três partes: a propriedade (background-color), o tempo (0.3s) e o jeito da mudança (ease: começa devagar, acelera e termina devagar). Junto com o :hover vai o :focus-visible, para quem usa o teclado. E o cartão sobe com transform: translateY(-4px): o translateY mexe na vertical, e o número negativo é para cima."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "nav a:hover,",
+              "nav a:focus-visible {",
+              "background-color: #264653;",
+              "color: #ffffff;",
+              "}"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "Primeiro vêm os dois seletores, separados por vírgula: nav a:hover, para o mouse, e nav a:focus-visible, para o teclado. A chave abre depois do último seletor. Dentro, as declarações, cada uma com ponto e vírgula, e no fim a chave que fecha a regra. É uma regra só, com dois seletores."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Faça o menu e os cartões da Ana responderem. Na aba CSS, escreva cada valor exatamente como está aqui. 1) Na regra nav a, coloque transition: background-color 0.3s ease. 2) Escreva uma regra para nav a:hover, nav a:focus-visible (os dois seletores juntos, separados por vírgula) com background-color: #264653 e color: #ffffff. 3) Escreva uma regra nav a:focus-visible com outline: 2px solid #b5452c. 4) Na regra .cartao, coloque transition: transform 0.3s ease. 5) Escreva uma regra .cartao:hover com transform: translateY(-4px).",
+            "starter": {
+              "html": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#projetos\">Meus projetos</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n  </section>\n  <section id=\"projetos\">\n    <h2>Meus projetos</h2>\n    <div class=\"projetos\">\n      <article class=\"cartao\">\n        <h3>Receitas favoritas</h3>\n        <p>Um site com as receitas que eu mais gosto de fazer.</p>\n        <a href=\"https://receitas.example.com\" target=\"_blank\" rel=\"noopener\">Ver o site</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Página pessoal</h3>\n        <p>Esta página, feita do zero com HTML e CSS.</p>\n        <a href=\"#sobre\">Ver do começo</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Todos os projetos</h3>\n        <p>A lista completa, com o que já fiz e o que está em andamento.</p>\n        <a href=\"paginas/projetos.html\">Ver a lista</a>\n      </article>\n    </div>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n  <p>ana@example.com</p>\n</footer>\n",
+              "css": "nav a {\n  color: #b5452c;\n  text-decoration: none;\n  font-weight: bold;\n  display: inline-block;\n  padding: 8px 12px;\n  /* 1) a mudança de fundo fica suave (transition: background-color 0.3s ease) */\n}\n\n/* 2) aqui: uma regra para nav a:hover e nav a:focus-visible juntos, separados por vírgula (background-color: #264653 e color: #ffffff) */\n\n/* 3) aqui: uma regra só para nav a:focus-visible (outline: 2px solid #b5452c) */\n\n.cartao {\n  padding: 16px;\n  border: 1px solid #264653;\n  border-radius: 8px;\n  /* 4) o movimento fica suave (transition: transform 0.3s ease) */\n}\n\n/* 5) aqui: uma regra .cartao:hover (transform: translateY(-4px)) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "transition",
+                "value": "background-color 0.3s ease"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a:hover",
+                "property": "background-color",
+                "value": "#264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a:hover",
+                "property": "color",
+                "value": "#ffffff"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a:focus-visible",
+                "property": "outline",
+                "value": "2px solid #b5452c"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao",
+                "property": "transition",
+                "value": "transform 0.3s ease"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao:hover",
+                "property": "transform",
+                "value": "translateY(-4px)"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: nav a { ... transition: background-color 0.3s ease; } nav a:hover, nav a:focus-visible { background-color: #264653; color: #ffffff; } nav a:focus-visible { outline: 2px solid #b5452c; } .cartao { ... transition: transform 0.3s ease; } .cartao:hover { transform: translateY(-4px); }. A transition fica nas regras normais, para a ida e a volta serem suaves. O :focus-visible vai junto com o :hover, para quem usa o teclado, e ganha um contorno só dele. Para o corretor, 0.3s não é o mesmo que 300ms nem que .3s, translateY(-4px) não é o mesmo que translate(0, -4px), transition: all não é o mesmo que transition: background-color, e o :hover vai grudado no seletor, sem espaço (nav a:hover, não nav a :hover)."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -2241,6 +2384,87 @@
             "selector": "header",
             "property": "flex-direction",
             "value": "row"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Em qual regra fica a transition, para a mudança ser suave na ida e na volta do mouse?",
+        "options": [
+          "Na regra normal, como nav a { transition: background-color 0.3s ease; }",
+          "Só na regra nav a:hover",
+          "Num @media (min-width: 768px)",
+          "Na regra body"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Por que não esconder um link importante que só aparece no :hover?",
+        "options": [
+          "Porque no celular não existe passar o mouse por cima, e quem usa o teclado também não passa",
+          "Porque o :hover só funciona em títulos",
+          "Porque o :hover deixa a página mais lenta",
+          "Porque o navegador não aceita :hover em links"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "O que faz transform: translateY(-4px) num cartão?",
+        "options": [
+          "Move o cartão 4px para cima, sem empurrar os vizinhos",
+          "Move o cartão 4px para baixo",
+          "Deixa o cartão 4px mais largo",
+          "Gira o cartão 4 graus"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Dê uma resposta ao menu. Na aba CSS, na regra nav a, coloque transition: background-color 0.3s ease. Depois, escreva uma regra para nav a:hover, nav a:focus-visible (os dois juntos, separados por vírgula) com background-color: #264653.",
+        "starter": {
+          "html": "<nav>\n  <a href=\"#sobre\">Sobre mim</a>\n  <a href=\"#contato\">Fale comigo</a>\n</nav>\n",
+          "css": "nav a {\n  color: #b5452c;\n  padding: 8px 12px;\n}\n"
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "nav a",
+            "property": "transition",
+            "value": "background-color 0.3s ease"
+          },
+          {
+            "type": "css-decl",
+            "selector": "nav a:hover",
+            "property": "background-color",
+            "value": "#264653"
+          },
+          {
+            "type": "css-decl",
+            "selector": "nav a:focus-visible",
+            "property": "background-color",
+            "value": "#264653"
           }
         ]
       }
