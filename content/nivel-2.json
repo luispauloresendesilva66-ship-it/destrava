@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 11. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 11 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 completo, com as 12 aulas. A prova sorteia 10 perguntas do banco (examQuestions), sempre com pelo menos uma de código, e a nota mínima é 90%. exerciseMinutes e examMinutes só entram na carga horária do certificado (round((minutos de vídeo + exerciseMinutes + examMinutes) / 60)): 320 = a mesma taxa do nível 1 (240 minutos para 9 aulas, cerca de 27 por aula) vezes 12 aulas; 60 = igual ao nível 1, que também sorteia 10 perguntas.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -7,9 +7,9 @@
     "description": "CSS do zero: cores, fontes, espaços, flexbox e o básico de responsivo, para dar aparência à página pessoal do nível 1."
   },
   "exam": {
-    "questionCount": 5,
-    "exerciseMinutes": 30,
-    "examMinutes": 30
+    "questionCount": 10,
+    "exerciseMinutes": 320,
+    "examMinutes": 60
   },
   "lessons": [
     {
@@ -1536,6 +1536,173 @@
           "explanation": "Uma solução. No CSS: nav a { ... transition: background-color 0.3s ease; } nav a:hover, nav a:focus-visible { background-color: #264653; color: #ffffff; } nav a:focus-visible { outline: 2px solid #b5452c; } .cartao { ... transition: transform 0.3s ease; } .cartao:hover { transform: translateY(-4px); }. A transition fica nas regras normais, para a ida e a volta serem suaves. O :focus-visible vai junto com o :hover, para quem usa o teclado, e ganha um contorno só dele. Para o corretor, 0.3s não é o mesmo que 300ms nem que .3s, translateY(-4px) não é o mesmo que translate(0, -4px), transition: all não é o mesmo que transition: background-color, e o :hover vai grudado no seletor, sem espaço (nav a:hover, não nav a :hover)."
         }
       ]
+    },
+    {
+      "position": 12,
+      "title": "Projeto final: dê acabamento ao seu site",
+      "description": "O projeto final do nível: planeje a paleta, as fontes e os espaços e dê um estilo completo à sua própria página pessoal do nível 1, região por região: a base, o topo com flexbox, as seções e os cartões, a tabela e o formulário, o hover, o foco e o @media. Depois, revise com uma checklist, salve a versão 2 e conheça a prova do nível.",
+      "durationSeconds": 795,
+      "videoKey": "N2/a12.mp4",
+      "captionsKey": "N2/a12.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Você está planejando o visual da sua página pessoal. Qual plano segue o que a aula recomenda?",
+            "options": [
+              "Duas ou três cores, mais os neutros, e no máximo duas fontes: uma para os títulos e outra para o texto",
+              "Uma cor diferente para cada seção, para nenhuma ficar igual à outra",
+              "Uma fonte diferente para cada título, para dar variedade",
+              "Só cores claras, no texto e no fundo, para a página ficar leve"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Poucas cores e poucas fontes deixam a página com cara de uma coisa só. A Ana usa o creme no fundo, o azul-petróleo nos títulos e o terracota nos destaques, mais o branco e o cinza bem escuro, e duas fontes: Georgia nos títulos e Verdana no texto. Texto claro em fundo claro não tem contraste e fica difícil de ler."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Na checklist, você estreitou a janela até a largura de um celular e apareceu uma barra de rolagem para o lado. Qual é a causa mais provável?",
+            "options": [
+              "Uma caixa com largura fixa em px maior que a tela; trocar o width por max-width resolve",
+              "Faltou o :hover nos links do menu",
+              "O line-height do body está em 1.6",
+              "A página tem mais de uma seção"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Uma caixa com width: 900px, por exemplo, continua com 900px mesmo numa tela estreita e passa da borda. Com max-width: 900px, ela tem até 900px, mas pode encolher. O :hover, o line-height e o número de seções não mudam a largura da página."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "* {\n  box-sizing: ___;\n}\n\nmain {\n  max-width: 720px;\n  /* no meio da tela */\n  margin: 0 ___;\n}\n\ntable {\n  /* as bordas vizinhas viram uma linha só */\n  border-collapse: ___;\n}\n\n@___ (min-width: 768px) {\n  header {\n    flex-direction: row;\n  }\n}",
+            "blanks": 4
+          },
+          "solution": {
+            "answers": [
+              "border-box",
+              "auto",
+              "collapse",
+              "media"
+            ]
+          },
+          "explanation": "O box-sizing: border-box faz o padding e a borda entrarem na largura. O margin: 0 auto centraliza o main, que tem um max-width. O border-collapse: collapse junta as bordas das células da tabela numa linha só. E o @media (min-width: 768px), no fim do arquivo, guarda o que muda nas telas maiores."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "Planejar a paleta, as fontes e os espaços",
+              "Ligar o estilo.css e colocar a meta viewport no head",
+              "Escrever a base: *, body, p, os títulos e o main",
+              "Estilizar as regiões: o topo, as seções, os cartões, a tabela e o formulário",
+              "Colocar o :hover e o :focus-visible e, no fim do arquivo, o @media",
+              "Revisar com a checklist e testar no navegador",
+              "Salvar e copiar a pasta como meu-site-v2"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "explanation": "Primeiro o plano, para saber as cores e as fontes. Depois, a ligação entre o HTML e o estilo. Em seguida, a base, que vale para a página toda, e as regiões, uma por uma. Os estados e o @media vêm por último no arquivo, só com o que muda. Por fim, a revisão e a cópia da versão 2, que guarda a página que funciona."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Mini projeto final: dê acabamento à página. Escreva cada valor exatamente como está aqui. Na aba HTML, dentro do <head>: 1) coloque <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">; 2) ligue o estilo com <link rel=\"stylesheet\" href=\"estilo.css\">. Na aba CSS, que faz o papel do estilo.css: 3) crie a regra body com background-color: #fdf6e3 e line-height: 1.6; 4) crie a regra header com display: flex; 5) crie a regra .cartao com padding: 16px e border-radius: 8px; 6) escreva uma regra para nav a:hover, nav a:focus-visible (os dois juntos, separados por vírgula) com background-color: #264653; 7) no fim, escreva um @media (min-width: 768px) com uma regra header que tenha flex-direction: row. O corretor confere as declarações, mas não confere se a regra 7 está dentro do @media: confira você.",
+            "starter": {
+              "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Ana Souza, página pessoal</title>\n    <!-- 1) a meta viewport vem aqui -->\n    <!-- 2) a link para o estilo.css vem aqui -->\n  </head>\n  <body>\n    <header>\n      <h1>Olá, eu sou a Ana</h1>\n      <nav>\n        <ul>\n          <li><a href=\"#sobre\">Sobre mim</a></li>\n          <li><a href=\"#projetos\">Meus projetos</a></li>\n          <li><a href=\"#contato\">Fale comigo</a></li>\n        </ul>\n      </nav>\n    </header>\n    <main>\n      <section id=\"sobre\">\n        <h2>Sobre mim</h2>\n        <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n      </section>\n      <section id=\"projetos\">\n        <h2>Meus projetos</h2>\n        <div class=\"projetos\">\n          <article class=\"cartao\">\n            <h3>Receitas favoritas</h3>\n            <p>Um site com as receitas que eu mais gosto de fazer.</p>\n            <a href=\"https://receitas.example.com\" target=\"_blank\" rel=\"noopener\">Ver o site</a>\n          </article>\n          <article class=\"cartao\">\n            <h3>Página pessoal</h3>\n            <p>Esta página, feita do zero com HTML e CSS.</p>\n            <a href=\"#sobre\">Ver do começo</a>\n          </article>\n        </div>\n      </section>\n      <section id=\"contato\">\n        <h2>Fale comigo</h2>\n        <p>Escreva para ana@example.com.</p>\n      </section>\n    </main>\n    <footer>\n      <p>Feito pela Ana, em 2026.</p>\n    </footer>\n  </body>\n</html>\n",
+              "css": "/* 3) a base: regra body (background-color: #fdf6e3 e line-height: 1.6) */\n\n/* 4) o topo: regra header (display: flex) */\n\nnav a {\n  color: #b5452c;\n  text-decoration: none;\n  font-weight: bold;\n}\n\n/* 5) os cartões: regra .cartao (padding: 16px e border-radius: 8px) */\n\n/* 6) o menu responde: nav a:hover e nav a:focus-visible juntos, separados por vírgula (background-color: #264653) */\n\n/* 7) aqui, no fim: @media (min-width: 768px) com uma regra header (flex-direction: row) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "head meta[name=\"viewport\"][content*=\"width=device-width\"]"
+              },
+              {
+                "type": "dom-exists",
+                "selector": "head link[rel=\"stylesheet\"][href=\"estilo.css\"]"
+              },
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "background-color",
+                "value": "#fdf6e3"
+              },
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "line-height",
+                "value": "1.6"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "display",
+                "value": "flex"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao",
+                "property": "padding",
+                "value": "16px"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao",
+                "property": "border-radius",
+                "value": "8px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a:hover",
+                "property": "background-color",
+                "value": "#264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a:focus-visible",
+                "property": "background-color",
+                "value": "#264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "flex-direction",
+                "value": "row"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No HTML, dentro do <head>: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> e <link rel=\"stylesheet\" href=\"estilo.css\">. No CSS: body { background-color: #fdf6e3; line-height: 1.6; } header { display: flex; } .cartao { padding: 16px; border-radius: 8px; } nav a:hover, nav a:focus-visible { background-color: #264653; } e, no fim, @media (min-width: 768px) { header { flex-direction: row; } }. Na sua página, use as suas cores e complete com o resto do que você aprendeu: as fontes, o main centralizado, as seções como cartões, a transition e a checklist de revisão. Para o corretor, o valor tem de ser o do enunciado: 1.6 não é o mesmo que 160%, e o :hover vai grudado no seletor, sem espaço."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1565,22 +1732,6 @@
           "<p> { color: navy; }",
           "p ( color = navy )",
           "p { color navy }"
-        ]
-      },
-      "answer": {
-        "correctIndex": 0
-      }
-    },
-    {
-      "type": "multiple_choice",
-      "topic": "css",
-      "prompt": {
-        "question": "Onde fica a tag <style> numa página HTML?",
-        "options": [
-          "Dentro do <head>",
-          "Depois do </html>",
-          "Dentro de cada <p>",
-          "Antes do <!DOCTYPE html>"
         ]
       },
       "answer": {
@@ -1748,8 +1899,9 @@
       "answer": {
         "tests": [
           {
-            "type": "dom-exists",
-            "selector": "p.aviso"
+            "type": "dom-text",
+            "selector": "p.aviso",
+            "equals": "Vagas abertas para estágio."
           },
           {
             "type": "css-decl",
@@ -2465,6 +2617,101 @@
             "selector": "nav a:focus-visible",
             "property": "background-color",
             "value": "#264653"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "No projeto final, quantas fontes, no máximo, a aula recomenda usar numa página pessoal?",
+        "options": [
+          "Duas: uma para os títulos e outra para o texto",
+          "Uma diferente para cada seção",
+          "Cinco, para a página ter variedade",
+          "Nenhuma: só a fonte padrão do navegador funciona"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "A Ana pensou em usar um cinza bem claro no texto dos parágrafos, sobre o fundo creme. Qual item da checklist de revisão mostra que isso é um problema?",
+        "options": [
+          "O contraste: o texto precisa se destacar bem do fundo para dar para ler",
+          "O foco visível",
+          "A rolagem para o lado",
+          "O CSS sem erro"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Depois de revisar a página com estilo, como você guarda a versão 2 do seu site neste nível?",
+        "options": [
+          "Salva os arquivos e copia a pasta inteira com um nome como meu-site-v2, sem apagar a meu-site-v1",
+          "Apaga a pasta meu-site-v1, porque ela ficou velha",
+          "Muda o nome do estilo.css para estilo-v2.css",
+          "Não precisa fazer nada: o navegador guarda as versões sozinho"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "O que a declaração border-collapse: collapse; faz numa tabela com bordas nas células?",
+        "options": [
+          "Junta as bordas vizinhas das células numa linha só",
+          "Esconde a tabela da página",
+          "Deixa a tabela com a largura da tela",
+          "Arredonda os cantos das células"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Comece o acabamento da página. 1) Na aba HTML, dentro do <head>, ligue o estilo com <link rel=\"stylesheet\" href=\"estilo.css\">. Na aba CSS: 2) crie a regra body com line-height: 1.6; 3) crie a regra nav a:focus-visible com outline: 2px solid #b5452c.",
+        "starter": {
+          "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Ana Souza, página pessoal</title>\n  </head>\n  <body>\n    <nav>\n      <a href=\"#sobre\">Sobre mim</a>\n      <a href=\"#contato\">Fale comigo</a>\n    </nav>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n  </body>\n</html>\n",
+          "css": "nav a {\n  color: #b5452c;\n}\n"
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "dom-exists",
+            "selector": "head link[rel=\"stylesheet\"][href=\"estilo.css\"]"
+          },
+          {
+            "type": "css-decl",
+            "selector": "body",
+            "property": "line-height",
+            "value": "1.6"
+          },
+          {
+            "type": "css-decl",
+            "selector": "nav a:focus-visible",
+            "property": "outline",
+            "value": "2px solid #b5452c"
           }
         ]
       }
