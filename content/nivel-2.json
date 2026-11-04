@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 5. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 5 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 6. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 6 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -696,6 +696,144 @@
           "explanation": "Uma solução. No CSS: section { background-color: #ffffff; padding: 16px; border: 2px solid #264653; border-radius: 8px; margin-bottom: 24px; } img { border-radius: 50%; }. O fundo branco cobre o conteúdo e o padding, mas não a margin: por isso o creme do body aparece entre os cartões. Na border, a ordem é largura, estilo e cor, e sem o solid ela não aparece. Para o corretor, margin-bottom: 24px e margin: 0 0 24px 0 são escritas diferentes, por isso aqui ele pede margin-bottom."
         }
       ]
+    },
+    {
+      "position": 6,
+      "title": "Tamanhos e unidades",
+      "description": "Defina largura e altura sem quebrar a página: px, % e rem, a largura máxima (max-width) para o texto e as imagens, e o box-sizing: border-box, que coloca o padding e a borda dentro da largura.",
+      "durationSeconds": 611,
+      "videoKey": "N2/a06.mp4",
+      "captionsKey": "N2/a06.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Com o tamanho de letra padrão do navegador (16px), quanto vale 1.5rem?",
+            "options": [
+              "24px",
+              "15px",
+              "16px",
+              "1.5px"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O rem usa o tamanho da letra da raiz da página, o elemento html, que no padrão é 16px. Então 1rem = 16px, e 1.5rem = 1,5 × 16 = 24px. Se a pessoa aumentar a letra nas configurações, o rem cresce junto. Para converter de px para rem, divida por 16."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Um cartão tem width: 300px, padding: 20px e border: 2px solid #264653, sem box-sizing: border-box. Quanto ele mede de largura na tela?",
+            "options": [
+              "344px",
+              "300px",
+              "322px",
+              "340px"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Por padrão, a width vale só para o conteúdo, e o padding e a borda se somam dos dois lados: 300 + 20 + 20 + 2 + 2 = 344px. Com box-sizing: border-box, o padding e a borda ficam por dentro, e o cartão mede exatamente 300px."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "main {\n  /* cresce até 720px e encolhe no celular */\n  ___: 720px;\n}\n\nimg {\n  /* nunca mais larga que a caixa mãe */\n  max-width: ___;\n}\n\n* {\n  /* padding e borda por dentro da largura */\n  box-sizing: ___;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "max-width",
+              "100%",
+              "border-box"
+            ]
+          },
+          "explanation": "A max-width é um teto: o main cresce até 720px numa tela grande e fica menor quando a tela é pequena. Na img, max-width: 100% impede a foto de passar da caixa mãe, sem esticar as fotos pequenas. E, com o seletor universal *, box-sizing: border-box vale para todos os elementos: a largura passa a incluir o padding e a borda."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "img {",
+              "max-width: 100%;",
+              "height: auto;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra img: o seletor e a chave que abre. Depois, as declarações: max-width: 100%, para a foto nunca passar da caixa mãe, e height: auto, para a altura acompanhar a largura e a foto não achatar. Por último, a chave que fecha e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Deixe a página da Ana boa em qualquer tela, na aba CSS. Escreva cada valor exatamente como está aqui, com o número colado na unidade. 1) Crie a regra com o seletor universal * e coloque box-sizing: border-box. 2) Na regra main, coloque max-width: 720px (a largura máxima, não a width). 3) Na regra img, coloque max-width: 100%. 4) Na regra h1, coloque font-size: 2rem. 5) Na regra h2, coloque font-size: 1.5rem (com ponto, não vírgula).",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "/* 1) seletor universal: box-sizing: border-box */\n\nmain {\n  /* 2) largura máxima (max-width: 720px) */\n}\n\nimg {\n  border-radius: 50%;\n  /* 3) nunca mais larga que a caixa (max-width: 100%) */\n}\n\nh1 {\n  /* 4) título em rem (font-size: 2rem) */\n}\n\nh2 {\n  /* 5) subtítulo em rem (font-size: 1.5rem) */\n}\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "*",
+                "property": "box-sizing",
+                "value": "border-box"
+              },
+              {
+                "type": "css-decl",
+                "selector": "main",
+                "property": "max-width",
+                "value": "720px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "img",
+                "property": "max-width",
+                "value": "100%"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h1",
+                "property": "font-size",
+                "value": "2rem"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h2",
+                "property": "font-size",
+                "value": "1.5rem"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: * { box-sizing: border-box; } main { max-width: 720px; } img { border-radius: 50%; max-width: 100%; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; }. O * é o seletor universal: a regra vale para todos os elementos, e o padding e a borda passam a ficar dentro da largura. A max-width é um teto, que deixa as linhas do main num tamanho bom para ler sem vazar no celular. E o rem acompanha o tamanho de letra que a pessoa escolheu: 2rem = 32px e 1.5rem = 24px no padrão. Para o corretor, max-width e width são propriedades diferentes, e 2 rem, com espaço, não vale."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1141,6 +1279,81 @@
             "selector": "img",
             "property": "border",
             "value": "3px solid #264653"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual unidade faz o texto crescer quando a pessoa aumenta o tamanho da letra nas configurações do navegador?",
+        "options": [
+          "rem",
+          "px",
+          "Qualquer unidade, sempre",
+          "Nenhuma: o tamanho da letra não muda"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Um parágrafo com width: 50% está dentro de uma seção de 600px de largura. Qual é a largura do parágrafo?",
+        "options": [
+          "300px",
+          "50px",
+          "600px",
+          "Metade da tela inteira, seja qual for a seção"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Por que é melhor usar img { max-width: 100%; } do que img { width: 100%; }?",
+        "options": [
+          "Porque max-width só encolhe a imagem quando ela não cabe, sem esticar as fotos pequenas",
+          "Porque width não funciona em imagens",
+          "Porque max-width deixa a imagem redonda",
+          "Porque max-width aumenta a imagem até a largura da tela"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, crie a regra com o seletor universal * e box-sizing: border-box, e a regra main com max-width: 720px.",
+        "starter": {
+          "html": "<main>\n  <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n</main>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "*",
+            "property": "box-sizing",
+            "value": "border-box"
+          },
+          {
+            "type": "css-decl",
+            "selector": "main",
+            "property": "max-width",
+            "value": "720px"
           }
         ]
       }
