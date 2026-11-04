@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 8. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 8 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 9. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 9 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -1118,6 +1118,146 @@
           "explanation": "Uma solução. No CSS: header { display: flex; justify-content: space-between; align-items: center; } nav ul { display: flex; gap: 16px; list-style: none; padding: 0; } nav a { display: inline-block; padding: 8px 12px; }. O header vira uma caixa flexível com duas filhas, o h1 e o nav: o space-between manda uma para cada ponta, e o align-items: center alinha as duas pelo meio. No nav ul, o display: flex põe os itens em fila, o gap: 16px dá o espaço só entre eles e o list-style: none tira as bolinhas. Para o corretor, space-between e space-around são escritas diferentes, e o display: flex precisa estar na mãe (nav ul), não nos li."
         }
       ]
+    },
+    {
+      "position": 9,
+      "title": "Flexbox na prática",
+      "description": "Monte cartões lado a lado que quebram a linha sozinhos: flex-wrap: wrap na caixa mãe, flex: 1 e min-width nos cartões, alturas iguais com o stretch e o link no pé do cartão, com a seção de projetos e o rodapé da página da Ana.",
+      "durationSeconds": 617,
+      "videoKey": "N2/a09.mp4",
+      "captionsKey": "N2/a09.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Os cartões da Ana estão assim: <div class=\"projetos\"><article class=\"cartao\">...</article><article class=\"cartao\">...</article></div>. Em qual regra vai o flex-wrap: wrap, para os cartões descerem para a linha de baixo quando faltar espaço?",
+            "options": [
+              ".projetos",
+              ".cartao",
+              ".cartao h3",
+              ".cartao a"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Quem quebra a linha é a fila, e a fila é a caixa flexível: a div com a classe projetos, a mãe dos cartões. Por isso o flex-wrap: wrap vai em .projetos, junto com o display: flex e o gap. Colocar flex-wrap no .cartao não muda nada na fila dos cartões. O que vai no .cartao é o flex: 1 e o min-width."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A caixa dos cartões tem display: flex e flex-wrap: wrap, e cada cartão tem .cartao { flex: 1; min-width: 200px; }. O que o min-width: 200px faz?",
+            "options": [
+              "Impede o cartão de ficar mais estreito que 200px; quando não cabem todos, o que sobra desce para a linha de baixo",
+              "Deixa todos os cartões com exatamente 200px de largura",
+              "Faz os cartões quebrarem de linha sempre, mesmo quando sobra espaço",
+              "Dá 200px de espaço entre um cartão e outro"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O flex: 1 faz os cartões dividirem a linha em partes iguais, e eles podem crescer. O min-width: 200px diz o tamanho mínimo: o cartão nunca fica mais estreito que 200px. Quando a linha não tem espaço para todos com pelo menos 200px (mais o gap), em vez de espremer, o último desce para a linha de baixo. O espaço entre os cartões é o gap, não o min-width."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": ".projetos {\n  display: flex;\n  gap: 16px;\n  /* deixa os cartões descerem para a linha de baixo */\n  flex-wrap: ___;\n}\n\n.cartao {\n  /* cada cartão pega uma parte igual da linha */\n  flex: ___;\n  /* nunca mais estreito que 200px */\n  ___: 200px;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "wrap",
+              "1",
+              "min-width"
+            ]
+          },
+          "explanation": "Com flex-wrap: wrap, a fila pode quebrar: os itens que não cabem descem para a linha de baixo. O padrão é nowrap, que deixa tudo numa linha só. O flex: 1 faz cada cartão pegar uma parte igual do espaço da linha. E o min-width: 200px é a largura mínima: é ele que faz a quebra acontecer antes de os cartões ficarem espremidos."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              ".projetos {",
+              "display: flex;",
+              "gap: 16px;",
+              "flex-wrap: wrap;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra .projetos: o seletor (com o ponto, porque é uma classe) e a chave que abre. Depois, as declarações: display: flex, para os cartões ficarem em fila, gap: 16px, para o espaço entre eles, e flex-wrap: wrap, para deixar quebrar a linha. Por último, a chave que fecha e o </style>. A ordem das três declarações entre si não muda o resultado; aqui seguimos a ordem da aula."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Monte os cartões de projetos da Ana com flexbox, na aba CSS. Escreva cada valor exatamente como está aqui. 1) Na regra .projetos, coloque display: flex. 2) Na mesma regra .projetos, coloque gap: 16px. 3) Na mesma regra .projetos, coloque flex-wrap: wrap. 4) Na regra .cartao, coloque flex: 1. 5) Na mesma regra .cartao, coloque min-width: 200px.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#projetos\">Meus projetos</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n  </section>\n  <section id=\"projetos\">\n    <h2>Meus projetos</h2>\n    <div class=\"projetos\">\n      <article class=\"cartao\">\n        <h3>Receitas favoritas</h3>\n        <p>Um site com as receitas que eu mais gosto de fazer.</p>\n        <a href=\"https://receitas.example.com\" target=\"_blank\" rel=\"noopener\">Ver o site</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Página pessoal</h3>\n        <p>Esta página, feita do zero com HTML e CSS.</p>\n        <a href=\"#sobre\">Ver do começo</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Todos os projetos</h3>\n        <p>A lista completa, com o que já fiz e o que está em andamento.</p>\n        <a href=\"paginas/projetos.html\">Ver a lista</a>\n      </article>\n    </div>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n  <p>ana@example.com</p>\n</footer>\n",
+              "css": ".projetos {\n  /* 1) caixa flexível (display: flex) */\n  /* 2) espaço entre os cartões (gap: 16px) */\n  /* 3) deixa quebrar a linha (flex-wrap: wrap) */\n}\n\n.cartao {\n  /* 4) partes iguais da linha (flex: 1) */\n  /* 5) nunca mais estreito que 200px (min-width: 200px) */\n  background-color: #fdf6e3;\n  padding: 16px;\n  border: 1px solid #264653;\n  border-radius: 8px;\n}\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": ".projetos",
+                "property": "display",
+                "value": "flex"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".projetos",
+                "property": "gap",
+                "value": "16px"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".projetos",
+                "property": "flex-wrap",
+                "value": "wrap"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao",
+                "property": "flex",
+                "value": "1"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".cartao",
+                "property": "min-width",
+                "value": "200px"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: .projetos { display: flex; gap: 16px; flex-wrap: wrap; } .cartao { flex: 1; min-width: 200px; background-color: #fdf6e3; padding: 16px; border: 1px solid #264653; border-radius: 8px; }. A div .projetos é a mãe: o display: flex põe os cartões em fila, o gap: 16px dá o espaço entre eles (e entre as linhas) e o flex-wrap: wrap deixa quebrar a linha. Nos cartões, o flex: 1 divide a linha em partes iguais e o min-width: 200px faz o cartão descer em vez de espremer. Para o corretor, flex: 1 e flex: 1 1 0 são escritas diferentes, min-width não é o mesmo que width, e o flex-wrap precisa estar na mãe (.projetos), não no .cartao."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1800,6 +1940,93 @@
             "selector": ".caixa",
             "property": "align-items",
             "value": "center"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual é o valor padrão de flex-wrap numa caixa flexível?",
+        "options": [
+          "nowrap",
+          "wrap",
+          "column",
+          "stretch"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Numa caixa flexível sem flex-wrap, os itens não cabem mais na linha. O que acontece?",
+        "options": [
+          "Eles encolhem para caber e, se não der mais para encolher, passam da borda da caixa",
+          "Eles descem sozinhos para a linha de baixo",
+          "Eles somem da página",
+          "A caixa vira uma coluna"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Três cartões numa fila flexível têm textos de tamanhos diferentes, mas ficam todos da mesma altura. Por quê?",
+        "options": [
+          "Porque o padrão do align-items é stretch, que estica os itens para a altura da linha",
+          "Porque o gap deixa os itens com a mesma altura",
+          "Porque o flex-wrap: wrap deixa os itens com a mesma altura",
+          "Porque o min-width deixa os itens com a mesma altura"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, faça os cartões dividirem a linha e descerem quando faltar espaço. Na regra .projetos, coloque display: flex e flex-wrap: wrap. Na regra .cartao, coloque flex: 1 e min-width: 200px.",
+        "starter": {
+          "html": "<div class=\"projetos\">\n  <article class=\"cartao\"><h3>Receitas favoritas</h3></article>\n  <article class=\"cartao\"><h3>Página pessoal</h3></article>\n  <article class=\"cartao\"><h3>Todos os projetos</h3></article>\n</div>\n",
+          "css": ".projetos {\n  gap: 16px;\n}\n\n.cartao {\n  padding: 16px;\n}\n"
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": ".projetos",
+            "property": "display",
+            "value": "flex"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".projetos",
+            "property": "flex-wrap",
+            "value": "wrap"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".cartao",
+            "property": "flex",
+            "value": "1"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".cartao",
+            "property": "min-width",
+            "value": "200px"
           }
         ]
       }
