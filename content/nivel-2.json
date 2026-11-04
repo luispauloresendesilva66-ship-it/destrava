@@ -1,0 +1,278 @@
+{
+  "_nota": "Nível 2 em produção: por enquanto só a aula 1. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só a aula 1 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "level": {
+    "position": 2,
+    "slug": "mao-de-tinta",
+    "name": "Mão de Tinta",
+    "description": "CSS do zero: cores, fontes, espaços, flexbox e o básico de responsivo, para dar aparência à página pessoal do nível 1."
+  },
+  "exam": {
+    "questionCount": 5,
+    "exerciseMinutes": 30,
+    "examMinutes": 30
+  },
+  "lessons": [
+    {
+      "position": 1,
+      "title": "O que é CSS?",
+      "description": "Entenda o papel do CSS, escreva a sua primeira regra e aprenda a ligar o CSS à página, com a tag style e com um arquivo separado.",
+      "durationSeconds": 464,
+      "videoKey": "N2/a01.mp4",
+      "captionsKey": "N2/a01.vtt",
+      "isFree": false,
+      "isSample": true,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Na comparação com a casa, qual é o papel do CSS numa página?",
+            "options": [
+              "A aparência: cores, tamanhos e espaços, como o acabamento da casa",
+              "A estrutura: dizer o que é título, parágrafo e menu, como as paredes",
+              "As ações: fazer algo acontecer quando a pessoa clica, como a parte elétrica",
+              "O endereço: levar a página até o navegador, como o carteiro"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O HTML é a estrutura (o que cada coisa é) e o CSS é a aparência (como cada coisa aparece). A parte das ações é do JavaScript, que vem nos próximos níveis."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Qual linha, dentro do <head>, liga a página ao arquivo estilo.css?",
+            "options": [
+              "<style href=\"estilo.css\"></style>",
+              "<link href=\"estilo.css\">",
+              "<link rel=\"stylesheet\" href=\"estilo.css\">",
+              "<css src=\"estilo.css\">"
+            ]
+          },
+          "solution": {
+            "correctIndex": 2
+          },
+          "explanation": "A tag <link> precisa dos dois atributos: rel=\"stylesheet\" avisa que o arquivo é uma folha de estilo, e href diz onde ele está. A <link> não tem fechamento. A tag <style> guarda o CSS escrito ali mesmo, e não existe tag <css>."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "<link ___=\"stylesheet\" ___=\"estilo.css\">\n\n/* no estilo.css: */\nh1 {\n  ___: navy;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "rel",
+              "href",
+              "color"
+            ]
+          },
+          "explanation": "Na <link>, o rel diz o tipo do arquivo (uma folha de estilo) e o href diz o caminho. No CSS, a propriedade color muda a cor do texto: aqui, todo <h1> fica azul-marinho."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "h1 {",
+              "color: navy;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "A tag <style> é a caixa do CSS. Dentro dela vem a regra: o seletor e a abertura das chaves, a declaração (propriedade, dois pontos, valor e ponto e vírgula) e o fechamento das chaves. Por fim, fecha a </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Dê as primeiras cores à página da Ana. 1) Na aba HTML, dentro do <head>, ligue o arquivo estilo.css com a tag <link> (rel=\"stylesheet\" e href=\"estilo.css\"). 2) Na aba CSS, que faz o papel do estilo.css, deixe o texto do h1 azul-marinho: color: navy. 3) Deixe o fundo da página (body) amarelo-claro: background-color: lightyellow. 4) Deixe os parágrafos (p) com letra de 18 pixels: font-size: 18px.",
+            "starter": {
+              "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Ana Souza, página pessoal</title>\n    <!-- 1) Ligue aqui o arquivo estilo.css -->\n  </head>\n  <body>\n    <h1>Olá, eu sou a Ana</h1>\n    <p>Estou aprendendo CSS para dar cara nova à minha página.</p>\n  </body>\n</html>\n",
+              "css": "/* 2) O título h1 com o texto azul-marinho (navy) */\n\n/* 3) O fundo da página (body) amarelo-claro (lightyellow) */\n\n/* 4) Os parágrafos (p) com letra de 18px */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "head link[rel=\"stylesheet\"][href=\"estilo.css\"]"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h1",
+                "property": "color",
+                "value": "navy"
+              },
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "background-color",
+                "value": "lightyellow"
+              },
+              {
+                "type": "css-decl",
+                "selector": "p",
+                "property": "font-size",
+                "value": "18px"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No HTML, dentro do <head>: <link rel=\"stylesheet\" href=\"estilo.css\">. No CSS: h1 { color: navy; } body { background-color: lightyellow; } p { font-size: 18px; }. Repare no ponto e vírgula no fim de cada declaração e no tracinho de background-color e font-size, sem espaço."
+        }
+      ]
+    }
+  ],
+  "examQuestions": [
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual propriedade do CSS muda a cor do texto?",
+        "options": [
+          "color",
+          "background-color",
+          "font-size",
+          "text"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual regra está escrita do jeito certo?",
+        "options": [
+          "p { color: navy; }",
+          "<p> { color: navy; }",
+          "p ( color = navy )",
+          "p { color navy }"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Onde fica a tag <style> numa página HTML?",
+        "options": [
+          "Dentro do <head>",
+          "Depois do </html>",
+          "Dentro de cada <p>",
+          "Antes do <!DOCTYPE html>"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Você escreveu \"cor: azul;\" no CSS. O que o navegador faz?",
+        "options": [
+          "Ignora a declaração, sem mostrar nenhuma mensagem de erro",
+          "Mostra uma mensagem de erro na página",
+          "Traduz para color: blue e pinta o texto",
+          "Para de mostrar a página inteira"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Por que é melhor colocar o CSS num arquivo separado, ligado com <link>, do que numa tag <style> em cada página?",
+        "options": [
+          "Porque um arquivo só vale para todas as páginas, e mudar o visual do site inteiro fica num lugar só",
+          "Porque a tag <style> não funciona nos navegadores modernos",
+          "Porque o arquivo separado deixa a página sem estrutura HTML",
+          "Porque só o arquivo separado aceita a propriedade color"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, deixe o texto de todos os <h2> roxo (color: purple) e o fundo da página (body) cinza bem claro (background-color: whitesmoke).",
+        "starter": {
+          "html": "<h2>Meus projetos</h2>\n<p>Um site de receitas e esta página pessoal.</p>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "h2",
+            "property": "color",
+            "value": "purple"
+          },
+          {
+            "type": "css-decl",
+            "selector": "body",
+            "property": "background-color",
+            "value": "whitesmoke"
+          }
+        ]
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "1) Na aba HTML, dentro do <head>, ligue o arquivo que está em css/estilo.css com a tag <link> (rel=\"stylesheet\"). 2) Na aba CSS, deixe o texto dos parágrafos (p) cinza-escuro: color: dimgray.",
+        "starter": {
+          "html": "<!DOCTYPE html>\n<html lang=\"pt-BR\">\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Ana Souza, página pessoal</title>\n  </head>\n  <body>\n    <p>Feito pela Ana, em 2026.</p>\n  </body>\n</html>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "dom-exists",
+            "selector": "head link[rel=\"stylesheet\"][href=\"css/estilo.css\"]"
+          },
+          {
+            "type": "css-decl",
+            "selector": "p",
+            "property": "color",
+            "value": "dimgray"
+          }
+        ]
+      }
+    }
+  ]
+}
