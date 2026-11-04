@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 7. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 7 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 8. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 8 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -972,6 +972,152 @@
           "explanation": "Uma solução. No CSS: nav li { display: inline; } nav a { display: inline-block; padding: 8px 12px; } main { max-width: 720px; margin: 0 auto; } img { border-radius: 50%; max-width: 100%; height: auto; display: block; }. Com display: inline, os itens da lista ficam lado a lado e as bolinhas somem. O inline-block deixa o padding do link funcionar e a área de clique cresce. O margin: 0 auto centraliza o main porque ele já tem max-width. E display: block na img tira o espacinho embaixo da foto. Para o corretor, margin: 0 auto e margin-left: auto são escritas diferentes, e inline não é o mesmo que inline-block."
         }
       ]
+    },
+    {
+      "position": 8,
+      "title": "Flexbox: o básico",
+      "description": "Coloque itens lado a lado e alinhe tudo com o flexbox: display: flex na caixa mãe, eixo principal e eixo cruzado, flex-direction, justify-content, align-items e gap, com o menu e o topo da página da Ana.",
+      "durationSeconds": 685,
+      "videoKey": "N2/a08.mp4",
+      "captionsKey": "N2/a08.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana quer os itens do menu lado a lado com flexbox. O HTML é <nav><ul><li>...</li><li>...</li></ul></nav>. Em qual regra vai o display: flex?",
+            "options": [
+              "nav ul",
+              "nav li",
+              "nav a",
+              "body"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O display: flex vai na caixa mãe, e quem se organiza em fila são as filhas diretas dela. Os li são as filhas do ul, então a regra é nav ul. Colocar display: flex em cada li transforma cada li numa caixa flexível, mas os li continuam empilhados."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Numa caixa flexível com a direção padrão (row), qual propriedade alinha os itens na vertical, como deixar todos no meio da altura?",
+            "options": [
+              "align-items",
+              "justify-content",
+              "flex-direction",
+              "gap"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Na direção row, o eixo principal é o horizontal e o eixo cruzado é o vertical. O justify-content alinha ao longo da fila (eixo principal) e o align-items alinha no sentido que corta a fila (eixo cruzado). Então, para a vertical, é align-items: center. Se a direção fosse column, os eixos girariam e os papéis trocariam."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "header {\n  display: flex;\n  /* nome numa ponta, menu na outra */\n  justify-content: ___;\n  /* os dois alinhados pelo meio, na vertical */\n  align-items: ___;\n}\n\nnav ul {\n  display: flex;\n  /* 16px só entre os itens */\n  ___: 16px;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "space-between",
+              "center",
+              "gap"
+            ]
+          },
+          "explanation": "Com justify-content: space-between, o primeiro item vai para o começo, o último para o fim, e o espaço que sobra fica entre eles: o h1 à esquerda e o nav à direita. O align-items: center alinha os dois pelo meio, na vertical. E o gap: 16px dá 16px só entre os itens do menu, sem sobra nas pontas."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "nav ul {",
+              "display: flex;",
+              "gap: 16px;",
+              "list-style: none;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra nav ul: o seletor e a chave que abre. Depois, as declarações: display: flex, para os itens ficarem em fila, gap: 16px, para o espaço entre eles, e list-style: none, para tirar as bolinhas. Por último, a chave que fecha e o </style>. A ordem das três declarações entre si não muda o resultado; aqui seguimos a ordem da aula."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Monte o topo da página da Ana com flexbox, na aba CSS. Escreva cada valor exatamente como está aqui. 1) Na regra header, coloque display: flex. 2) Na mesma regra header, coloque justify-content: space-between. 3) Na mesma regra header, coloque align-items: center. 4) Na regra nav ul, coloque display: flex. 5) Na mesma regra nav ul, coloque gap: 16px. 6) Na mesma regra nav ul, coloque list-style: none.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "header {\n  /* 1) caixa flexível (display: flex) */\n  /* 2) nome numa ponta, menu na outra (justify-content: space-between) */\n  /* 3) alinhados pelo meio, na vertical (align-items: center) */\n}\n\nnav ul {\n  /* 4) itens em fila (display: flex) */\n  /* 5) espaço só entre os itens (gap: 16px) */\n  /* 6) sem bolinhas (list-style: none) */\n  padding: 0;\n}\n\nnav a {\n  display: inline-block;\n  padding: 8px 12px;\n}\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "display",
+                "value": "flex"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "justify-content",
+                "value": "space-between"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "align-items",
+                "value": "center"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav ul",
+                "property": "display",
+                "value": "flex"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav ul",
+                "property": "gap",
+                "value": "16px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav ul",
+                "property": "list-style",
+                "value": "none"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: header { display: flex; justify-content: space-between; align-items: center; } nav ul { display: flex; gap: 16px; list-style: none; padding: 0; } nav a { display: inline-block; padding: 8px 12px; }. O header vira uma caixa flexível com duas filhas, o h1 e o nav: o space-between manda uma para cada ponta, e o align-items: center alinha as duas pelo meio. No nav ul, o display: flex põe os itens em fila, o gap: 16px dá o espaço só entre eles e o list-style: none tira as bolinhas. Para o corretor, space-between e space-around são escritas diferentes, e o display: flex precisa estar na mãe (nav ul), não nos li."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1573,6 +1719,87 @@
             "selector": "img",
             "property": "display",
             "value": "block"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Uma div tem display: flex e três div dentro. O que acontece com as três div de dentro?",
+        "options": [
+          "Ficam lado a lado, numa fila",
+          "Continuam empilhadas, uma embaixo da outra",
+          "Somem da página",
+          "Cada uma ocupa a linha toda"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Numa caixa flexível com flex-direction: row, qual valor de justify-content manda o primeiro item para o começo, o último para o fim e divide o espaço que sobra entre eles?",
+        "options": [
+          "space-between",
+          "center",
+          "flex-start",
+          "stretch"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual é o jeito mais simples de dar 16px de espaço só entre os itens de uma caixa flexível, sem sobra nas pontas?",
+        "options": [
+          "gap: 16px; na caixa mãe",
+          "margin-right: 16px; em cada item",
+          "padding: 16px; na caixa mãe",
+          "justify-content: 16px; na caixa mãe"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, centralize o parágrafo no meio da caixa, na horizontal e na vertical. Na regra .caixa, coloque display: flex, justify-content: center e align-items: center.",
+        "starter": {
+          "html": "<div class=\"caixa\">\n  <p>Olá, eu sou a Ana</p>\n</div>\n",
+          "css": ".caixa {\n  height: 300px;\n}\n"
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": ".caixa",
+            "property": "display",
+            "value": "flex"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".caixa",
+            "property": "justify-content",
+            "value": "center"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".caixa",
+            "property": "align-items",
+            "value": "center"
           }
         ]
       }
