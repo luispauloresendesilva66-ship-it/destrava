@@ -1,6 +1,6 @@
 # Aula 1 — O que é CSS?
 
-**Nível:** Mão de Tinta · **Duração estimada:** ~8 minutos · **Blocos:** 10
+**Nível:** Primeira Demão · **Duração estimada:** ~8 minutos · **Blocos:** 10
 
 ## Como este roteiro é usado
 
@@ -16,9 +16,9 @@
 ## Bloco 01 — Abertura
 
 **Fala:**
-Olá, seja bem-vindo ao segundo nível da Destrava: Mão de Tinta. Lembra da casa da primeira aula? O HTML é a estrutura: as paredes, as portas, os cômodos. No nível passado, a Ana levantou essa estrutura inteira: uma página pessoal com topo, menu, sobre mim, projetos, rotina, formulário e rodapé. Funciona, está organizada, mas ainda tem cara de rascunho: letra preta, fundo branco, links azuis. Agora chegou a hora do acabamento. É aqui que entra o cê ésse ésse, a linguagem que cuida da aparência. Hoje, você vai entender o que ele é, como se escreve uma regra e as formas de ligar o cê ésse ésse a uma página. E, no fim, a página da Ana vai ganhar as primeiras cores. Abre o editor e bora destravar.
+Olá, seja bem-vindo ao segundo nível da Destrava: Primeira Demão. Lembra da casa da primeira aula? O HTML é a estrutura: as paredes, as portas, os cômodos. No nível passado, a Ana levantou essa estrutura inteira: uma página pessoal com topo, menu, sobre mim, projetos, rotina, formulário e rodapé. Funciona, está organizada, mas ainda tem cara de rascunho: letra preta, fundo branco, links azuis. Agora chegou a hora do acabamento. É aqui que entra o cê ésse ésse, a linguagem que cuida da aparência. Hoje, você vai entender o que ele é, como se escreve uma regra e as formas de ligar o cê ésse ésse a uma página. E, no fim, a página da Ana vai ganhar as primeiras cores. Abre o editor e bora destravar.
 
-**Tela:** logo da Destrava animando → título "Nível 2 — Mão de Tinta" → os 5 degraus do curso, o primeiro com bandeirinha e o segundo acendendo → título "Aula 1 — O que é CSS?". Depois, a casa da aula 1 do nível 1 aparece só com a estrutura em linhas (rótulo "HTML: nível 1 ✓"); um rolo de tinta passa por cima e pinta as paredes (rótulo "CSS: agora"). Ao lado, a página da Ana da aula 9, em preto e branco, com o rótulo "estrutura pronta, falta o acabamento".
+**Tela:** logo da Destrava animando → título "Nível 2 — Primeira Demão" → os 5 degraus do curso, o primeiro com bandeirinha e o segundo acendendo → título "Aula 1 — O que é CSS?". Depois, a casa da aula 1 do nível 1 aparece só com a estrutura em linhas (rótulo "HTML: nível 1 ✓"); um rolo de tinta passa por cima e pinta as paredes (rótulo "CSS: agora"). Ao lado, a página da Ana da aula 9, em preto e branco, com o rótulo "estrutura pronta, falta o acabamento".
 
 ---
 

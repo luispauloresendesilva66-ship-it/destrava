@@ -2,8 +2,8 @@
   "_nota": "Nível 2 em produção: por enquanto só a aula 1. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só a aula 1 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
-    "slug": "mao-de-tinta",
-    "name": "Mão de Tinta",
+    "slug": "primeira-demao",
+    "name": "Primeira Demão",
     "description": "CSS do zero: cores, fontes, espaços, flexbox e o básico de responsivo, para dar aparência à página pessoal do nível 1."
   },
   "exam": {

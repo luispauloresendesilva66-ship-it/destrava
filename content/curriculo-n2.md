@@ -1,13 +1,13 @@
-# Currículo do Nível 2 — Mão de Tinta
+# Currículo do Nível 2 — Primeira Demão
 
-**Proposta para aprovação.** Objetivo do nível: dar aparência à página pessoal construída no Primeiro Commit, com CSS do zero até o layout responsivo básico. Fio condutor: a mesma página "sobre mim" da Ana (aluna fictícia), agora com um arquivo `estilo.css` que cresce a cada aula. No projeto final, o aluno estiliza a própria página pessoal que fez na aula 9 do nível 1. JavaScript fica para os próximos níveis.
+**Aprovado pelo founder em 2026-11-04 (nome: Primeira Demão).** Objetivo do nível: dar aparência à página pessoal construída no Primeiro Commit, com CSS do zero até o layout responsivo básico. Fio condutor: a mesma página "sobre mim" da Ana (aluna fictícia), agora com um arquivo `estilo.css` que cresce a cada aula. No projeto final, o aluno estiliza a própria página pessoal que fez na aula 9 do nível 1. JavaScript fica para os próximos níveis.
 
 ## Nome do nível
 
 | Opção | Por quê |
 |---|---|
-| **Mão de Tinta** (escolhida) | "Dar uma mão de tinta" é expressão do dia a dia para deixar algo com cara nova. Continua a metáfora da casa da aula 1 do nível 1 (HTML é a estrutura, CSS é o acabamento) e casa com o fim da aula 9 ("a estrutura está de pé, agora vem o acabamento"). Slug sugerido: `mao-de-tinta`. |
-| Primeira Demão | Mesma metáfora, rima com "Primeiro Commit". Ponto fraco: "demão" é menos conhecida, e dois níveis começando com "Primeiro/a" ficam repetitivos. |
+| Mão de Tinta | "Dar uma mão de tinta" é expressão do dia a dia. Continua a metáfora da casa (HTML é a estrutura, CSS é o acabamento). |
+| **Primeira Demão** (escolhida pelo founder) | Mesma metáfora: a primeira demão de tinta é o primeiro acabamento da casa. Rima com "Primeiro Commit". Slug: `primeira-demao`. |
 | Pixel Perfeito | Termo do mundo dev, como "commit". Ponto fraco: soa perfeccionista, e o curso repete "não precisa ficar perfeito, precisa ficar seu". |
 
 ## Aulas
