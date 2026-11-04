@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 e 2. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 e 2 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1, 2 e 3. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1, 2 e 3 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -282,6 +282,144 @@
           "explanation": "Uma solução. No HTML: <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>. No CSS: .destaque { color: purple; } #contato { background-color: white; } h1, h2 { color: navy; } nav a { color: tomato; }. Repare no ponto da classe, na cerquilha do id, na vírgula que junta h1 e h2 e no espaço de nav a, que quer dizer \"dentro de\"."
         }
       ]
+    },
+    {
+      "position": 3,
+      "title": "Cores",
+      "description": "Escreva cores por nome, em hexadecimal e em rgb, monte uma paleta pequena com o seletor de cores do navegador e garanta que o texto tem contraste para ser lido.",
+      "durationSeconds": 496,
+      "videoKey": "N2/a03.mp4",
+      "captionsKey": "N2/a03.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Que cor o código #ff0000 representa?",
+            "options": [
+              "Vermelho puro",
+              "Verde puro",
+              "Azul puro",
+              "Preto"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O código hexadecimal tem três pares: vermelho, verde e azul (#RRGGBB). Em #ff0000, o vermelho está no máximo (ff) e o verde e o azul estão em zero (00). Por isso é vermelho puro. Tudo zero (#000000) seria preto."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana quer um texto fácil de ler. Qual destas combinações tem o melhor contraste?",
+            "options": [
+              "Texto #264653 (azul-petróleo escuro) sobre fundo #fdf6e3 (creme)",
+              "Texto #ffff99 (amarelo-claro) sobre fundo #ffffff (branco)",
+              "Texto #777777 (cinza) sobre fundo #888888 (cinza)",
+              "Texto #e76f51 (coral) sobre fundo #fdf6e3 (creme)"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Contraste é a diferença entre a cor do texto e a do fundo. A regra prática é fundo claro com texto escuro, ou o contrário. Amarelo-claro no branco e cinza no cinza quase somem. O coral no creme parece bonito, mas fica fraco para texto: foi por isso que a Ana o escureceu para #b5452c."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "body {\n  background-color: ___fdf6e3;\n}\n\nh1 {\n  color: ___(38, 70, 83);\n}\n\n/* o mesmo que #ffffff, no atalho de 3 dígitos */\nfooter p {\n  color: #___;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "#",
+              "rgb",
+              "fff"
+            ]
+          },
+          "explanation": "O código hexadecimal sempre começa com a cerquilha (#). O rgb leva três números de 0 a 255 entre parênteses: vermelho, verde e azul. E, quando cada par tem os dois dígitos iguais, dá para usar o atalho de 3 dígitos: #fff é o mesmo que #ffffff, o branco."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "h1,",
+              "h2 {",
+              "color: rgb(38, 70, 83);",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem uma regra com dois seletores separados por vírgula (h1, h2). A chave abre depois do último seletor. Em seguida vem a declaração, com a cor em rgb: três números de 0 a 255, separados por vírgula, entre parênteses. Depois, o fechamento das chaves e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Aplique a paleta da Ana na aba CSS. Escreva cada código exatamente como está aqui, com a cerquilha e os seis dígitos. 1) Crie a regra body com background-color: #fdf6e3. 2) Crie a regra h1 com color: #264653. 3) Crie a regra .destaque com color: #b5452c. 4) Crie a regra footer com background-color: #264653. 5) Crie a regra footer p com color: #ffffff.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "/* 1) body: fundo creme (background-color: #fdf6e3) */\n\n/* 2) h1: texto azul-petróleo (color: #264653) */\n\n/* 3) .destaque: texto terracota (color: #b5452c) */\n\n/* 4) footer: fundo azul-petróleo (background-color: #264653) */\n\n/* 5) footer p: texto branco (color: #ffffff) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "background-color",
+                "value": "#fdf6e3"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h1",
+                "property": "color",
+                "value": "#264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".destaque",
+                "property": "color",
+                "value": "#b5452c"
+              },
+              {
+                "type": "css-decl",
+                "selector": "footer",
+                "property": "background-color",
+                "value": "#264653"
+              },
+              {
+                "type": "css-decl",
+                "selector": "footer p",
+                "property": "color",
+                "value": "#ffffff"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: body { background-color: #fdf6e3; } h1 { color: #264653; } .destaque { color: #b5452c; } footer { background-color: #264653; } footer p { color: #ffffff; }. Repare na cerquilha antes de cada código, nos seis dígitos sem espaço. O mesmo azul-petróleo aparece no título e no fundo do rodapé: poucas cores, repetidas, formam a paleta. Em rgb, #264653 seria rgb(38, 70, 83), mas aqui o corretor pede o código em hexadecimal."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -502,6 +640,81 @@
             "selector": ".aviso",
             "property": "color",
             "value": "tomato"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual destes valores é o mesmo que #ffffff?",
+        "options": [
+          "#fff",
+          "#ff",
+          "#f",
+          "rgb(0, 0, 0)"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "No rgb(r, g, b), qual é o maior número que cada cor pode receber?",
+        "options": [
+          "255",
+          "100",
+          "999",
+          "ff"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual destas declarações escreve a cor do jeito certo?",
+        "options": [
+          "color: #fdf6e3;",
+          "color: fdf6e3;",
+          "color: #fdf6e;",
+          "color: #fd f6e3;"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, crie a regra footer com background-color: #264653 e color: #ffffff.",
+        "starter": {
+          "html": "<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "footer",
+            "property": "background-color",
+            "value": "#264653"
+          },
+          {
+            "type": "css-decl",
+            "selector": "footer",
+            "property": "color",
+            "value": "#ffffff"
           }
         ]
       }
