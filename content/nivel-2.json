@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 9. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 9 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 10. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 10 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -1258,6 +1258,141 @@
           "explanation": "Uma solução. No CSS: .projetos { display: flex; gap: 16px; flex-wrap: wrap; } .cartao { flex: 1; min-width: 200px; background-color: #fdf6e3; padding: 16px; border: 1px solid #264653; border-radius: 8px; }. A div .projetos é a mãe: o display: flex põe os cartões em fila, o gap: 16px dá o espaço entre eles (e entre as linhas) e o flex-wrap: wrap deixa quebrar a linha. Nos cartões, o flex: 1 divide a linha em partes iguais e o min-width: 200px faz o cartão descer em vez de espremer. Para o corretor, flex: 1 e flex: 1 1 0 são escritas diferentes, min-width não é o mesmo que width, e o flex-wrap precisa estar na mãe (.projetos), não no .cartao."
         }
       ]
+    },
+    {
+      "position": 10,
+      "title": "Responsivo: o básico",
+      "description": "Faça a página funcionar bem no celular, no tablet e no computador: a meta viewport no head, a ideia de pensar primeiro no celular e o @media (min-width: 768px) para mudar regras nas telas maiores, com o topo e a letra da página da Ana.",
+      "durationSeconds": 661,
+      "videoKey": "N2/a10.mp4",
+      "captionsKey": "N2/a10.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana abriu a página dela num celular e ela apareceu inteira, mas minúscula, como uma miniatura da página do computador. O que está faltando?",
+            "options": [
+              "A linha <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"> no head",
+              "Um max-width: 100% na regra body",
+              "Um @media (max-width: 768px) no fim do estilo.css",
+              "A linha <meta charset=\"UTF-8\"> no head"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Sem a meta viewport, o navegador do celular finge que tem uma tela larga, monta a página nesse tamanho e depois encolhe tudo para caber. Com width=device-width, a página usa a largura de verdade da tela; com initial-scale=1, começa sem zoom. A meta charset é para os acentos, e nenhuma regra de CSS resolve isso sozinha: sem a meta viewport, o navegador nem deixa a página perceber que a tela é estreita."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "No fim do estilo.css está assim: @media (min-width: 768px) { header { flex-direction: row; } }. Quando a regra header de dentro vale?",
+            "options": [
+              "Só quando a tela tem pelo menos 768px de largura",
+              "Só quando a tela tem no máximo 768px de largura",
+              "Sempre, em qualquer tela",
+              "Só nos celulares"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O min-width: 768px é a condição: a tela precisa ter pelo menos 768px de largura. Nas telas mais estreitas, a condição é falsa e o navegador ignora tudo o que está dentro do @media; lá vale a regra header de fora, com flex-direction: column. Quem quer dizer \"até 768px\" é o max-width. O @media olha a largura da tela, não o tipo de aparelho."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "<!-- no head do index.html -->\n<meta name=\"___\" content=\"width=___, initial-scale=1\">\n\n/* no fim do estilo.css: telas de pelo menos 768px */\n@media (___: 768px) {\n  header {\n    /* o título e o menu lado a lado de novo */\n    flex-direction: ___;\n  }\n}",
+            "blanks": 4
+          },
+          "solution": {
+            "answers": [
+              "viewport",
+              "device-width",
+              "min-width",
+              "row"
+            ]
+          },
+          "explanation": "A meta viewport tem name=\"viewport\" e content=\"width=device-width, initial-scale=1\": a largura da página é a da tela do aparelho, sem zoom no começo. No @media, min-width: 768px quer dizer \"de 768px para cima\". E, dentro dele, o header volta para flex-direction: row, a linha; no celular, fora do @media, ele fica em column."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "@media (min-width: 768px) {",
+              "header {",
+              "flex-direction: row;",
+              "}",
+              "} /* fim do @media */"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          "explanation": "Primeiro vem o @media com a condição entre parênteses e a chave que abre. Dentro dele, uma regra inteira: o seletor header, a chave dele, a declaração flex-direction: row e a chave que fecha a regra. Por último, a chave que fecha o @media. São chaves dentro de chaves: cada regra fecha a dela, e o @media fecha a dele, no fim."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Deixe a página da Ana responsiva. Escreva cada valor exatamente como está aqui. 1) Na aba HTML, no começo, antes do header, coloque <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">. Na aba CSS: 2) na regra header, coloque flex-direction: column; 3) na regra nav ul, coloque flex-wrap: wrap. Depois, no fim da aba CSS, escreva um @media (min-width: 768px) com duas regras dentro: 4) header com flex-direction: row; 5) body com font-size: 1.25rem. O corretor confere a meta e as declarações, mas não confere se as regras 4 e 5 estão dentro do @media: confira você.",
+            "starter": {
+              "html": "<!-- 1) a meta viewport vem aqui, antes do header -->\n<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#projetos\">Meus projetos</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n  </section>\n  <section id=\"projetos\">\n    <h2>Meus projetos</h2>\n    <div class=\"projetos\">\n      <article class=\"cartao\">\n        <h3>Receitas favoritas</h3>\n        <p>Um site com as receitas que eu mais gosto de fazer.</p>\n        <a href=\"https://receitas.example.com\" target=\"_blank\" rel=\"noopener\">Ver o site</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Página pessoal</h3>\n        <p>Esta página, feita do zero com HTML e CSS.</p>\n        <a href=\"#sobre\">Ver do começo</a>\n      </article>\n      <article class=\"cartao\">\n        <h3>Todos os projetos</h3>\n        <p>A lista completa, com o que já fiz e o que está em andamento.</p>\n        <a href=\"paginas/projetos.html\">Ver a lista</a>\n      </article>\n    </div>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n  <p>ana@example.com</p>\n</footer>\n",
+              "css": "body {\n  font-size: 1.125rem;\n}\n\nheader {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  /* 2) celular primeiro: um embaixo do outro (flex-direction: column) */\n}\n\nnav ul {\n  display: flex;\n  gap: 16px;\n  list-style: none;\n  padding: 0;\n  /* 3) os links descem se não couberem (flex-wrap: wrap) */\n}\n\n/* 4) e 5) aqui, no fim: @media (min-width: 768px) com header (flex-direction: row) e body (font-size: 1.25rem) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "meta[name=\"viewport\"][content*=\"width=device-width\"]"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "flex-direction",
+                "value": "column"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav ul",
+                "property": "flex-wrap",
+                "value": "wrap"
+              },
+              {
+                "type": "css-decl",
+                "selector": "header",
+                "property": "flex-direction",
+                "value": "row"
+              },
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "font-size",
+                "value": "1.25rem"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No HTML, no começo: <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">. No CSS: header { display: flex; justify-content: space-between; align-items: center; flex-direction: column; } nav ul { display: flex; gap: 16px; list-style: none; padding: 0; flex-wrap: wrap; } e, no fim, @media (min-width: 768px) { header { flex-direction: row; } body { font-size: 1.25rem; } }. As regras de fora são o celular: o topo empilhado e o menu que pode quebrar a linha. O @media só muda o que precisa nas telas de 768px para cima, e fica no fim para vencer as regras de fora. Para o corretor, a meta precisa ter name=\"viewport\" e width=device-width no content, e 1.25rem não é o mesmo que 20px. Ele não confere se a regra está dentro do @media, nem se é min-width ou max-width: isso fica com você."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -2027,6 +2162,85 @@
             "selector": ".cartao",
             "property": "min-width",
             "value": "200px"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "O que quer dizer width=device-width na meta viewport?",
+        "options": [
+          "Que a largura da página é a largura da tela do aparelho",
+          "Que a página tem sempre 768px de largura",
+          "Que as imagens ocupam a largura toda da página",
+          "Que a página começa com zoom"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Pensando primeiro no celular, onde fica o CSS das telas maiores?",
+        "options": [
+          "Dentro de um @media (min-width: ...), no fim do arquivo, só com o que muda",
+          "Nas regras normais, e o CSS do celular fica dentro do @media",
+          "Num atributo style=\"\" em cada tag",
+          "Não precisa de CSS para telas maiores: o navegador ajusta sozinho"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Uma caixa tem width: 900px e passa da borda da tela no celular. Qual troca resolve, sem estragar o computador?",
+        "options": [
+          "max-width: 900px, para ela poder encolher",
+          "min-width: 900px",
+          "width: 1000px",
+          "height: 900px"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Deixe o topo responsivo. Na aba HTML, no começo, coloque <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">. Na aba CSS, na regra header, coloque flex-direction: column. No fim da aba CSS, escreva um @media (min-width: 768px) com uma regra header que tenha flex-direction: row.",
+        "starter": {
+          "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <a href=\"#sobre\">Sobre mim</a>\n    <a href=\"#contato\">Fale comigo</a>\n  </nav>\n</header>\n",
+          "css": "header {\n  display: flex;\n  align-items: center;\n}\n"
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "dom-exists",
+            "selector": "meta[name=\"viewport\"][content*=\"width=device-width\"]"
+          },
+          {
+            "type": "css-decl",
+            "selector": "header",
+            "property": "flex-direction",
+            "value": "column"
+          },
+          {
+            "type": "css-decl",
+            "selector": "header",
+            "property": "flex-direction",
+            "value": "row"
           }
         ]
       }
