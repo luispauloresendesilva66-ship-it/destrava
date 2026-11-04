@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1, 2 e 3. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1, 2 e 3 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 4. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 4 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -420,6 +420,144 @@
           "explanation": "Uma solução. No CSS: body { background-color: #fdf6e3; } h1 { color: #264653; } .destaque { color: #b5452c; } footer { background-color: #264653; } footer p { color: #ffffff; }. Repare na cerquilha antes de cada código, nos seis dígitos sem espaço. O mesmo azul-petróleo aparece no título e no fundo do rodapé: poucas cores, repetidas, formam a paleta. Em rgb, #264653 seria rgb(38, 70, 83), mas aqui o corretor pede o código em hexadecimal."
         }
       ]
+    },
+    {
+      "position": 4,
+      "title": "Texto e fontes",
+      "description": "Escolha a fonte com uma fonte de reserva, use a herança para escrever o texto padrão no body e ajuste tamanho, peso, espaço entre as linhas, alinhamento e sublinhado para deixar o texto fácil de ler.",
+      "durationSeconds": 557,
+      "videoKey": "N2/a04.mp4",
+      "captionsKey": "N2/a04.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Na regra font-family: Verdana, Arial, sans-serif; para que serve o sans-serif no fim da lista?",
+            "options": [
+              "É a fonte de reserva: uma família genérica que sempre funciona, se as outras não existirem no aparelho",
+              "Deixa o texto em negrito",
+              "Obriga o navegador a baixar a fonte Verdana",
+              "Não serve para nada: só a primeira fonte da lista é usada"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O navegador tenta as fontes da lista na ordem: primeiro Verdana, depois Arial. Se nenhuma existir no aparelho, ele usa a família genérica do fim, sans-serif (sem serifa), que sempre funciona. Por isso a lista termina sempre com serif, sans-serif ou monospace."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana quer a mesma fonte e o mesmo tamanho de letra em toda a página, escrevendo o mínimo de CSS. Onde ela deve colocar o font-family e o font-size?",
+            "options": [
+              "Numa regra para o body, porque as propriedades de texto são herdadas pelos elementos de dentro",
+              "Numa regra para cada tag: p, h1, h2, a, li…",
+              "Só numa regra para o h1, porque ele é o primeiro elemento",
+              "Numa regra para o footer, porque ele fica no fim da página"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "É a herança: propriedades de texto como font-family, font-size, color e line-height passam do elemento pai para os filhos. Como tudo o que aparece na página está dentro do body, uma regra no body vale para a página inteira. Para uma exceção, basta criar uma regra para aquele elemento, como os títulos com outra fonte."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "h1, h2 {\n  /* lista de fontes com a reserva no fim */\n  font-family: Georgia, \"Times New Roman\", ___;\n}\n\n.destaque {\n  font-weight: ___;\n}\n\nnav a {\n  text-decoration: ___;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "serif",
+              "bold",
+              "none"
+            ]
+          },
+          "explanation": "A lista de fontes termina com uma família genérica, a reserva que sempre funciona: aqui, serif, porque Georgia e \"Times New Roman\" são fontes com serifa (repare nas aspas no nome com espaço). O negrito é font-weight: bold (o mesmo peso que 700). E text-decoration: none tira o sublinhado dos links. No menu, a Ana deixou os links em negrito e na cor terracota, para continuarem com cara de link."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "body {",
+              "font-family: Verdana, Arial, sans-serif;",
+              "line-height: 1.6;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra do body: o seletor e a chave que abre. Depois, as declarações: a lista de fontes, separada por vírgulas e terminando com a reserva sans-serif, e o line-height sem unidade. Por último, a chave que fecha e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Deixe o texto da Ana fácil de ler, na aba CSS. Escreva cada valor exatamente como está aqui. 1) Na regra body, coloque font-size: 18px. 2) Na mesma regra body, coloque line-height: 1.6 (sem unidade). 3) Crie a regra h1 com text-align: center. 4) Crie a regra nav a com text-decoration: none. 5) Na mesma regra nav a, coloque font-weight: bold.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "body {\n  font-family: Verdana, Arial, sans-serif;\n  /* 1) tamanho da letra (font-size: 18px) */\n  /* 2) espaço entre as linhas (line-height: 1.6) */\n}\n\n/* 3) h1: título centralizado (text-align: center) */\n\n/* 4) nav a: links do menu sem sublinhado (text-decoration: none) */\n/* 5) nav a: links do menu em negrito (font-weight: bold) */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "font-size",
+                "value": "18px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "body",
+                "property": "line-height",
+                "value": "1.6"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h1",
+                "property": "text-align",
+                "value": "center"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "text-decoration",
+                "value": "none"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "font-weight",
+                "value": "bold"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: body { font-family: Verdana, Arial, sans-serif; font-size: 18px; line-height: 1.6; } h1 { text-align: center; } nav a { text-decoration: none; font-weight: bold; }. Por herança, a fonte, o tamanho e o espaço entre as linhas do body valem para a página toda. O line-height vai sem unidade: 1.6 quer dizer 1,6 vez o tamanho da letra. E os links do menu perderam o sublinhado, mas ganharam negrito, para continuarem com cara de link. Para o corretor, bold e 700 são valores diferentes, por isso aqui ele pede bold."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -715,6 +853,81 @@
             "selector": "footer",
             "property": "color",
             "value": "#ffffff"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual destas declarações escreve a lista de fontes do jeito mais seguro?",
+        "options": [
+          "font-family: \"Times New Roman\", serif;",
+          "font-family: Times New Roman serif;",
+          "font-family: \"Times New Roman\";",
+          "font-family: serif, \"Times New Roman\";"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Para o texto comum de uma página, qual line-height deixa a leitura mais confortável?",
+        "options": [
+          "1.6",
+          "0.8",
+          "16px numa letra de 18px",
+          "5"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "A Ana tirou o sublinhado dos links do menu com text-decoration: none. O que ela deve fazer para os links continuarem fáceis de reconhecer?",
+        "options": [
+          "Deixar outra pista, como negrito e uma cor diferente do texto, num lugar onde se espera um menu",
+          "Nada: link sem sublinhado é sempre reconhecido",
+          "Tirar também o sublinhado dos links no meio dos parágrafos",
+          "Deixar os links com a mesma cor do texto"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, crie a regra p com font-size: 18px e line-height: 1.6.",
+        "starter": {
+          "html": "<p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "p",
+            "property": "font-size",
+            "value": "18px"
+          },
+          {
+            "type": "css-decl",
+            "selector": "p",
+            "property": "line-height",
+            "value": "1.6"
           }
         ]
       }
