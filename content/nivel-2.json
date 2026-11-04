@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só a aula 1. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só a aula 1 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 e 2. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 e 2 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -139,6 +139,149 @@
           "explanation": "Uma solução. No HTML, dentro do <head>: <link rel=\"stylesheet\" href=\"estilo.css\">. No CSS: h1 { color: navy; } body { background-color: lightyellow; } p { font-size: 18px; }. Repare no ponto e vírgula no fim de cada declaração e no tracinho de background-color e font-size, sem espaço."
         }
       ]
+    },
+    {
+      "position": 2,
+      "title": "Seletores: tag, classe e id",
+      "description": "Escolha exatamente quem recebe o estilo com seletores de tag, de classe e de id, junte seletores com vírgula, mire elementos dentro de outros e entenda quem vence quando duas regras brigam.",
+      "durationSeconds": 535,
+      "videoKey": "N2/a02.mp4",
+      "captionsKey": "N2/a02.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana escreveu <p class=\"destaque\"> no HTML. Qual seletor do CSS escolhe esse parágrafo pela classe?",
+            "options": [
+              ".destaque",
+              "#destaque",
+              "destaque",
+              "<destaque>"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "No CSS, a classe é escrita com um ponto na frente: .destaque. A cerquilha (#) é para id. Sem o ponto, destaque procura uma tag chamada <destaque>, que não existe. E no CSS não se usa < e >."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "O CSS tem p { color: navy; } e, depois, .destaque { color: purple; }. De que cor fica o texto de <p class=\"destaque\">?",
+            "options": [
+              "Roxo (purple), porque a regra de classe é mais específica que a de tag",
+              "Azul-marinho (navy), porque a regra do p vale para todos os parágrafos",
+              "Uma mistura das duas cores",
+              "Preto, porque as duas regras se anulam"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "Quando duas regras brigam pela mesma propriedade, a mais específica vence: id vence classe, e classe vence tag. Só quando as duas são do mesmo tipo é que vence a que vem por último."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "<p ___=\"destaque\">Estou procurando o meu primeiro emprego.</p>\n<section ___=\"contato\">...</section>\n\n/* no CSS: */\n___destaque {\n  color: purple;\n}\n\n___contato {\n  background-color: white;\n}",
+            "blanks": 4
+          },
+          "solution": {
+            "answers": [
+              "class",
+              "id",
+              ".",
+              "#"
+            ]
+          },
+          "explanation": "No HTML, a classe entra com o atributo class e o id com o atributo id, os dois sem símbolo. No CSS, a classe ganha um ponto na frente (.destaque) e o id ganha a cerquilha (#contato), o mesmo símbolo dos links para uma seção."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "nav a,",
+              ".destaque {",
+              "color: tomato;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem uma regra com dois seletores separados por vírgula: nav a (todo link dentro da nav) e .destaque (todo elemento com class=\"destaque\"). A vírgula fica no fim do primeiro seletor, e a chave abre depois do último. Em seguida, a declaração, o fechamento das chaves e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Escolha quem recebe cada estilo na página da Ana. 1) Na aba HTML, coloque class=\"destaque\" no parágrafo \"Estou procurando o meu primeiro emprego na área.\". 2) Na aba CSS, crie a regra .destaque com color: purple. 3) Crie a regra #contato com background-color: white. 4) Crie uma regra só para os dois tipos de título, com o seletor h1, h2 e a declaração color: navy. 5) Crie a regra nav a, para os links do menu, com color: tomato.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <!-- 1) Coloque class=\"destaque\" no parágrafo abaixo -->\n    <p>Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026. <a href=\"#sobre\">Voltar ao topo</a></p>\n</footer>\n",
+              "css": "/* 2) A classe destaque com o texto roxo (purple) */\n\n/* 3) O id contato com o fundo branco (white) */\n\n/* 4) Uma regra só para h1 e h2, com o texto azul-marinho (navy) */\n\n/* 5) Os links dentro da nav (nav a) com o texto tomato */\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "dom-exists",
+                "selector": "#sobre p.destaque"
+              },
+              {
+                "type": "css-decl",
+                "selector": ".destaque",
+                "property": "color",
+                "value": "purple"
+              },
+              {
+                "type": "css-decl",
+                "selector": "#contato",
+                "property": "background-color",
+                "value": "white"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h1",
+                "property": "color",
+                "value": "navy"
+              },
+              {
+                "type": "css-decl",
+                "selector": "h2",
+                "property": "color",
+                "value": "navy"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "color",
+                "value": "tomato"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No HTML: <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>. No CSS: .destaque { color: purple; } #contato { background-color: white; } h1, h2 { color: navy; } nav a { color: tomato; }. Repare no ponto da classe, na cerquilha do id, na vírgula que junta h1 e h2 e no espaço de nav a, que quer dizer \"dentro de\"."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -270,6 +413,95 @@
             "selector": "p",
             "property": "color",
             "value": "dimgray"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual seletor escolhe o elemento com id=\"contato\"?",
+        "options": [
+          "#contato",
+          ".contato",
+          "contato",
+          "id.contato"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual destas afirmações sobre classe e id está certa?",
+        "options": [
+          "A mesma classe pode estar em vários elementos, mas cada id só pode aparecer uma vez na página",
+          "O mesmo id pode estar em vários elementos, mas cada classe só pode aparecer uma vez",
+          "Um elemento só pode ter uma classe",
+          "Classe e id só funcionam na tag <p>"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "O que a regra nav a { color: tomato; } pinta?",
+        "options": [
+          "Só os links que estão dentro da <nav>",
+          "A <nav> inteira e todos os links da página",
+          "Só a primeira letra a de cada <nav>",
+          "Todos os links da página, menos os da <nav>"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "O elemento <section id=\"contato\" class=\"caixa\"> tem duas regras: .caixa { background-color: white; } e #contato { background-color: lightyellow; }. Qual fundo ele recebe?",
+        "options": [
+          "lightyellow, porque o id é mais específico que a classe",
+          "white, porque a classe vem primeiro no HTML",
+          "white, porque classe sempre vence id",
+          "Nenhum dos dois, porque as regras se anulam"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "1) Na aba HTML, coloque class=\"aviso\" no parágrafo \"Vagas abertas para estágio.\". 2) Na aba CSS, crie a regra .aviso com color: tomato.",
+        "starter": {
+          "html": "<h2>Novidades</h2>\n<p>Terminei o nível 1 da Destrava.</p>\n<p>Vagas abertas para estágio.</p>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "dom-exists",
+            "selector": "p.aviso"
+          },
+          {
+            "type": "css-decl",
+            "selector": ".aviso",
+            "property": "color",
+            "value": "tomato"
           }
         ]
       }
