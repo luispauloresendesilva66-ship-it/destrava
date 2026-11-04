@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "prep:n1a01": "node scripts/prep-audio.mjs n1-a01-o-que-e-html n1-a01",
-    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:n1a07 && npm run prep:n1a08 && npm run prep:n1a09 && npm run prep:reels && remotion studio src/index.js",
+    "studio": "npm run prep:n1a01 && npm run prep:n1a02 && npm run prep:n1a03 && npm run prep:n1a04 && npm run prep:n1a05 && npm run prep:n1a06 && npm run prep:n1a07 && npm run prep:n1a08 && npm run prep:n1a09 && npm run prep:n2a01 && npm run prep:reels && remotion studio src/index.js",
     "still:n1a01": "npm run prep:n1a01 && node scripts/stills.mjs AulaN1A01 n1-a01-o-que-e-html",
     "render:n1a01": "npm run prep:n1a01 && remotion render src/index.js AulaN1A01 ../aulas/n1-a01-o-que-e-html/out/aula.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:n1a02": "node scripts/prep-audio.mjs n1-a02-sua-primeira-pagina n1-a02",
@@ -32,6 +32,9 @@
     "prep:n1a09": "node scripts/prep-audio.mjs n1-a09-projeto-final n1-a09",
     "still:n1a09": "npm run prep:n1a09 && node scripts/stills.mjs AulaN1A09 n1-a09-projeto-final",
     "render:n1a09": "npm run prep:n1a09 && remotion render src/index.js AulaN1A09 ../aulas/n1-a09-projeto-final/out/a09.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
+    "prep:n2a01": "node scripts/prep-audio.mjs n2-a01-o-que-e-css n2-a01",
+    "still:n2a01": "npm run prep:n2a01 && node scripts/stills.mjs AulaN2A01 n2-a01-o-que-e-css",
+    "render:n2a01": "npm run prep:n2a01 && remotion render src/index.js AulaN2A01 ../aulas/n2-a01-o-que-e-css/out/a01.mp4 --codec=h264 --crf=28 --audio-codec=aac --audio-bitrate=128k --pixel-format=yuv420p --overwrite",
     "prep:reels": "node scripts/prep-reel.mjs all",
     "still:reel": "node scripts/reel.mjs still",
     "still:reels": "node scripts/reel.mjs still all",
