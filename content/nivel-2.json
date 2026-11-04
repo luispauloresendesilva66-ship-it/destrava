@@ -1,5 +1,5 @@
 {
-  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 6. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 6 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
+  "_nota": "Nível 2 em produção: por enquanto só as aulas 1 a 7. O banco de prova (examQuestions) e os números de \"exam\" são PROVISÓRIOS, cobrem só as aulas 1 a 7 e existem porque o validador exige a prova. Ampliar o banco e revisar questionCount, exerciseMinutes e examMinutes antes de lançar o nível completo.",
   "level": {
     "position": 2,
     "slug": "primeira-demao",
@@ -834,6 +834,144 @@
           "explanation": "Uma solução. No CSS: * { box-sizing: border-box; } main { max-width: 720px; } img { border-radius: 50%; max-width: 100%; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; }. O * é o seletor universal: a regra vale para todos os elementos, e o padding e a borda passam a ficar dentro da largura. A max-width é um teto, que deixa as linhas do main num tamanho bom para ler sem vazar no celular. E o rem acompanha o tamanho de letra que a pessoa escolheu: 2rem = 32px e 1.5rem = 24px no padrão. Para o corretor, max-width e width são propriedades diferentes, e 2 rem, com espaço, não vale."
         }
       ]
+    },
+    {
+      "position": 7,
+      "title": "Block e inline",
+      "description": "Entenda por que alguns elementos ocupam a linha toda e outros não: elementos de bloco e em linha, o display (block, inline, inline-block e none), links com área de clique maior e como centralizar uma caixa com margin: 0 auto.",
+      "durationSeconds": 547,
+      "videoKey": "N2/a07.mp4",
+      "captionsKey": "N2/a07.vtt",
+      "isFree": false,
+      "isSample": false,
+      "exercises": [
+        {
+          "position": 1,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "Qual destes elementos é, por padrão, um elemento em linha (inline), que ocupa só o espaço do conteúdo?",
+            "options": [
+              "span",
+              "p",
+              "section",
+              "div"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O span é a caixa neutra em linha: fica no meio do texto e ocupa só o espaço do conteúdo. O p, a section e a div são elementos de bloco: ocupam a linha toda e se empilham. A div é o par do span, a caixa neutra de bloco."
+        },
+        {
+          "position": 2,
+          "type": "multiple_choice",
+          "topic": "css",
+          "prompt": {
+            "question": "A Ana escreveu main { margin: 0 auto; }, mas o main continua de ponta a ponta, sem ir para o meio. O que falta?",
+            "options": [
+              "Uma largura menor que a da caixa mãe, como max-width: 720px",
+              "text-align: center no main",
+              "display: inline no main",
+              "Trocar 0 auto por auto 0"
+            ]
+          },
+          "solution": {
+            "correctIndex": 0
+          },
+          "explanation": "O auto divide entre a esquerda e a direita o espaço que sobra ao lado da caixa. Sem uma width ou max-width, o bloco ocupa a linha toda, não sobra espaço e nada centraliza. O text-align: center centraliza o conteúdo, não a caixa, e auto 0 coloca o automático em cima e embaixo, não nos lados."
+        },
+        {
+          "position": 3,
+          "type": "fill_blank",
+          "topic": "css",
+          "prompt": {
+            "code": "nav a {\n  /* na linha, mas com medidas de bloco */\n  display: ___;\n  padding: 8px 12px;\n}\n\nmain {\n  max-width: 720px;\n  /* zero em cima e embaixo, automático nos lados */\n  margin: 0 ___;\n}\n\n.aviso-antigo {\n  /* esconde o elemento da página */\n  display: ___;\n}",
+            "blanks": 3
+          },
+          "solution": {
+            "answers": [
+              "inline-block",
+              "auto",
+              "none"
+            ]
+          },
+          "explanation": "Com display: inline-block, o link continua na linha, mas o padding passa a funcionar como num bloco e a área de clique cresce. No margin: 0 auto, o 0 vale para cima e embaixo, e o auto divide o espaço que sobra entre os dois lados: a caixa vai para o meio. E display: none esconde o elemento para todo mundo, inclusive para quem usa leitor de tela."
+        },
+        {
+          "position": 4,
+          "type": "order_blocks",
+          "topic": "css",
+          "prompt": {
+            "blocks": [
+              "<style>",
+              "nav a {",
+              "display: inline-block;",
+              "padding: 8px 12px;",
+              "}",
+              "</style>"
+            ]
+          },
+          "solution": {
+            "order": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "explanation": "Dentro da <style> vem a regra nav a: o seletor e a chave que abre. Depois, as declarações: display: inline-block, para o link ficar na linha mas aceitar medidas de bloco, e padding: 8px 12px, 8px em cima e embaixo e 12px nos lados, para a área de clique crescer. Por último, a chave que fecha e o </style>."
+        },
+        {
+          "position": 5,
+          "type": "code",
+          "topic": "css",
+          "prompt": {
+            "statement": "Arrume o menu, o centro e a foto da página da Ana, na aba CSS. Escreva cada valor exatamente como está aqui. 1) Na regra nav li, coloque display: inline. 2) Na regra nav a, coloque display: inline-block. 3) Na mesma regra nav a, coloque padding: 8px 12px. 4) Na regra main, coloque margin: 0 auto (o atalho, não margin-left). 5) Na regra img, coloque display: block.",
+            "starter": {
+              "html": "<header>\n  <h1>Olá, eu sou a Ana</h1>\n  <nav>\n    <ul>\n      <li><a href=\"#sobre\">Sobre mim</a></li>\n      <li><a href=\"#contato\">Fale comigo</a></li>\n    </ul>\n  </nav>\n</header>\n<main>\n  <section id=\"sobre\">\n    <h2>Sobre mim</h2>\n    <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n    <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n    <p class=\"destaque\">Estou procurando o meu primeiro emprego na área.</p>\n  </section>\n  <section id=\"contato\">\n    <h2>Fale comigo</h2>\n    <p>Escreva para ana@example.com.</p>\n  </section>\n</main>\n<footer>\n  <p>Feito pela Ana, em 2026.</p>\n</footer>\n",
+              "css": "nav li {\n  /* 1) itens lado a lado (display: inline) */\n}\n\nnav a {\n  /* 2) na linha, com medidas de bloco (display: inline-block) */\n  /* 3) área de clique maior (padding: 8px 12px) */\n}\n\nmain {\n  max-width: 720px;\n  /* 4) centralizar a caixa (margin: 0 auto) */\n}\n\nimg {\n  border-radius: 50%;\n  max-width: 100%;\n  height: auto;\n  /* 5) sem o espacinho embaixo (display: block) */\n}\n"
+            }
+          },
+          "solution": {
+            "tests": [
+              {
+                "type": "css-decl",
+                "selector": "nav li",
+                "property": "display",
+                "value": "inline"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "display",
+                "value": "inline-block"
+              },
+              {
+                "type": "css-decl",
+                "selector": "nav a",
+                "property": "padding",
+                "value": "8px 12px"
+              },
+              {
+                "type": "css-decl",
+                "selector": "main",
+                "property": "margin",
+                "value": "0 auto"
+              },
+              {
+                "type": "css-decl",
+                "selector": "img",
+                "property": "display",
+                "value": "block"
+              }
+            ]
+          },
+          "explanation": "Uma solução. No CSS: nav li { display: inline; } nav a { display: inline-block; padding: 8px 12px; } main { max-width: 720px; margin: 0 auto; } img { border-radius: 50%; max-width: 100%; height: auto; display: block; }. Com display: inline, os itens da lista ficam lado a lado e as bolinhas somem. O inline-block deixa o padding do link funcionar e a área de clique cresce. O margin: 0 auto centraliza o main porque ele já tem max-width. E display: block na img tira o espacinho embaixo da foto. Para o corretor, margin: 0 auto e margin-left: auto são escritas diferentes, e inline não é o mesmo que inline-block."
+        }
+      ]
     }
   ],
   "examQuestions": [
@@ -1354,6 +1492,87 @@
             "selector": "main",
             "property": "max-width",
             "value": "720px"
+          }
+        ]
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Um main tem max-width: 720px. Qual declaração coloca essa caixa no meio da tela?",
+        "options": [
+          "margin: 0 auto;",
+          "text-align: center;",
+          "display: inline;",
+          "padding: 0 auto;"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "A Ana colocou a { width: 200px; } num link, sem mudar o display. O que acontece?",
+        "options": [
+          "Nada: o link é um elemento em linha e ignora a width",
+          "O link passa a medir 200px de largura",
+          "O link vira um bloco e ocupa a linha toda",
+          "O link some da página"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "multiple_choice",
+      "topic": "css",
+      "prompt": {
+        "question": "Qual valor de display esconde o elemento da página, inclusive para quem usa leitor de tela?",
+        "options": [
+          "none",
+          "hidden",
+          "inline",
+          "block"
+        ]
+      },
+      "answer": {
+        "correctIndex": 0
+      }
+    },
+    {
+      "type": "code",
+      "topic": "css",
+      "prompt": {
+        "statement": "Na aba CSS, na regra main, coloque max-width: 720px e margin: 0 auto. Na regra img, coloque display: block.",
+        "starter": {
+          "html": "<main>\n  <p>Moro em Belo Horizonte e estou aprendendo a programar.</p>\n  <img src=\"imagens/foto-ana.jpg\" alt=\"Ana sorrindo, com um caderno de anotações na mão\" width=\"200\" height=\"200\">\n</main>\n",
+          "css": ""
+        }
+      },
+      "answer": {
+        "tests": [
+          {
+            "type": "css-decl",
+            "selector": "main",
+            "property": "max-width",
+            "value": "720px"
+          },
+          {
+            "type": "css-decl",
+            "selector": "main",
+            "property": "margin",
+            "value": "0 auto"
+          },
+          {
+            "type": "css-decl",
+            "selector": "img",
+            "property": "display",
+            "value": "block"
           }
         ]
       }
